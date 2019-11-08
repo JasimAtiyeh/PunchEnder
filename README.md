@@ -11,6 +11,7 @@
   * Funbucks
 * Pledges?
 * Projects
+  * Name - String
   * Goal - Int
   * Amount Raised - Int
   * Backers - Array?

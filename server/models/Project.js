@@ -11,20 +11,17 @@ const ProjectSchema = new Schema({
     required: true
   },
   goal: {
-    type: Number,
-    required: true
+    type: Number
   },
   projectCreator: {
     type: Schema.Types.ObjectId,
     ref: "user"
   },
   amountRaised: {
-    type: Number,
-    required: true
+    type: Number
   },
   endDate: {
-    type: Date,
-    required: true
+    type: Date
   },
   story: {
     type: String,

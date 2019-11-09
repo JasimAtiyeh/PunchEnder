@@ -64,17 +64,13 @@ const mutation = new GraphQLObjectType({
         args: {
           name: { type: new GraphQLNonNull(GraphQLString) },
           description: { type: new GraphQLNonNull(GraphQLString) },
-          category: { type: new GraphQLNonNull(GraphQLString) }
+          category: { type: new GraphQLNonNull(GraphQLID) }
         },
-        async resolve(_, { name, description, weight }, context) {
+        async resolve(_, { name, description, category }, context) {
           const validUser = await AuthService.verifyUser({ token: context.token });
 
           if (validUser.loggedIn) {
-            const cost = function getRandomInt(max) {
-              return Math.floor(Math.random() * Math.floor(max));
-            }(100);
-
-            new Product({ name, description, weight, cost }).save();
+            return new Project({ name, description, category }).save();
           } else {
             throw new Error("sorry, you need to log in first");
           }

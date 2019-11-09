@@ -24,4 +24,17 @@ export default {
       }
     }
   `,
+  CREATE_PROJECT: gql`
+    mutation CreateProject($name: String!, $description: String!, $category: ID!) {
+      newProject(name: $name, description: $description, category: $category) {
+        _id
+        name
+        description
+        category {
+          _id
+          name
+        }
+      }
+    }
+  `,
 };

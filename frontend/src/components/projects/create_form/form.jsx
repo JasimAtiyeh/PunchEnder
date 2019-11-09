@@ -3,6 +3,11 @@ import { useMutation } from '@apollo/react-hooks';
 import CategoryPage from "./category_page";
 import DescriptionPage from "./description_page";
 import NamePage from "./name_page";
+import Mutations from "../../../graphql/mutations";
+import Queries from "../../../graphql/queries";
+import { withRouter } from "react-router-dom";
+const { FETCH_PROJECTS } = Queries;
+const  { CREATE_PROJECT } = Mutations;
 
 // Using hooks here to make it simpler to use multiple form components.
 
@@ -11,8 +16,17 @@ const ProjectCreateForm = props => {
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
   const [page, setPage] = useState(1);
-  // const [createProject] = useMutation(CREATE_PROJECT);
-  const createProject = null;
+
+  const [createProject, { data }] = useMutation(CREATE_PROJECT,
+    {
+      update(cache, { data: { newProject } }) {
+        const rootQuery = cache.readQuery({ query: FETCH_PROJECTS });
+        cache.writeQuery({
+          query: FETCH_PROJECTS,
+          data: { projects: rootQuery.projects.concat([newProject]) },
+        });
+      }
+    });
 
   let component;
   if (page === 1) {
@@ -21,22 +35,24 @@ const ProjectCreateForm = props => {
     component = <NamePage name={name} setName={setName} setPage={setPage} />;
   } else {
     component = <DescriptionPage 
-      category={category} 
-      name={name} 
       description={description}
       setPage={setPage} 
-      setDescription={setDescription} 
-      createProject={createProject} />;
+      setDescription={setDescription} />;
   }
 
   return (
     <div className="project-create-form-container">
       <span>{page} of 3</span>
-      <form>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          createProject({ variables: { name, description, category } })
+            .then(res => props.history.push(`/projects/${res.data.newProject._id}/build`))
+        }}>
         {component}
       </form>
     </div>
   )
 }
 
-export default ProjectCreateForm;
+export default withRouter(ProjectCreateForm);

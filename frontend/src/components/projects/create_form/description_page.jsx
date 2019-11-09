@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import autosize from "autosize";
 
 const DescriptionPage = props => {
+  let textarea; // for the ref
   useEffect(() => {
     // this is the same as componentDidMount
-    const textarea = document.getElementById("create-form-input-textarea");
     autosize(textarea);
     return () => {
       // this is the same as componentWillUnmount
-      console.log('bye');
       autosize.destroy(textarea);
     };
   }, []); // empty-array means don't watch for any updates
@@ -22,7 +21,8 @@ const DescriptionPage = props => {
         Be sure to fully express the importance of your project!
       </p>
       <div className="create-form-input-container">
-        <textarea 
+        <textarea
+          ref={node => {textarea = node}}
           value={props.description || ''}
           id="create-form-input-textarea"
           onChange={e => props.setDescription(e.target.value)} 

@@ -7,7 +7,8 @@ const ProjectSchema = new Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   goal: {
     type: Number,
@@ -24,6 +25,12 @@ const ProjectSchema = new Schema({
   endDate: {
     type: Date,
     required: true
+  },
+  story: {
+    type: String,
+  },
+  image: {
+    type: String
   },
   category: {
     type: Schema.Types.ObjectId,

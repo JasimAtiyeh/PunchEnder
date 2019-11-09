@@ -30,6 +30,8 @@ const ProjectType = new GraphQLObjectType({
     goal: { type: GraphQLInt },
     amountRaised: { type: GraphQLInt },
     endDate: { type: GraphQLInt },
+    story: { type: GraphQLString },
+    image: { type: GraphQLString },
     backers: { 
       type: new GraphQLList(require("./user_type")),
       resolve(parentValue) {

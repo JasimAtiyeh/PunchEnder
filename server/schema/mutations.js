@@ -57,7 +57,28 @@ const mutation = new GraphQLObjectType({
       resolve(_, args) {
         return AuthService.verifyUser(args);
       }
-    }
+    },
+      newProject: {
+        type: ProjectType,
+        args: {
+          name: { type: new GraphQLNonNull(GraphQLString) },
+          description: { type: new GraphQLNonNull(GraphQLString) },
+          cost: { type: GraphQLInt }
+        },
+        async resolve(_, { name, description, weight }, context) {
+          const validUser = await AuthService.verifyUser({ token: context.token });
+
+          if (validUser.loggedIn) {
+            const cost = function getRandomInt(max) {
+              return Math.floor(Math.random() * Math.floor(max));
+            }(100);
+
+            new Product({ name, description, weight, cost }).save();
+          } else {
+            throw new Error("sorry, you need to log in first");
+          }
+        }
+    },
   }
 });
 

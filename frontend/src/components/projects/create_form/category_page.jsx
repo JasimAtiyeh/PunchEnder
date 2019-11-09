@@ -7,12 +7,42 @@ const CategoryPage = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORIES);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
+  const options =  data.categories.map(category => (
+    <option 
+      key={category._id} 
+      value={category._id}>
+      {category.name}
+    </option> 
+  ));
 
   return (
     <div className="create-form-category">
-      <select>
-        
-      </select>
+      <h2>
+        Let's get this project going!
+      </h2>
+      <p>
+        Pick a project category to get started. Don't fret, you can always change it later.
+      </p>
+      <div className="create-form-input-container">
+        <select 
+          onChange={e => props.setCategory(e.target.value)}
+          value={props.category || "default"}
+          style={{color: props.category ? "black" : "gray"}}
+        >
+          <option disabled={true} value="default" id="default-option">Select a category</option>
+          {options}
+        </select>
+      </div>
+      <div className="create-form-button-container">
+        <span>Another exciting project!</span>
+        <button 
+          className="create-form-forward-button"
+          onClick={() => props.setPage(2)}
+          disabled={!props.category}>
+            Next: Project Title
+        </button>
+      </div>
+
     </div>
   )
 };

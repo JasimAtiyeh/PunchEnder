@@ -5,6 +5,7 @@ import Login from "./session/Login";
 import Register from "./session/Register";
 import Nav from "./nav/Nav";
 import "../assets/stylesheets/main.scss";
+import CreateForm from "./projects/create_form/form";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Register} routeType="auth" />
       </Switch>
+      <AuthRoute exact path="/start" component={CreateForm} />
     </div>
   );
 };

@@ -9,6 +9,7 @@
     "apollo-link": "^1.2.13",
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
+    "autosize": "^4.0.2",
     "graphql-tag": "^2.10.1",
     "node-sass": "^4.13.0",
     "nodemon": "^1.19.4",

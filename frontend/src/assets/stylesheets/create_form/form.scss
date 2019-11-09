@@ -1,0 +1,53 @@
+@import './category';
+@import './name';
+@import './description';
+
+.project-create-form-container {
+  background-color: red;
+  min-width: 220px;
+  max-width: 1100px;
+  height: 550px;
+  margin: 0 auto;
+  padding-top: 15px;
+  span {
+    font-size: 16px;
+  }
+  form {
+    margin-top: 110px;
+  }
+}
+
+.create-form-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  height: 80px;
+  width: 60%;
+  min-width: 350px;
+  max-width: 475px;
+  font-size: 15px;
+  span {
+    color: darkgray;
+  }
+  .create-form-forward-button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+  }
+  .create-form-forward-button:hover:enabled {
+    background-color: tint(black, 10%);
+  }
+  .create-form-forward-button:disabled {
+    background-color: tint(black, 30%);
+  }
+  .create-form-forward-button:disabled:hover {
+    cursor: not-allowed;
+  }
+  .create-form-back-button {
+    padding: 10px 15px;
+  }
+  .create-form-back-button:hover {
+    color: tint(black, 20%);
+  }
+}

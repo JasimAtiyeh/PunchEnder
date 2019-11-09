@@ -4,13 +4,16 @@ import AuthRoute from "../util/route_util";
 import Login from "./session/Login";
 import Register from "./session/Register";
 import Nav from "./nav/Nav";
-import sass from "node-sass";
+import "../assets/stylesheets/main.scss";
 
 const App = () => {
   return (
     <div>
       <Nav />
       <h1 className="app-header">PunchEnder</h1>
+      <div className="random-class">
+        <h1>random header</h1>
+      </div>
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Register} routeType="auth" />

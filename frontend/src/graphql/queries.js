@@ -26,4 +26,12 @@ export default {
       }
     }
   `,
+  FETCH_CATEGORIES: gql`
+    {
+      categories {
+        _id
+        name
+      }
+    }
+  `,
 };

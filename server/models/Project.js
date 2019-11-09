@@ -32,6 +32,10 @@ const ProjectSchema = new Schema({
   image: {
     type: String
   },
+  launched: {
+    type: Boolean,
+    default: false
+  },
   category: {
     type: Schema.Types.ObjectId,
     ref: "category"

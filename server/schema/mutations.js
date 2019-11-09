@@ -4,7 +4,8 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLID,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLNonNull
 } = graphql;
 const mongoose = require("mongoose");
 const AuthService = require("../services/auth");
@@ -63,7 +64,7 @@ const mutation = new GraphQLObjectType({
         args: {
           name: { type: new GraphQLNonNull(GraphQLString) },
           description: { type: new GraphQLNonNull(GraphQLString) },
-          cost: { type: GraphQLInt }
+          category: { type: new GraphQLNonNull(GraphQLString) }
         },
         async resolve(_, { name, description, weight }, context) {
           const validUser = await AuthService.verifyUser({ token: context.token });
@@ -78,6 +79,19 @@ const mutation = new GraphQLObjectType({
             throw new Error("sorry, you need to log in first");
           }
         }
+    },
+    newCategory: {
+      type: CategoryType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(_, { name, description }) {
+        const newCat = new Category({ name, description });
+        return newCat.save()
+          .then(cat => cat)
+          .catch(err => err);
+      }
     },
   }
 });

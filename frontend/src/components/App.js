@@ -10,10 +10,7 @@ const App = () => {
   return (
     <div>
       <Nav />
-      <h1 className="app-header">PunchEnder</h1>
-      <div className="random-class">
-        <h1>random header</h1>
-      </div>
+      <h1>PunchEnder</h1>
       <Switch>
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Register} routeType="auth" />

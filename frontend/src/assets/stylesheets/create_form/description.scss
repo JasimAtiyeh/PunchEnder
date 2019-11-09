@@ -31,6 +31,13 @@
       font-size: 17px;
       background-color: white;
       resize: none;
+      border: 1px solid #d4d4d4;
+    }
+    textarea:hover {
+      border: 1px solid green;
+    }
+    textarea:focus {
+      border: 1px solid black;
     }
   }
 }

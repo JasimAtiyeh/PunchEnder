@@ -22,18 +22,22 @@
     select {
       display: block;
       margin: 0 auto;
-      height: 55px;
+      height: 30px;
       width: 100%;
       min-width: 350px;
       max-width: 475px;
       padding: 12px;
       font-size: 20px;
+      border: 1px solid #d4d4d4;
       option {
         color: black;
       }
       #default-option {
         display: none;
       }
+    }
+    select:hover {
+      border: 1px solid black;
     }
   }
 }

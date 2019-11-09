@@ -3,11 +3,11 @@ import autosize from "autosize";
 
 const DescriptionPage = props => {
   useEffect(() => {
-    // console.log("componentDidMount");
+    // this is the same as componentDidMount
     const textarea = document.getElementById("create-form-input-textarea");
     autosize(textarea);
     return () => {
-      // console.log("componentWillUnmount");
+      // this is the same as componentWillUnmount
       console.log('bye');
       autosize.destroy(textarea);
     };

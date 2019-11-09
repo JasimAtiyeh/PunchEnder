@@ -29,6 +29,13 @@
       padding: 12px;
       font-size: 20px;
       background-color: white;
+      border: 1px solid #d4d4d4;
+    }
+    input:hover {
+      border: 1px solid green;
+    }
+    input:focus {
+      border: 1px solid black;
     }
   }
 }

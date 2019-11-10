@@ -3,8 +3,10 @@ import { Route } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
 import Mutations from "../../../graphql/mutations";
-import BuildFormTabs from "./tabs";
-import BuildFormBasics from "./basics";
+import Basics from "./basics"
+import Rewards from "./rewards"
+import Story from "./story"
+
 const { FETCH_UNFINISHED_PROJECT } = Queries;
 
 const BuildForm = props => {
@@ -15,8 +17,11 @@ const BuildForm = props => {
 
   return (
     <div className="build-form-container">
-      <BuildFormTabs projectId={projectId} />
-      <Route path="/projects/:projectid/build/basics" component={BuildFormBasics}/>
+      <Route 
+        path="/projects/:projectId/build/basics" 
+        render={ props => <Basics {...props} project={data.project} /> } />
+      <Route path="/projects/:projectId/build/rewards" component={Rewards} />
+      <Route path="/projects/:projectId/build/story" component={Story} />
     </div>
   )
 };

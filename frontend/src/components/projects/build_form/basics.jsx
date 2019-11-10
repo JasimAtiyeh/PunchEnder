@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import BasicsCategoryForm from "./basics_category";
 import BasicsDate from "./basics_date";
+import Tabs from "./tabs";
+import Nav from "./nav";
 
 const BuildFormBasics = props => {
+  const { project } = props;
+  const [needSave, setNeedSave] = useState(false);
+  const [name, setName] = useState(project.name);
+  const [category, setCategory] = useState(project.category._id);
+  const [goal, setGoal] = useState(project.goal);
+  const [date, setDate] = useState(project.endDate);
+
   return (
     <div className="build-form-basics">
+      <Nav />
+      <Tabs projectId={props.match.params.projectId}/>
       <h2>Let's start with basic project info</h2>
       <p>Give backers the information they need.</p>
       <form className="build-form-basics-form">
@@ -15,7 +27,7 @@ const BuildFormBasics = props => {
           </div>
           <div className="basics-form">
             <label>Title</label>
-            <input type="text" placeholder="Enter your title here" />
+            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter your title here" />
           </div>
         </div>
         <div className="basics-panel">
@@ -23,7 +35,7 @@ const BuildFormBasics = props => {
             <h4>Project Category</h4>
             <p>Think of a category that best fits your project This is important for backers to be able to find your project.</p>
           </div>
-          <BasicsCategoryForm />
+          <BasicsCategoryForm setCategory={setCategory} category={category} />
         </div>
         <div className="basics-panel">
           <div className="basics-info">
@@ -44,7 +56,11 @@ const BuildFormBasics = props => {
             <label>Goal Amount</label>
             <div className="input-group">
               <div className="input-group-sign">$</div>
-              <input type="number" placeholder="Goal amount" />
+              <input 
+                type="number" 
+                placeholder="Goal amount" 
+                onChange={e => setGoal(e.target.value)} 
+                value={ goal || '' }/>
             </div>
           </div>
         </div>
@@ -53,11 +69,11 @@ const BuildFormBasics = props => {
             <h4>End Date</h4>
             <p>Set the end date for your campaign. You can't change the date after launch!</p>
           </div>
-          <BasicsDate />
+          <BasicsDate date={date} setDate={setDate} />
         </div>
       </form>    
     </div>
   )
 };
 
-export default BuildFormBasics;
+export default withRouter(BuildFormBasics);

@@ -1,2 +1,18 @@
 @import './tabs';
+@import './story';
 @import './basics';
+@import './rewards';
+
+.build-form-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  h1 {
+    padding: 10px;
+    font-size: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    background-color: lightgreen;
+  }
+}

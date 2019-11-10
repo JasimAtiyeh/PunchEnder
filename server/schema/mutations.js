@@ -64,13 +64,14 @@ const mutation = new GraphQLObjectType({
         args: {
           name: { type: new GraphQLNonNull(GraphQLString) },
           description: { type: new GraphQLNonNull(GraphQLString) },
-          category: { type: new GraphQLNonNull(GraphQLID) }
+          category: { type: new GraphQLNonNull(GraphQLID) },
         },
         async resolve(_, { name, description, category }, context) {
           const validUser = await AuthService.verifyUser({ token: context.token });
 
           if (validUser.loggedIn) {
-            return new Project({ name, description, category }).save();
+            const projectCreator = validUser.id;
+            return new Project({ name, description, category, projectCreator }).save();
           } else {
             throw new Error("sorry, you need to log in first");
           }

@@ -10,7 +10,7 @@ const DescriptionPage = props => {
       // this is the same as componentWillUnmount
       autosize.destroy(textarea);
     };
-  }, []); // empty-array means don't watch for any updates
+  }, [textarea]); // empty-array would mean don't watch for any updates
 
   return (
     <div className="create-form-description">

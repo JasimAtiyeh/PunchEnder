@@ -17,7 +17,7 @@ const ProjectCreateForm = props => {
   const [description, setDescription] = useState(null);
   const [page, setPage] = useState(1);
 
-  const [createProject, { data }] = useMutation(CREATE_PROJECT,
+  const [createProject] = useMutation(CREATE_PROJECT,
     {
       update(cache, { data: { newProject } }) {
         const rootQuery = cache.readQuery({ query: FETCH_PROJECTS });
@@ -47,7 +47,7 @@ const ProjectCreateForm = props => {
         onSubmit={e => {
           e.preventDefault();
           createProject({ variables: { name, description, category } })
-            .then(res => props.history.push(`/projects/${res.data.newProject._id}/build`))
+            .then(res => props.history.push(`/projects/${res.data.newProject._id}/build/basics`))
         }}>
         {component}
       </form>

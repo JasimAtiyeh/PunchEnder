@@ -24,7 +24,9 @@ const BuildForm = props => {
         path="/projects/:projectId/build/basics" 
         render={ props => <Basics {...props} project={data.project} /> } />
       <Route path="/projects/:projectId/build/rewards" component={Rewards} />
-      <Route path="/projects/:projectId/build/story" component={Story} />
+      <Route 
+        path="/projects/:projectId/build/story" 
+        render={props => <Story {...props} story={data.project.story} />} />
     </div>
   )
 };

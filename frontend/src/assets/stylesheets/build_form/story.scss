@@ -14,3 +14,20 @@
     max-width: 600px;
   }
 }
+
+.editor-container {
+  padding: 3px;
+  padding-top: 0;
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.editor {
+  box-sizing: border-box;
+  cursor: text;
+  margin: 0 auto;
+  background: #fefefe;
+  min-height: 250px;
+  width: 100%;
+}

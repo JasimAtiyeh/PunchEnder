@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StoryEditor from './story_editor';
+import StoryEditor from './editor/story_editor';
 import { withRouter } from "react-router-dom";
 import Tabs from "./tabs";
 import Nav from "./last_nav";

@@ -21,7 +21,7 @@ const BasicsCategoryForm = props => {
     <div className="basics-form">
       <label>Category</label>
       <select
-        onChange={e => props.setCategory(e.target.value)}
+        onChange={e => {props.setCategory(e.target.value); props.setNeedSave(true)}}
         value={props.category || "default"}
         style={{ color: props.category ? "black" : "gray" }}
       >

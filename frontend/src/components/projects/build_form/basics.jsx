@@ -15,7 +15,7 @@ const BuildFormBasics = props => {
 
   return (
     <div className="build-form-basics">
-      <Nav />
+      <Nav setNeedSave={setNeedSave} needSave={needSave} nextText={"Next: Rewards"} nextLink={"rewards"} />
       <Tabs projectId={props.match.params.projectId}/>
       <h2>Let's start with basic project info</h2>
       <p>Give backers the information they need.</p>
@@ -27,7 +27,11 @@ const BuildFormBasics = props => {
           </div>
           <div className="basics-form">
             <label>Title</label>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="Enter your title here" />
+            <input 
+              type="text" 
+              value={name} 
+              onChange={e => { setName(e.target.value); setNeedSave(true) }} 
+              placeholder="Enter your title here" />
           </div>
         </div>
         <div className="basics-panel">
@@ -35,7 +39,7 @@ const BuildFormBasics = props => {
             <h4>Project Category</h4>
             <p>Think of a category that best fits your project This is important for backers to be able to find your project.</p>
           </div>
-          <BasicsCategoryForm setCategory={setCategory} category={category} />
+          <BasicsCategoryForm setNeedSave={setNeedSave} setCategory={setCategory} category={category} />
         </div>
         <div className="basics-panel">
           <div className="basics-info">
@@ -59,7 +63,7 @@ const BuildFormBasics = props => {
               <input 
                 type="number" 
                 placeholder="Goal amount" 
-                onChange={e => setGoal(e.target.value)} 
+                onChange={e => {setGoal(e.target.value); setNeedSave(true)}} 
                 value={ goal || '' }/>
             </div>
           </div>
@@ -69,7 +73,7 @@ const BuildFormBasics = props => {
             <h4>End Date</h4>
             <p>Set the end date for your campaign. You can't change the date after launch!</p>
           </div>
-          <BasicsDate date={date} setDate={setDate} />
+          <BasicsDate date={date} setDate={setDate} setNeedSave={setNeedSave} />
         </div>
       </form>    
     </div>

@@ -11,8 +11,16 @@
     padding: 10px;
     font-size: 20px;
   }
-  button {
+  > button {
     padding: 10px 20px;
     background-color: lightgreen;
+  }
+  > a {
+    padding: 10px 20px;
+    background-color: darkgreen;
+  }
+  #launch-button {
+    background-color: lightcyan;
+    border: 1px solid blue;
   }
 }

@@ -1,4 +1,3 @@
-
 import gql from "graphql-tag";
 
 export default {
@@ -10,19 +9,48 @@ export default {
   FETCH_PROJECTS: gql`
     {
       projects {
-        _id
-        projectCreator
+        projectCreator {
+          name
+        }
         name
         description
         goal
         amountRaised
-        endDate
-        backers
-        comments
-        updates
-        rewards
-        category
-        pledges
+        category {
+          name
+        }
+      }
+    }
+  `,
+  FETCH_USER: gql`
+    query FetchProject($id: ID!) {
+      project(_id: $id) {
+        _id
+        name
+        projects {
+          projectCreator {
+            name
+          }
+          name
+          description
+          goal
+          amountRaised
+          category {
+            name
+          }
+        }
+        backedProjects {
+          projectCreator {
+            name
+          }
+          name
+          description
+          goal
+          amountRaised
+          category {
+            name
+          }
+        }
       }
     }
   `,

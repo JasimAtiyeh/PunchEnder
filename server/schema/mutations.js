@@ -76,11 +76,27 @@ const mutation = new GraphQLObjectType({
           }
         }
     },
+    updateProjectBasics: {
+      type: ProjectType,
+      args: {
+        _id:  { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        category: { type: new GraphQLNonNull(GraphQLID) },
+        goal: { type: new GraphQLNonNull(GraphQLInt)},
+        endDate: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve(_, variables) {
+        return Project.findById(variables._id)
+          .then(project => project.update(variables))
+          .catch(err => err);
+      }
+    },
     newCategory: {
       type: CategoryType,
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
-        description: { type: new GraphQLNonNull(GraphQLString) }
+        description: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(_, { name, description }) {
         const newCat = new Category({ name, description });

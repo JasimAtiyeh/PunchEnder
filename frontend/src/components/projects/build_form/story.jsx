@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import Tabs from "./tabs";
-import Nav from "./nav";
+import Nav from "./last_nav";
 
 const BuildFormStory = props => {
   return (

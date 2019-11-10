@@ -8,7 +8,11 @@ const BuildFormRewards = props => {
 
   return (
     <div className="build-form-rewards">
-      <Nav setNeedSave={setNeedSave} needSave={needSave} nextText={"Next: Story"} nextLink={"story"} />
+      <Nav 
+        setNeedSave={setNeedSave} 
+        needSave={needSave} 
+        nextText={"Next: Story"} 
+        nextLink={"story"} />
       <Tabs projectId={props.match.params.projectId} />
       <h2>Create the rewards.</h2>
       <p>Create simple rewards to incentivize backers. While donating to charitable causes is fulfilling in itself, getting something back doesn't hurt either.</p>

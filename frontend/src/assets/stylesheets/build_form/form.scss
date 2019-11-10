@@ -3,6 +3,17 @@
 @import './basics';
 @import './rewards';
 
+.build-form-tabs {
+  padding-top: 64px;
+}
+
+.build-form-nav-container {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
 .build-form-nav {
   display: flex;
   justify-content: space-between;

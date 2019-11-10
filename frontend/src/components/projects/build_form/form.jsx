@@ -13,7 +13,10 @@ const BuildForm = props => {
   const { projectId } = props.match.params;
   const { loading, error, data } = useQuery(FETCH_UNFINISHED_PROJECT, { variables: { _id: projectId }});
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) {
+    console.dir(error);
+    return <div>{error.responseJSON}</div>
+  };
 
   return (
     <div className="build-form-container">

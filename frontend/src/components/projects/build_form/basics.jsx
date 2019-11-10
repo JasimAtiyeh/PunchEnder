@@ -1,21 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from "react-router-dom";
 import BasicsCategoryForm from "./basics_category";
 import BasicsDate from "./basics_date";
+import autosize from "autosize";
 import Tabs from "./tabs";
 import Nav from "./nav";
+import Mutations from "../../../graphql/mutations";
+const { UPDATE_PROJECT_BASICS } = Mutations;
 
 const BuildFormBasics = props => {
   const { project } = props;
   const [needSave, setNeedSave] = useState(false);
   const [name, setName] = useState(project.name);
+  const [description, setDescription] = useState(project.description);
   const [category, setCategory] = useState(project.category._id);
   const [goal, setGoal] = useState(project.goal);
   const [date, setDate] = useState(project.endDate);
+  const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
+  const variables = { name, description, category, goal: parseInt(goal), endDate: date, _id: project._id };
+
+  let textarea; // for the ref
+  useEffect(() => {
+    // this is the same as componentDidMount
+    autosize(textarea);
+    return () => {
+      // this is the same as componentWillUnmount
+      autosize.destroy(textarea);
+    };
+  }, [textarea]); // empty-array would mean don't watch for any updates
 
   return (
     <div className="build-form-basics">
-      <Nav setNeedSave={setNeedSave} needSave={needSave} nextText={"Next: Rewards"} nextLink={"rewards"} />
+      <Nav
+        mdata={mdata}
+        save={save}
+        variables={variables}
+        setNeedSave={setNeedSave} 
+        needSave={needSave} 
+        nextText={"Next: Rewards"} 
+        nextLink={"rewards"} />
       <Tabs projectId={props.match.params.projectId}/>
       <h2>Let's start with basic project info</h2>
       <p>Give backers the information they need.</p>
@@ -29,9 +53,24 @@ const BuildFormBasics = props => {
             <label>Title</label>
             <input 
               type="text" 
-              value={name} 
+              value={name || ''} 
               onChange={e => { setName(e.target.value); setNeedSave(true) }} 
               placeholder="Enter your title here" />
+          </div>
+        </div>
+        <div className="basics-panel">
+          <div className="basics-info">
+            <h4>Project Description</h4>
+            <p>This is a short description that will be displayed alongside your project title.</p>
+          </div>
+          <div className="basics-form">
+            <label>Description</label>
+            <textarea
+              ref={node => { textarea = node }}
+              value={description || ''}
+              maxLength={135}
+              onChange={e => { setDescription(e.target.value); setNeedSave(true) }}
+              placeholder="Project description here" />
           </div>
         </div>
         <div className="basics-panel">

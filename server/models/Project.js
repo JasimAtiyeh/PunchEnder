@@ -21,7 +21,7 @@ const ProjectSchema = new Schema({
     type: Number
   },
   endDate: {
-    type: Date
+    type: String
   },
   story: {
     type: String,

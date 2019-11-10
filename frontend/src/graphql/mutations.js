@@ -37,4 +37,19 @@ export default {
       }
     }
   `,
+  UPDATE_PROJECT_BASICS: gql`
+    mutation UpdateProjectBasics($_id: ID!, $name: String!, $description: String!, $category: ID!, $goal: Int!, $endDate: String!) {
+      updateProjectBasics(_id: $_id, name: $name, description: $description, category: $category, goal: $goal, endDate: $endDate) {
+        _id
+        name
+        description
+        endDate
+        goal
+        category {
+          _id
+          name
+        }
+      }
+    }
+  `
 };

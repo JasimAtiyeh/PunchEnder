@@ -49,15 +49,20 @@
       margin-bottom: 10px;
       font-size: 15px;
     }
-    input, select {
+    input, select, textarea {
       background-color: white;
       padding: 12px 10px;
       width: 100%;
       box-sizing: border-box;
       border: 1px solid lightgray;
     }
-    input:focus, input:hover, select:focus, select:hover {
+    input:focus, input:hover, 
+    select:focus, select:hover,
+    textarea:focus, textarea:hover {
       border: 1px solid green;
+    }
+    textarea {
+      resize: none;
     }
     select {
       option {

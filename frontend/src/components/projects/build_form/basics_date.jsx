@@ -7,7 +7,8 @@ class BasicsDate extends React.Component {
     super(props);
     this.setDate = props.setDate;
     if (props.date) {
-      const date = Date(props.date);
+      const date = new Date(props.date);
+      console.dir(date);
       this.state = { day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear(), error: {} };
     } else {
       this.state = { day: undefined, month: undefined, year: undefined, error: {} }
@@ -54,7 +55,6 @@ class BasicsDate extends React.Component {
     const date = new Date(year, month - 1, day, 0, 0, 0, 0);
     const timeDiff = date.getTime() - new Date().getTime();
     const dayDiff = timeDiff / (1000 * 3600 * 24);
-    console.log(dayDiff);
 
     if (dayDiff < 0) {
       this.setState({ error: { date: "You must select a future date!" } });
@@ -68,7 +68,6 @@ class BasicsDate extends React.Component {
   }
 
   handleCalendar(date) {
-    console.log(this.state);
     if (date > new Date()) {
       this.setState({ 
         day: date.getDate(),

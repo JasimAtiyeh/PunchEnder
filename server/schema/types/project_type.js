@@ -30,7 +30,7 @@ const ProjectType = new GraphQLObjectType({
     description: { type: GraphQLString },
     goal: { type: GraphQLInt },
     amountRaised: { type: GraphQLInt },
-    endDate: { type: GraphQLInt },
+    endDate: { type: GraphQLString },
     story: { type: GraphQLString },
     image: { type: GraphQLString },
     launched: { type: GraphQLBoolean },

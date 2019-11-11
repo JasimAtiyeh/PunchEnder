@@ -130,6 +130,7 @@ const mutation = new GraphQLObjectType({
           .catch(err => err);
       }
     },
+<<<<<<< HEAD
     // newProject: {
     //   type: ProjectType,
     //   args: {
@@ -189,6 +190,8 @@ const mutation = new GraphQLObjectType({
     //     }
     //   }
     // }
+=======
+>>>>>>> f25cefe... style user-profile
   }
 });
 

@@ -5,6 +5,7 @@
 
 .user-profile-info {
   margin: 0 auto;
+  margin-bottom: 3.6rem;
 }
 
 .user-profile-info-avatar {
@@ -18,12 +19,50 @@
   color: #020621;
   margin-bottom: 1.2rem;
   text-align: center;
+  font-size: 24px;
+  line-height: 30px;
 }
 
 .user-profile-info-sub{
   display: flex;
+  font-size: 13px;
+  margin-bottom: 0.6rem;
+  color: #80809E;
 }
 
 .user-profile-projects {
 
+}
+
+.user-profile-projects-button {
+  background-color: white;
+  text-align: center;
+
+  button {
+    margin-right: 40px;
+    color: #80809E;
+    font-weight: bold;
+    font-size: 14px;
+    height: 60px;
+  }
+
+  .active {
+    color: #060F46;
+    border-bottom: 4px solid #009E74;
+  }
+}
+
+.user-profile-projects-display-none {
+  line-height: 26px;
+  font-size: 19px;
+  color: #3D3D66;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+
+  strong {
+    font-weight: 700;
+  }
 }

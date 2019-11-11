@@ -7,12 +7,20 @@ require("./models/index");
 const schema = require("./schema/schema");
 const cors = require("cors");
 const app = express();
+const path = require('path');
 
 if (!db) {
   throw new Error("You must provide a string to connect to MongoDB Atlas");
 }
 
 app.use(cors());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  })
+}
 
 mongoose
   .connect(db, { useNewUrlParser: true })

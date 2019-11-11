@@ -15,6 +15,7 @@ export default {
       register(name: $name, email: $email, password: $password) {
         token
         loggedIn
+        _id
       }
     }
   `,

@@ -18,6 +18,7 @@ const BuildFormRewards = props => {
 
   return (
     <div className="build-form-rewards">
+      { (creating || editing) && <div className="reward-modal" />}
       <Nav
         variables={{ name, description, tier, pledgeAmount, project: project._id }}
         creating={creating} 

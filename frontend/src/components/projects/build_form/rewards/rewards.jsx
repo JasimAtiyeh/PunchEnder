@@ -4,6 +4,8 @@ import Tabs from "../tabs";
 import Nav from "./nav";
 import AddForm from "./add_form";
 import EditForm from "./edit_form";
+import Mutations from "../../../../graphql/mutations";
+const { CREATE_REWARD, DELETE_REWARD, UPDATE_REWARD } = Mutations;
 
 const BuildFormRewards = props => {
   const { project } = props;

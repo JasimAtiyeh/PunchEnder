@@ -14,13 +14,11 @@ class RewardsForm extends React.Component {
           <label>Pledge Amount</label>
           <input type="number" />
           <label>Description</label>
+          <textarea></textarea>
         </form>
       </div>
     )
   }
-
-
-
 };
 
 export default RewardsForm;

@@ -7,23 +7,31 @@ const ProjectSchema = new Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   goal: {
-    type: Number,
-    required: true
+    type: Number
   },
   projectCreator: {
     type: Schema.Types.ObjectId,
     ref: "user"
   },
   amountRaised: {
-    type: Number,
-    required: true
+    type: Number
   },
   endDate: {
-    type: Date,
-    required: true
+    type: String
+  },
+  story: {
+    type: String,
+  },
+  image: {
+    type: String
+  },
+  launched: {
+    type: Boolean,
+    default: false
   },
   category: {
     type: Schema.Types.ObjectId,

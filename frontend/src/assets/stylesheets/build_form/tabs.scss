@@ -1,0 +1,42 @@
+.build-form-tabs {
+  div{
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid lightgray;
+    box-sizing: border-box;
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 70px;
+    }
+    .active {
+      border-bottom: 3px solid green;
+      i {
+        font-size: 24px;
+        margin-bottom: 3px;
+      }
+      h3 {
+        font-weight: 500;
+      }
+    }
+    .fa-marker {
+      color: red;
+    }
+    .fa-gift {
+      color: green;
+    }
+    .fa-book {
+      color: blue;
+    }
+  }
+}
+
+.build-form-tabs:after {
+  height: 5px;
+  display: block;
+  width: 100%;
+  background: rgb(250,250,250);
+  background: linear-gradient(0deg, rgba(250,250,250,1) 0%, rgba(233,233,233,1) 49%, rgba(215,215,215,1) 100%);
+  content: '';
+}

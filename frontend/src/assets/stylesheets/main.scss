@@ -1,1 +1,7 @@
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
 @import './reset';
+@import './create_form/form';
+@import './build_form/form';

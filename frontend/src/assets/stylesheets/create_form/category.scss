@@ -1,0 +1,45 @@
+.create-form-category {
+  h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    color: gray;
+    text-align: center;
+    font-size: 19px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 42%;
+  }
+  .create-form-input-container {
+    padding-bottom: 75px;
+    width: 60%;
+    min-width: 350px;
+    max-width: 475px;
+    margin: 0 auto;
+    border-bottom: 1px solid gray;
+    select {
+      display: block;
+      margin: 0 auto;
+      height: 30px;
+      width: 100%;
+      min-width: 350px;
+      max-width: 475px;
+      padding: 12px;
+      font-size: 20px;
+      border: 1px solid #d4d4d4;
+      option {
+        color: black;
+      }
+      #default-option {
+        display: none;
+      }
+    }
+    select:hover {
+      border: 1px solid black;
+    }
+  }
+}
+  
+

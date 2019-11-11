@@ -5,7 +5,8 @@ const {
   GraphQLString,
   GraphQLID,
   GraphQLInt,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean
 } = graphql;
 const UserType = require("./user_type");
 const CategoryType = require("./category_type");
@@ -29,7 +30,10 @@ const ProjectType = new GraphQLObjectType({
     description: { type: GraphQLString },
     goal: { type: GraphQLInt },
     amountRaised: { type: GraphQLInt },
-    endDate: { type: GraphQLInt },
+    endDate: { type: GraphQLString },
+    story: { type: GraphQLString },
+    image: { type: GraphQLString },
+    launched: { type: GraphQLBoolean },
     backers: { 
       type: new GraphQLList(require("./user_type")),
       resolve(parentValue) {

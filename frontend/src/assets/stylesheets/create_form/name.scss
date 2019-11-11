@@ -1,0 +1,41 @@
+.create-form-name {
+  h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  p {
+    color: gray;
+    text-align: center;
+    font-size: 19px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 42%;
+  }
+  .create-form-input-container {
+    padding-bottom: 75px;
+    width: 60%;
+    min-width: 350px;
+    max-width: 475px;
+    margin: 0 auto;
+    border-bottom: 1px solid gray;
+    input {
+      display: block;
+      margin: 0 auto;
+      height: 27px;
+      width: 100%;
+      min-width: 350px;
+      max-width: 475px;
+      padding: 12px;
+      font-size: 20px;
+      background-color: white;
+      border: 1px solid #d4d4d4;
+    }
+    input:hover {
+      border: 1px solid green;
+    }
+    input:focus {
+      border: 1px solid black;
+    }
+  }
+}

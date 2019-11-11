@@ -29,6 +29,8 @@ const AuthRoute = ({
       } else {
         return (
           <Route
+            path={path}
+            exact={exact}
             {...rest}
             render={props =>
               data.isLoggedIn ? (

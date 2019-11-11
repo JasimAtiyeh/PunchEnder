@@ -1,0 +1,39 @@
+@import './tabs';
+@import './story';
+@import './basics';
+@import './rewards';
+@import './editor';
+
+.build-form-tabs {
+  padding-top: 64px;
+}
+
+.build-form-nav-container {
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.build-form-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  h1 {
+    padding: 10px;
+    font-size: 20px;
+  }
+  > button {
+    padding: 10px 20px;
+    background-color: lightgreen;
+  }
+  > a {
+    padding: 10px 20px;
+    background-color: darkgreen;
+  }
+  #launch-button {
+    padding: 10px 20px;
+    background-color: lightcyan;
+    border: 1px solid blue;
+  }
+}

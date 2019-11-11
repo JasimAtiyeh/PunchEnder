@@ -5,7 +5,7 @@ const {
   GraphQLInt,
   GraphQLID,
   GraphQLBoolean,
-  GraphQLNonNull
+  GraphQLNonNull,
   GraphQLList
 } = graphql;
 const mongoose = require("mongoose");
@@ -60,7 +60,6 @@ const mutation = new GraphQLObjectType({
         return AuthService.verifyUser(args);
       }
     },
-<<<<<<< HEAD
       newProject: {
         type: ProjectType,
         args: {
@@ -131,7 +130,6 @@ const mutation = new GraphQLObjectType({
           .catch(err => err);
       }
     },
-=======
     // newProject: {
     //   type: ProjectType,
     //   args: {
@@ -191,7 +189,6 @@ const mutation = new GraphQLObjectType({
     //     }
     //   }
     // }
->>>>>>> f733b37... add project index, no style
   }
 });
 

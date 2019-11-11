@@ -130,68 +130,6 @@ const mutation = new GraphQLObjectType({
           .catch(err => err);
       }
     },
-<<<<<<< HEAD
-    // newProject: {
-    //   type: ProjectType,
-    //   args: {
-    //     projectCreater: { type: GraphQLID },
-    //     name: { type: GraphQLString },
-    //     description: { type: GraphQLString },
-    //     goal: { type: GraphQLInt },
-    //     amountRaised: { type: GraphQLInt },
-    //     endDate: { type: GraphQLInt },
-    //     backers: { type: GraphQLList },
-    //     comments: { type: GraphQLList },
-    //     updates: { type: GraphQLList },
-    //     rewards: { type: GraphQLList },
-    //     pledges: { type: GraphQLList },
-    //     category: { type: GraphQLString },
-    //     story: { type: GraphQLString },
-    //     launched: { type: GraphQLBoolean}
-    //   },
-    //   async resolve(_, {
-    //     projectCreater,
-    //     name,
-    //     description,
-    //     goal,
-    //     amountRaised,
-    //     endDate,
-    //     backers,
-    //     comments,
-    //     updates,
-    //     rewards,
-    //     pledges,
-    //     category,
-    //     story,
-    //     launched
-    //   }, ctx) {
-    //     const validUser = await AuthService.verifyUser({
-    //       token: ctx.token
-    //     });
-    //     if(validUser.loggedIn) {
-    //       return new Project({
-    //         projectCreater,
-    //         name,
-    //         description,
-    //         goal,
-    //         amountRaised,
-    //         endDate,
-    //         backers,
-    //         comments,
-    //         updates,
-    //         rewards,
-    //         pledges,
-    //         category,
-    //         story,
-    //         launched
-    //       }).save();
-    //     } else {
-    //       throw new Error("Sorry, you are not logged in");
-    //     }
-    //   }
-    // }
-=======
->>>>>>> f25cefe... style user-profile
   }
 });
 

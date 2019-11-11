@@ -69,5 +69,38 @@ export default {
         launched
       }
     }
-  `
+  `,
+  CREATE_REWARD: gql`
+    mutation CreateReward($name: String!, $description: String!, $tier: Int!, $pledgeAmount: Int!, $project: ID!) {
+      newReward(pledgeAmount: $pledgeAmount, name: $name, description: $description, tier: $tier, project: $project) {
+        _id
+        name
+        description
+        tier
+        project {
+          _id
+        }
+      }
+    }
+  `,
+  DELETE_REWARD: gql`
+    mutation DeleteReward($_id: ID!) {
+      deleteReward(_id: $_id) {
+        _id
+      }
+    }
+  `,
+  UPDATE_REWARD: gql`
+    mutation UpdateReward($_id: ID!, $name: String, $description: String, $pledgeAmount: Int) {
+      newReward(name: $name, description: $description, pledgeAmount: $pledgeAmount) {
+        _id
+        name
+        description
+        pledgeAmount
+        project {
+          _id
+        }
+      }
+    }
+  `,
 };

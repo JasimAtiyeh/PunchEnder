@@ -17,6 +17,8 @@ const CategoryType = require("./types/category_type");
 const Category = mongoose.model("category");
 const CommentType = require("./types/comment_type");
 const Comment = mongoose.model("comment");
+const RewardType = require("./types/reward_type");
+const Reward = mongoose.model("reward");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -88,10 +90,15 @@ const mutation = new GraphQLObjectType({
         goal: { type: GraphQLInt },
         endDate: { type: GraphQLString },
       },
-      resolve(_, variables) {
-        return Project.findByIdAndUpdate(variables._id, variables, { new: true })
-          .then(project => project)
-          .catch(err => err);
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+        if (validUser.loggedIn) {
+          return Project.findByIdAndUpdate(variables._id, variables, { new: true })
+            .then(project => project)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
       }
     },
     updateProjectStory: {
@@ -100,10 +107,16 @@ const mutation = new GraphQLObjectType({
         _id: { type: new GraphQLNonNull(GraphQLID) },
         story: { type: GraphQLString },
       },
-      resolve(_, variables) {
-        return Project.findByIdAndUpdate(variables._id, variables, { new: true })
-          .then(project => project)
-          .catch(err => err);
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Project.findByIdAndUpdate(variables._id, variables, { new: true })
+            .then(project => project)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
       }
     },
     launchProject: {
@@ -111,10 +124,16 @@ const mutation = new GraphQLObjectType({
       args: {
         _id: { type: new GraphQLNonNull(GraphQLID) }
       },
-      resolve(_, variables) {
-        return Project.findByIdAndUpdate(variables._id, { launched: true }, { new: true })
-          .then(project => project)
-          .catch(err => err);
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Project.findByIdAndUpdate(variables._id, { launched: true }, { new: true })
+            .then(project => project)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
       }
     },
     newCategory: {
@@ -128,6 +147,62 @@ const mutation = new GraphQLObjectType({
         return newCat.save()
           .then(cat => cat)
           .catch(err => err);
+      }
+    },
+    newReward: {
+      type: RewardType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        tier: { type: new GraphQLNonNull(GraphQLInt) },
+        pledgeAmount: { type: new GraphQLNonNull(GraphQLInt) },
+        project: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return new Reward({ variables }).save();
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
+      }
+    },
+    updateReward: {
+      type: RewardType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        description: { GraphQLString },
+        pledgeAmount: { type: GraphQLInt },
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Reward.findByIdAndUpdate(variables._id, variables, { new: true })
+            .then(reward => reward)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
+      }
+    },
+    deleteReward: {
+      type: RewardType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_, { _id }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Reward.findByIdAndDelete(_id)
+            .then(reward => reward)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
       }
     },
   }

@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import checkValidProject from "./check_valid_project";
 
 const BuildFormLastNav = props => {
   const { setNeedSave, needSave, variables, save, mdata, project } = props;
+  const validProject = checkValidProject(project);
   console.log(project);
+  console.dir(validProject);
+
   let button;
   if (needSave) {
     button =

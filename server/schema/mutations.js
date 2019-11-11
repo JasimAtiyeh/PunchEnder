@@ -88,8 +88,8 @@ const mutation = new GraphQLObjectType({
         endDate: { type: GraphQLString },
       },
       resolve(_, variables) {
-        return Project.findById(variables._id)
-          .then(project => project.update(variables))
+        return Project.findByIdAndUpdate(variables._id, variables)
+          .then(project => project)
           .catch(err => err);
       }
     },
@@ -100,9 +100,9 @@ const mutation = new GraphQLObjectType({
         story: { type: GraphQLString },
       },
       resolve(_, variables) {
-        return Project.findById(variables._id)
-          .then(project => project.update(variables))
-          .catch(err => err);
+        return Project.findByIdAndUpdate(variables._id, variables)
+          .then(project => project)
+          .catch(err => err)
       }
     },
     newCategory: {

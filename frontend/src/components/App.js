@@ -22,7 +22,7 @@ const App = () => {
         <AuthRoute path="/user" component={UserProfile} />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Register} routeType="auth" />
-        <ProjectIndex path='/' component={ProjectIndex} />
+        <ProjectIndex exact path='/' component={ProjectIndex} />
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />

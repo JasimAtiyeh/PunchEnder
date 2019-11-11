@@ -59,5 +59,13 @@ export default {
         story
       }
     }
+  `,
+  LAUNCH_PROJECT: gql`
+    mutation LaunchProject($_id: ID!) {
+      launchProject(_id: $_id) {
+        _id
+        launched
+      }
+    }
   `
 };

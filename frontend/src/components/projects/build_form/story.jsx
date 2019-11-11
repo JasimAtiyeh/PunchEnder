@@ -5,19 +5,21 @@ import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Tabs from "./tabs";
 import Nav from "./last_nav";
-const { UPDATE_PROJECT_STORY } = Mutations;
+const { UPDATE_PROJECT_STORY, LAUNCH_PROJECT } = Mutations;
 
 const BuildFormStory = props => {
   const { project } = props;
   const [story, setStory] = useState(props.story || '');
   const [needSave, setNeedSave] = useState(false);
   const [save, mdata] = useMutation(UPDATE_PROJECT_STORY);
+  const [launchProject] = useMutation(LAUNCH_PROJECT);
 
   return (
     <div className="build-form-story">
       <Nav
         project={project}
         mdata={mdata}
+        launchProject={launchProject}
         save={save}
         setNeedSave={setNeedSave}
         needSave={needSave}

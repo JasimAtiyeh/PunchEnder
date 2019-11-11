@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Editor from './editor/editor';
+import Editor from '../editor/editor';
 import { withRouter } from "react-router-dom";
 import { useMutation } from '@apollo/react-hooks';
-import Mutations from "../../../graphql/mutations";
-import Tabs from "./tabs";
-import Nav from "./last_nav";
+import Mutations from "../../../../graphql/mutations";
+import Tabs from "../tabs";
+import Nav from "./nav";
 const { UPDATE_PROJECT_STORY, LAUNCH_PROJECT } = Mutations;
 
 const BuildFormStory = props => {

@@ -14,3 +14,26 @@
     max-width: 600px;
   }
 }
+
+.add-reward-button {
+  display: block;
+  margin: 0 auto;
+  padding: 20px 35px;
+  background-color: black;
+  color: white;
+}
+
+.add-reward-button:hover {
+  background-color: tint(black, 20%);
+}
+
+.reward-cancel {
+  padding: 10px 20px;
+  border: 1px solid lightgray;
+}
+
+.reward-save {
+  padding: 10px 20px;
+  background-color: lightgreen;
+  border: 1px solid green;
+}

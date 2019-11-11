@@ -5,7 +5,7 @@ import BasicsCategoryForm from "./basics_category";
 import BasicsDate from "./basics_date";
 import autosize from "autosize";
 import Tabs from "../tabs";
-import Nav from "../nav";
+import Nav from "./nav";
 import Mutations from "../../../../graphql/mutations";
 const { UPDATE_PROJECT_BASICS } = Mutations;
 
@@ -37,9 +37,7 @@ const BuildFormBasics = props => {
         save={save}
         variables={variables}
         setNeedSave={setNeedSave} 
-        needSave={needSave} 
-        nextText={"Next: Rewards"} 
-        nextLink={"rewards"} />
+        needSave={needSave} />
       <Tabs projectId={props.match.params.projectId}/>
       <h2>Let's start with basic project info</h2>
       <p>Give backers the information they need.</p>

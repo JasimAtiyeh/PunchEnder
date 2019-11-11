@@ -10,8 +10,6 @@ import tboptions from './options';
 class StoryEditor extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
-    console.log(Boolean(props.story));
     const editorState = Boolean(props.story) ?
       EditorState.createWithContent(convertFromRaw(JSON.parse(props.story)))
       : EditorState.createEmpty() 

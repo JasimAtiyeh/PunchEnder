@@ -23,8 +23,8 @@ export default {
     }
   `,
   FETCH_USER: gql`
-    query FetchProject($id: ID!) {
-      project(_id: $id) {
+    query FetchUser($id: ID!) {
+      user(_id: $id) {
         _id
         name
         projects {
@@ -51,6 +51,7 @@ export default {
             name
           }
         }
+        date
       }
     }
   `,

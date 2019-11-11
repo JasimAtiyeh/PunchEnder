@@ -4,7 +4,6 @@ import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from './projects_index_tile';
 
 const ProjectIndex = () => {
-  console.log(Queries);
   return (
     <Query query={Queries.default.FETCH_PROJECTS}>
       {({ loading, error, data }) => {

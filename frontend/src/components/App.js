@@ -9,6 +9,7 @@ import CreateForm from "./projects/create_form/form";
 import BuildForm from "./projects/build_form/form";
 import ProjectIndex from './projects/projects_index';
 import UserProfile from './user/user_profile';
+import '../assets/stylesheets/main.scss';
 
 const App = () => {
   return (

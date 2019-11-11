@@ -54,7 +54,7 @@ const login = async data => {
     if (!isValid) {
       throw new Error(message);
     }
-
+    
     const { email, password } = data;
     const existingUser = await User.findOne({ email });
     
@@ -69,7 +69,7 @@ const login = async data => {
     }
 
     const token = jwt.sign({ id: existingUser._id }, keys.secretOrKey);
-    return { token, loggedIn: true, ...existingUser._doc, password: null };
+    return { token, loggedIn: true, ...existingUser._doc, password: null, userId: existingUser._id };
     
   } catch (err) {
     throw err;

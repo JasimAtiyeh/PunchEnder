@@ -55,7 +55,8 @@ const UserType = new GraphQLObjectType({
     },
     funBucks: { type: GraphQLInt },
     token: { type: GraphQLString },
-    loggedIn: { type: GraphQLBoolean }
+    loggedIn: { type: GraphQLBoolean },
+    date: { type: GraphQLString }
   })
 });
 

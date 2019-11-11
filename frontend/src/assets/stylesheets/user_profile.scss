@@ -1,0 +1,29 @@
+.user-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-info {
+  margin: 0 auto;
+}
+
+.user-profile-info-avatar {
+  border-radius: 50%;
+  width: 150px;
+  height: auto;
+  margin: 50px auto 15px;
+}
+
+.user-profile-info-name {
+  color: #020621;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.user-profile-info-sub{
+  display: flex;
+}
+
+.user-profile-projects {
+
+}

@@ -8,7 +8,6 @@ class BasicsDate extends React.Component {
     this.setDate = props.setDate;
     if (props.date) {
       const date = new Date(props.date);
-      console.dir(date);
       this.state = { day: date.getDate(), month: date.getMonth() + 1, year: date.getFullYear(), error: {} };
     } else {
       this.state = { day: undefined, month: undefined, year: undefined, error: {} }

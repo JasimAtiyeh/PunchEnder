@@ -93,6 +93,18 @@ const mutation = new GraphQLObjectType({
           .catch(err => err);
       }
     },
+    updateProjectStory: {
+      type: ProjectType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        story: { type: GraphQLString },
+      },
+      resolve(_, variables) {
+        return Project.findById(variables._id)
+          .then(project => project.update(variables))
+          .catch(err => err);
+      }
+    },
     newCategory: {
       type: CategoryType,
       args: {

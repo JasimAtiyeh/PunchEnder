@@ -5,7 +5,6 @@ const BuildFormNav = props => {
   const { setNeedSave, needSave, nextText, nextLink, mdata, variables, save } = props;
   const { projectId } = props.match.params;
   let button;
-  console.dir(variables);
 
   if (needSave) {
     button = 

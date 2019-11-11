@@ -51,5 +51,13 @@ export default {
         }
       }
     }
+  `,
+  UPDATE_PROJECT_STORY: gql`
+    mutation UpdateProjectStory($_id: ID!, $story: String!) {
+      updateProjectStory(_id: $_id, story: $story) {
+        _id
+        story
+      }
+    }
   `
 };

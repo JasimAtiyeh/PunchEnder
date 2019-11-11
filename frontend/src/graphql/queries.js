@@ -34,6 +34,7 @@ export default {
         description
         goal
         endDate
+        launched
         story
         rewards {
           _id

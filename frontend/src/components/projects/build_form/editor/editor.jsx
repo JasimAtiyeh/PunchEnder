@@ -4,6 +4,9 @@ import React from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import tboptions from './options';
 
+// https://jpuri.github.io/react-draft-wysiwyg
+// I was making a custom editor with slatejs, but there was a fatal error
+
 class StoryEditor extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +16,9 @@ class StoryEditor extends React.Component {
         : EditorState.createEmpty() 
     };
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
   }
 
   onChange(editorState) {

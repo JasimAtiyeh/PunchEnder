@@ -1,13 +1,23 @@
 import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const BuildFormLastNav = props => {
-  const { projectId } = props.match.params;
-  let button =
-    <button id="launch-button">
-      Launch!
-    </button>
-  ;
+  const { setNeedSave, needSave, variables, save, mdata } = props;
+
+  let button;
+  if (needSave) {
+    button =
+      <button
+        onClick={() => { setNeedSave(false); save({ variables }) }}
+        disabled={mdata.loading}>
+        Save
+      </button>
+  } else {
+    button =
+      <button id="launch-button">
+        Launch!
+      </button>
+  }
 
   return (
     <div className="build-form-nav-container">
@@ -19,4 +29,4 @@ const BuildFormLastNav = props => {
   )
 };
 
-export default withRouter(BuildFormLastNav);
+export default BuildFormLastNav;

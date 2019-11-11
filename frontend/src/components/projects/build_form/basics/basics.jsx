@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 import BasicsCategoryForm from "./basics_category";
 import BasicsDate from "./basics_date";
 import autosize from "autosize";
-import Tabs from "./tabs";
-import Nav from "./nav";
-import Mutations from "../../../graphql/mutations";
+import Tabs from "../tabs";
+import Nav from "../nav";
+import Mutations from "../../../../graphql/mutations";
 const { UPDATE_PROJECT_BASICS } = Mutations;
 
 const BuildFormBasics = props => {

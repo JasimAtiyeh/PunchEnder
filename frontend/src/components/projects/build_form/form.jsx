@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
-import Basics from "./basics"
+import Basics from "./basics/basics";
 import Rewards from "./rewards"
 import Story from "./story"
 

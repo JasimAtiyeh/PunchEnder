@@ -1,7 +1,7 @@
 import { convertFromRaw } from 'draft-js';
 
 export default project => {
-  const storyContent = convertFromRaw(JSON.parse(project.story)).getPlainText();
+  const storyContent = project.story ? convertFromRaw(JSON.parse(project.story)).getPlainText() : false;
 
   return (
     Boolean(

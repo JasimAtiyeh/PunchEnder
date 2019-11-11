@@ -10,15 +10,13 @@ import tboptions from './options';
 class StoryEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      editorState: props.story ? 
-        EditorState.createWithContent(convertFromRaw(JSON.parse(props.story))) 
-        : EditorState.createEmpty() 
-    };
+    console.log(props);
+    console.log(Boolean(props.story));
+    const editorState = Boolean(props.story) ?
+      EditorState.createWithContent(convertFromRaw(JSON.parse(props.story)))
+      : EditorState.createEmpty() 
+    this.state = { editorState };
     this.onChange = this.onChange.bind(this);
-  }
-
-  componentDidMount() {
   }
 
   onChange(editorState) {

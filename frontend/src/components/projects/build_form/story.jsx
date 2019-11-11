@@ -16,6 +16,7 @@ const BuildFormStory = props => {
   return (
     <div className="build-form-story">
       <Nav
+        project={project}
         mdata={mdata}
         save={save}
         setNeedSave={setNeedSave}

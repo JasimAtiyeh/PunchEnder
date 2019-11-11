@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BuildFormLastNav = props => {
-  const { setNeedSave, needSave, variables, save, mdata } = props;
-
+  const { setNeedSave, needSave, variables, save, mdata, project } = props;
+  console.log(project);
   let button;
   if (needSave) {
     button =

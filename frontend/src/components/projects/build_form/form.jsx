@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
 import Basics from "./basics"
@@ -18,7 +18,9 @@ const BuildForm = props => {
   };
 
   const { project } = data;
-  console.log(project);
+
+  // Only allow user to access the build page if the project is not launched
+  if (project.launched) { return <Redirect to={`/projects/${project._id}`}/> };
 
   return (
     <div className="build-form-container">

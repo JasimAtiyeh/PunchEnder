@@ -38,7 +38,7 @@ export default {
     }
   `,
   UPDATE_PROJECT_BASICS: gql`
-    mutation UpdateProjectBasics($_id: ID!, $name: String!, $description: String!, $category: ID!, $goal: Int!, $endDate: String!) {
+    mutation UpdateProjectBasics($_id: ID!, $name: String, $description: String, $category: ID, $goal: Int, $endDate: String) {
       updateProjectBasics(_id: $_id, name: $name, description: $description, category: $category, goal: $goal, endDate: $endDate) {
         _id
         name
@@ -53,7 +53,7 @@ export default {
     }
   `,
   UPDATE_PROJECT_STORY: gql`
-    mutation UpdateProjectStory($_id: ID!, $story: String!) {
+    mutation UpdateProjectStory($_id: ID!, $story: String) {
       updateProjectStory(_id: $_id, story: $story) {
         _id
         story

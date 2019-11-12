@@ -8,10 +8,12 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      errors: [],
     };
     this.updateCache = this.updateCache.bind(this);
     this.demoLogin = this.demoLogin.bind(this);
+    this.handleError = this.handleError.bind(this);
   }
 
   demoLogin(e, loginUser) {
@@ -22,6 +24,10 @@ class Login extends Component {
         password: "demouser"
       }
     });
+  }
+
+  handleError(err) {
+    this.setState({ errors: err.graphQLErrors.map(err => err.message) });
   }
 
   update(field) {
@@ -35,6 +41,8 @@ class Login extends Component {
   }
 
   render() {
+    const errorLis = this.state.errors.map(err => <li>{err}</li>);
+    
     return (
       <Mutation
         mutation={LOGIN_USER}
@@ -44,6 +52,7 @@ class Login extends Component {
           localStorage.setItem("userId", data.login._id);
           this.props.history.push("/");
         }} 
+        onError={error => this.handleError(error)}
         update={(client, data) => this.updateCache(client, data)}
       >
         {loginUser => (
@@ -74,6 +83,11 @@ class Login extends Component {
               />
               <button className="login-button" type="submit">Log In</button>
               <button className="demo-button" onClick={e => this.demoLogin(e, loginUser)}>Demo Login</button>
+              { this.state.errors.length > 0 && 
+                <ul className="session-errors">
+                  {errorLis}
+                </ul>
+              }
             </form>
           </div>
         )}

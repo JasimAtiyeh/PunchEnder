@@ -31,7 +31,7 @@
     }
     .demo-button {
       background-color: orange;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     .login-button:hover {
       background-color: tint(teal, 20%);
@@ -75,4 +75,9 @@
       background-color: tint(teal, 20%);
     }
   }
+}
+
+.session-errors {
+  color: red;
+  padding-left: 2px;
 }

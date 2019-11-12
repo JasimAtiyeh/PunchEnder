@@ -14,8 +14,6 @@ const BuildFormSecondNav = props => {
     updateReward } = props;
   const { project } = variables;
 
-  console.log(variables);
-
   let cancelButton;
   let saveButton;
 
@@ -35,7 +33,7 @@ const BuildFormSecondNav = props => {
       <button
         className="reward-save"
         onClick={() => updateReward({ variables })
-          .then(() => resetFields())
+          .then(() => { resetFields(); setEditing(false) } )
         }>
         Save
       </button>

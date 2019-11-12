@@ -96,11 +96,12 @@ export default {
   `,
   UPDATE_REWARD: gql`
     mutation UpdateReward($_id: ID!, $name: String, $description: String, $pledgeAmount: Int) {
-      newReward(name: $name, description: $description, pledgeAmount: $pledgeAmount) {
+      updateReward(_id: $_id, name: $name, description: $description, pledgeAmount: $pledgeAmount) {
         _id
         name
         description
         pledgeAmount
+        tier
         project {
           _id
         }

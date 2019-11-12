@@ -11,7 +11,7 @@ const RewardPanel = props => {
         <p>{name}</p>
       </div>
       <div className="reward-panel-buttons">
-        <button>Edit</button>
+        <button onClick={() => { setEditing(true); presetFields(reward) } } >Edit</button>
         <button onClick={() => deleteReward({ variables: { _id } })}>Delete</button>
       </div>
     </li>

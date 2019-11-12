@@ -20,9 +20,16 @@ const CommentType = require("./types/comment_type");
 const Comment = mongoose.model("comment");
 const RewardType = require("./types/reward_type");
 const Reward = mongoose.model("reward");
+const keys = require("../../config/keys");
 
 const AWS = require("aws-sdk");
-AWS.config.loadFromPath("./credentials.json");
+//AWS.config.loadFromPath("./credentials.json");
+AWS.config.update({
+  secretAccessKey: keys.secretAccessKey,
+  accessKeyId: keys.accessKeyId,
+  region: keys.region
+});
+
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 const mutation = new GraphQLObjectType({
@@ -149,7 +156,9 @@ const mutation = new GraphQLObjectType({
       },
       async resolve(_, { _id, image }) {
         const validUser = await AuthService.verifyUser({ token: context.token });
-        const updateObj = {};
+        
+        let imageUrl;
+
         if (image) {
           const { filename, mimetype, createReadStream } = await image;
           const fileStream = createReadStream();
@@ -162,11 +171,11 @@ const mutation = new GraphQLObjectType({
           };
           const result = await s3.upload(uploadParams).promise();
 
-          updateObj.image = result.Key;
+          imageUrl = result.Key;
         }
 
         if (validUser.loggedIn) {
-          return Project.findByIdAndUpdate(_id, image, { new: true })
+          return Project.findByIdAndUpdate(_id, { image: imageUrl }, { new: true })
             .then(project => project)
             .catch(err => err);
         } else {

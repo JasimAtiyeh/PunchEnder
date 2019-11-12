@@ -17,7 +17,11 @@ const BuildFormBasics = props => {
   const [category, setCategory] = useState(project.category._id);
   const [goal, setGoal] = useState(project.goal);
   const [date, setDate] = useState(project.endDate);
+  const [image, setImage] = useState(project.image || '');
+
   const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
+
+
   const variables = { name, description, category, goal: parseInt(goal), endDate: date, _id: project._id };
 
   let textarea; // for the ref
@@ -81,7 +85,7 @@ const BuildFormBasics = props => {
         <div className="basics-panel">
           <div className="basics-info">
             <h4>Project Image</h4>
-            <p>This feature does not currently work, but will be coming soon...</p>
+            <p>Add an image that will represent your project on its page. The image will be cropped to a 16:9 ratio for usage.</p>
           </div>
           <div className="basics-form">
             <label>Image</label>

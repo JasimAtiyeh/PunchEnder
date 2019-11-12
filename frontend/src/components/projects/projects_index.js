@@ -23,7 +23,7 @@ class ProjectIndex extends React.Component {
       projectDisplay = (
         <Query
           query={ Queries.default.FETCH_CATEGORY }
-          variables={{ id: this.state.category }} >
+          variables={{ _id: this.state.category }} >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
@@ -63,13 +63,12 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            console.log(data)
             return (
               <ul>
                 {data.categories.map((category, idx) => (
                   <li
                     key={idx}
-                    onClick={() => this.selectCategory(category.id)}>
+                    onClick={() => this.selectCategory(category._id)}>
                       {category.name}
                   </li>
                 ))}

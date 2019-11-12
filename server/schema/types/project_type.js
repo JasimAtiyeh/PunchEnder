@@ -16,6 +16,10 @@ const Project = mongoose.model("project");
 const User = mongoose.model("user");
 const Reward = mongoose.model("reward");
 
+const AWS = require("aws-sdk");
+AWS.config.loadFromPath("./credentials.json");
+const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+
 const ProjectType = new GraphQLObjectType({
   name: "ProjectType",
   fields: () => ({
@@ -34,7 +38,19 @@ const ProjectType = new GraphQLObjectType({
     amountRaised: { type: GraphQLInt },
     endDate: { type: GraphQLString },
     story: { type: GraphQLString },
-    image: { type: GraphQLString },
+    image: {
+      type: GraphQLString,
+      resolve(parentValue) {
+        let imageUrl;
+        if (parentValue.image) {
+          imageUrl = s3.getSignedUrl('getObject', {
+            Bucket: "punchender-dev",
+            Key: parentValue.image
+          });
+        }
+        return imageUrl || parentValue.image;
+      }
+    },
     launched: { type: GraphQLBoolean },
     backers: { 
       type: new GraphQLList(require("./user_type")),

@@ -6,7 +6,8 @@ const {
   GraphQLID,
   GraphQLBoolean,
   GraphQLNonNull,
-  GraphQLList
+  GraphQLList,
+  GraphQLUpload
 } = graphql;
 const mongoose = require("mongoose");
 const AuthService = require("../services/auth");
@@ -19,6 +20,10 @@ const CommentType = require("./types/comment_type");
 const Comment = mongoose.model("comment");
 const RewardType = require("./types/reward_type");
 const Reward = mongoose.model("reward");
+
+const AWS = require("aws-sdk");
+AWS.config.loadFromPath("./credentials.json");
+const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",
@@ -62,23 +67,23 @@ const mutation = new GraphQLObjectType({
         return AuthService.verifyUser(args);
       }
     },
-      newProject: {
-        type: ProjectType,
-        args: {
-          name: { type: new GraphQLNonNull(GraphQLString) },
-          description: { type: new GraphQLNonNull(GraphQLString) },
-          category: { type: new GraphQLNonNull(GraphQLID) },
-        },
-        async resolve(_, { name, description, category }, context) {
-          const validUser = await AuthService.verifyUser({ token: context.token });
+    newProject: {
+      type: ProjectType,
+      args: {
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        description: { type: new GraphQLNonNull(GraphQLString) },
+        category: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_, { name, description, category }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
 
-          if (validUser.loggedIn) {
-            const projectCreator = validUser.id;
-            return new Project({ name, description, category, projectCreator }).save();
-          } else {
-            throw new Error("sorry, you need to log in first");
-          }
+        if (validUser.loggedIn) {
+          const projectCreator = validUser.id;
+          return new Project({ name, description, category, projectCreator }).save();
+        } else {
+          throw new Error("sorry, you need to log in first");
         }
+      }
     },
     updateProjectBasics: {
       type: ProjectType,
@@ -129,6 +134,39 @@ const mutation = new GraphQLObjectType({
 
         if (validUser.loggedIn) {
           return Project.findByIdAndUpdate(variables._id, { launched: true }, { new: true })
+            .then(project => project)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
+      }
+    },
+    uploadProjectImage: {
+      type: ProjectType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        image: { type: GraphQLUpload }
+      },
+      async resolve(_, { _id, image }) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+        const updateObj = {};
+        if (image) {
+          const { filename, mimetype, createReadStream } = await image;
+          const fileStream = createReadStream();
+          // Promisify the stream and store the file, then…
+          const Key = new Date().getTime().toString();
+          const uploadParams = {
+            Bucket: "punchender-dev",
+            Key,
+            Body: fileStream
+          };
+          const result = await s3.upload(uploadParams).promise();
+
+          updateObj.image = result.Key;
+        }
+
+        if (validUser.loggedIn) {
+          return Project.findByIdAndUpdate(_id, image, { new: true })
             .then(project => project)
             .catch(err => err);
         } else {

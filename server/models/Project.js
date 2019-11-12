@@ -18,7 +18,8 @@ const ProjectSchema = new Schema({
     ref: "user"
   },
   amountRaised: {
-    type: Number
+    type: Number,
+    default: 0
   },
   endDate: {
     type: String

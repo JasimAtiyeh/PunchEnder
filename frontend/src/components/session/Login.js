@@ -12,6 +12,17 @@ class Login extends Component {
       password: ""
     };
     this.updateCache = this.updateCache.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
+  }
+
+  demoLogin(e, loginUser) {
+    e.preventDefault();
+    loginUser({
+      variables: {
+        email: "demo@demo.com",
+        password: "demouser"
+      }
+    });
   }
 
   update(field) {
@@ -37,8 +48,9 @@ class Login extends Component {
         update={(client, data) => this.updateCache(client, data)}
       >
         {loginUser => (
-          <div>
+          <div className="login-form-container">
             <form
+              className="login-form"
               onSubmit={e => {
                 e.preventDefault();
                 loginUser({
@@ -49,6 +61,7 @@ class Login extends Component {
                 });
               }}
             >
+              <label>Log In</label>
               <input
                 value={this.state.email}
                 onChange={this.update("email")}
@@ -60,7 +73,8 @@ class Login extends Component {
                 type="password"
                 placeholder="Password"
               />
-              <button type="submit">Log In</button>
+              <button className="login-button" type="submit">Log In</button>
+              <button className="demo-button" onClick={e => this.demoLogin(e, loginUser)}>Demo Login</button>
             </form>
           </div>
         )}

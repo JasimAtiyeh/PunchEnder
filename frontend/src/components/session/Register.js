@@ -11,9 +11,15 @@ class Register extends Component {
     this.state = {
 			name: "",
       email: "",
-      password: ""
+      password: "",
+      errors: []
     };
     this.updateCache = this.updateCache.bind(this);
+    this.handleError = this.handleError.bind(this);
+  }
+
+  handleError(err) {
+    this.setState({ errors: err.graphQLErrors.map(err => err.message) });
   }
 
   update(field) {
@@ -27,20 +33,24 @@ class Register extends Component {
   }
 
   render() {
+    const errorLis = this.state.errors.map(err => <li>{err}</li>);
+
     return (
       <Mutation
         mutation={SIGNUP_USER}
         onCompleted={data => {
           const { token } = data.register;
           localStorage.setItem("auth-token", token);
-          localStorage.setItem("userId", data.login._id);
+          localStorage.setItem("userId", data.register._id);
           this.props.history.push("/");
         }}
+        onError={error => this.handleError(error)}
         update={(client, data) => this.updateCache(client, data)}
       >
         {signupUser => (
-          <div>
+          <div className="signup-form-container">
             <form
+              className="signup-form"
               onSubmit={e => {
                 e.preventDefault();
                 signupUser({
@@ -52,6 +62,7 @@ class Register extends Component {
                 });
               }}
             >
+              <label>Sign Up</label>
               <input
                 value={this.state.name}
                 onChange={this.update("name")}
@@ -68,7 +79,12 @@ class Register extends Component {
                 type="password"
                 placeholder="Password"
               />
-              <button type="submit">Sign Up</button>
+              <button className="signup-button" type="submit">Sign Up</button>
+              {this.state.errors.length > 0 &&
+                <ul className="session-errors">
+                  {errorLis}
+                </ul>
+              }
             </form>
           </div>
         )}

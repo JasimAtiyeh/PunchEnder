@@ -88,6 +88,7 @@ export default {
     mutation DeleteReward($_id: ID!) {
       deleteReward(_id: $_id) {
         _id
+        tier
         project {
           _id
         }
@@ -105,6 +106,14 @@ export default {
         project {
           _id
         }
+      }
+    }
+  `,
+  UPDATE_REWARD_TIER: gql`
+    mutation UpdateReward($_id: ID!, $tier: Int!) {
+      updateRewardTier(_id: $_id, tier: $tier) {
+        _id
+        tier
       }
     }
   `,

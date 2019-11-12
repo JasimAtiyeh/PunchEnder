@@ -1,12 +1,21 @@
 import React from 'react';
 import RewardPanel from './panel';
+import { useMutation } from '@apollo/react-hooks';
+import Mutations from "../../../../graphql/mutations";
+
+const { UPDATE_REWARD_TIER } = Mutations;
+
 
 const RewardListing = props => {
   const { rewards, setEditing, deleteReward, presetFields } = props;
+  const [updateRewardTier] = useMutation(UPDATE_REWARD_TIER);
+
   const RewardLis = !rewards ? null : rewards.map(reward => {
     return <RewardPanel 
       key={reward._id} 
-      reward={reward} 
+      reward={reward}
+      rewards={rewards}
+      updateRewardTier={updateRewardTier}
       setEditing={setEditing}
       presetFields={presetFields} 
       deleteReward={deleteReward} />

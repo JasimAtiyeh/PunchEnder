@@ -8,7 +8,7 @@ import RewardListing from "./listing";
 import Mutations from "../../../../graphql/mutations";
 import Queries from "../../../../graphql/queries";
 const { FETCH_UNFINISHED_PROJECT } = Queries;
-const { CREATE_REWARD, DELETE_REWARD, UPDATE_REWARD } = Mutations;
+const { CREATE_REWARD, DELETE_REWARD, UPDATE_REWARD, UPDATE_REWARD_TIER } = Mutations;
 
 const BuildFormRewards = props => {
   const { project } = props;
@@ -20,7 +20,7 @@ const BuildFormRewards = props => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [pledgeAmount, setPledgeAmount] = useState("");
-  const [tier, setTier] = useState(rewards ? rewards.length + 1 : 1);
+  const tier = rewards ? rewards.length + 1 : 1;
 
   // These mutations don't update the cache, so this was necessary...
   const [createReward] = useMutation(
@@ -50,13 +50,13 @@ const BuildFormRewards = props => {
       }
   });
   const [updateReward] = useMutation(UPDATE_REWARD);
+  const [updateRewardTier] = useMutation(UPDATE_REWARD_TIER);
 
   const resetFields = () => {
     set_id(""); setName(""); setDescription(""); setPledgeAmount("");
   }
 
   const presetFields = reward => {
-    console.log(reward);
     set_id(reward._id); setName(reward.name); setDescription(reward.description); setPledgeAmount(reward.pledgeAmount);
   }
 
@@ -79,8 +79,9 @@ const BuildFormRewards = props => {
       { rewards && rewards.length > 0 && <RewardListing
         rewards={rewards}
         deleteReward={deleteReward}
+        updateRewardTier={updateRewardTier}
         setEditing={setEditing}
-        presetFields={presetFields} 
+        presetFields={presetFields}
       />}
       <button
         onClick={() => setCreating(true)}
@@ -109,7 +110,6 @@ const BuildFormRewards = props => {
           pledgeAmount={pledgeAmount}
           setPledgeAmount={setPledgeAmount}
           tier={tier}
-          setTier={setTier}
         />
       }
     </div>

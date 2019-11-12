@@ -188,6 +188,24 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    updateRewardTier: {
+      type: RewardType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        tier: { type: GraphQLInt },
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Reward.findByIdAndUpdate(variables._id, variables, { new: true })
+            .then(reward => reward)
+            .catch(err => err);
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
+      }
+    },
     deleteReward: {
       type: RewardType,
       args: {

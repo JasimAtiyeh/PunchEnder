@@ -1,7 +1,7 @@
 import React from 'react';
 
 const RewardPanel = props => {
-  const { reward, setEditing, presetFields, deleteReward } = props;
+  const { updateRewardTier, rewards, reward, setEditing, presetFields, deleteReward } = props;
   const { pledgeAmount, name, description, tier, _id } = reward;
 
   return (
@@ -16,7 +16,18 @@ const RewardPanel = props => {
       </div>
       <div className="reward-panel-buttons">
         <button onClick={() => { setEditing(true); presetFields(reward) } } >Edit</button>
-        <button onClick={() => deleteReward({ variables: { _id } })}>Delete</button>
+        <button 
+          onClick={() => { 
+            deleteReward({ variables: { _id } })
+              .then(({ data }) => { 
+                rewards.forEach(rew => { 
+                  if (rew.tier > data.deleteReward.tier) {
+                    updateRewardTier({ variables: { _id: rew._id, tier: parseInt(rew.tier) - 1 } });
+                  } 
+                })
+              })}}>
+          Delete
+        </button>
       </div>
     </li>
   )

@@ -69,7 +69,7 @@ class ProjectIndex extends React.Component {
                 {data.categories.map((category, idx) => (
                   <li
                     key={idx}
-                    onClick={this.selectCategory(category.name)}>
+                    onClick={() => this.selectCategory(category.id)}>
                       {category.name}
                   </li>
                 ))}

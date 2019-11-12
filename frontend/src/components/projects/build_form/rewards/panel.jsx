@@ -5,10 +5,14 @@ const RewardPanel = props => {
   const { pledgeAmount, name, description, tier, _id } = reward;
 
   return (
-    <li>
+    <li className="reward-panel">
       <div className="reward-panel-info">
+        <p>Tier {tier}</p>
         <p>US$ {pledgeAmount}</p>
-        <p>{name}</p>
+        <div className="reward-panel-details">
+          <h4>{name}</h4>
+          <p>{description}</p>
+        </div>
       </div>
       <div className="reward-panel-buttons">
         <button onClick={() => { setEditing(true); presetFields(reward) } } >Edit</button>

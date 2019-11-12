@@ -12,12 +12,13 @@ const RewardListing = props => {
       deleteReward={deleteReward} />
   });
   return (
-    <div>
-      <div>
-        <h4>Pledge Amount</h4>
-        <h4>Details</h4>
+    <div className="reward-list-container">
+      <div className="reward-list-header">
+        <h3>Tier</h3>
+        <h3>Pledge Amount</h3>
+        <h3>Details</h3>
       </div>
-      <ul>
+      <ul className="reward-list">
         {RewardLis}
       </ul>
     </div>

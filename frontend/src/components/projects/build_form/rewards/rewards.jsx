@@ -56,6 +56,7 @@ const BuildFormRewards = props => {
   }
 
   const presetFields = reward => {
+    console.log(reward);
     set_id(reward._id); setName(reward.name); setDescription(reward.description); setPledgeAmount(reward.pledgeAmount);
   }
 

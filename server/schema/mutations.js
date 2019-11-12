@@ -162,7 +162,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: context.token });
 
         if (validUser.loggedIn) {
-          return new Reward({ variables }).save();
+          return new Reward(variables).save();
         } else {
           throw new Error("sorry, you need to log in first");
         }
@@ -173,7 +173,7 @@ const mutation = new GraphQLObjectType({
       args: {
         _id: { type: new GraphQLNonNull(GraphQLID) },
         name: { type: GraphQLString },
-        description: { GraphQLString },
+        description: { type: GraphQLString },
         pledgeAmount: { type: GraphQLInt },
       },
       async resolve(_, variables, context) {

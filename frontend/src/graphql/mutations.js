@@ -87,6 +87,9 @@ export default {
     mutation DeleteReward($_id: ID!) {
       deleteReward(_id: $_id) {
         _id
+        project {
+          _id
+        }
       }
     }
   `,

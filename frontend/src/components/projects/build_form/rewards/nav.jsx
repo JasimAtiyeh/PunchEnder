@@ -2,7 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const BuildFormSecondNav = props => {
-  const { mdata, variables, creating, editing, setCreating, setEditing } = props;
+  const { 
+    mdata, 
+    variables, 
+    creating, 
+    editing, 
+    setCreating, 
+    setEditing,
+    resetFields,
+    createReward, 
+    updateReward } = props;
   const { project } = variables;
 
   let cancelButton;
@@ -13,7 +22,9 @@ const BuildFormSecondNav = props => {
     saveButton =
       <button
         className="reward-save"
-        onClick={() => console.log('creating...')}>
+        onClick={() => createReward({ variables })
+          .then(() => { resetFields(); setCreating(false) })
+        }>
         Save
       </button>
   } else if (editing) {
@@ -21,7 +32,9 @@ const BuildFormSecondNav = props => {
     saveButton = 
       <button
         className="reward-save"
-        onClick={() => console.log('editing...')}>
+        onClick={() => updateReward({ variables })
+          .then(() => resetFields())
+        }>
         Save
       </button>
   } else {

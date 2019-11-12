@@ -89,4 +89,18 @@ export default {
       }
     }
   `,
+  FETCH_REWARDS: gql`
+    query FetchRewards {
+      rewards {
+        _id
+        name
+        description
+        pledgeAmount
+        tier
+        project {
+          _id
+        }
+      }
+    }
+  `,
 };

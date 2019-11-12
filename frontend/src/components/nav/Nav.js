@@ -30,9 +30,11 @@ class Nav extends React.Component {
 					<Link to='/'>Explore &nbsp;&nbsp;&nbsp;</Link>
 					<Link to='/start'>Start a project</Link>
 				</div>
-				<h1 className='nav-logo'>
-					PUNCHENDER
-				</h1>
+				<Link to="/">
+					<h1 className='nav-logo'>
+						PUNCHENDER
+					</h1>
+				</Link>
 				<ApolloConsumer>
 					{client => (
 						<Query query={IS_LOGGED_IN}>

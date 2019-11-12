@@ -39,8 +39,9 @@ class Register extends Component {
         update={(client, data) => this.updateCache(client, data)}
       >
         {signupUser => (
-          <div>
+          <div className="signup-form-container">
             <form
+              className="signup-form"
               onSubmit={e => {
                 e.preventDefault();
                 signupUser({
@@ -52,6 +53,7 @@ class Register extends Component {
                 });
               }}
             >
+              <label>Sign Up</label>
               <input
                 value={this.state.name}
                 onChange={this.update("name")}
@@ -68,7 +70,7 @@ class Register extends Component {
                 type="password"
                 placeholder="Password"
               />
-              <button type="submit">Sign Up</button>
+              <button className="signup-button" type="submit">Sign Up</button>
             </form>
           </div>
         )}

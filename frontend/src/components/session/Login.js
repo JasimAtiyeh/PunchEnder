@@ -6,7 +6,6 @@ const { LOGIN_USER } = Mutations;
 class Login extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: "",
       password: ""

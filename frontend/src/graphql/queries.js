@@ -70,6 +70,7 @@ export default {
           name
           pledgeAmount
           tier
+          description
         }
         projectCreator {
           _id
@@ -86,6 +87,20 @@ export default {
       categories {
         _id
         name
+      }
+    }
+  `,
+  FETCH_REWARDS: gql`
+    query FetchRewards {
+      rewards {
+        _id
+        name
+        description
+        pledgeAmount
+        tier
+        project {
+          _id
+        }
       }
     }
   `,

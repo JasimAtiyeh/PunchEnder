@@ -34,7 +34,7 @@ const BuildFormLastNav = props => {
   return (
     <div className="build-form-nav-container">
       <div className="build-form-nav">
-        <h1><Link to="/">PunchEnder</Link></h1>
+        <h1 className="build-nav-logo"><Link to="/">PunchEnder</Link></h1>
         {needSave && saveButton}
         {!needSave && validProject && launchButton}
         {!needSave && !validProject && defaultButton}

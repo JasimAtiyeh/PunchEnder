@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
-import Basics from "./basics"
-import Rewards from "./rewards"
-import Story from "./story"
+import Basics from "./basics/basics";
+import Rewards from "./rewards/rewards"
+import Story from "./story/story"
 
 const { FETCH_UNFINISHED_PROJECT } = Queries;
 
@@ -27,7 +27,9 @@ const BuildForm = props => {
       <Route 
         path="/projects/:projectId/build/basics" 
         render={ props => <Basics {...props} project={project} /> } />
-      <Route path="/projects/:projectId/build/rewards" component={Rewards} />
+      <Route
+        path="/projects/:projectId/build/rewards"
+        render={props => <Rewards {...props} project={project} />} />
       <Route 
         path="/projects/:projectId/build/story" 
         render={props => <Story {...props} story={data.project.story} project={project} />} />

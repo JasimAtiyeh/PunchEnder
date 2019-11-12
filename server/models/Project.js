@@ -54,7 +54,7 @@ ProjectSchema.virtual('comments', {
 });
 
 ProjectSchema.virtual('rewards', {
-  ref: 'rewards',
+  ref: 'reward',
   localField: '_id',
   foreignField: 'project'
 });

@@ -84,8 +84,8 @@
         user-select: none;
       }
       input {
+        display: block;
         width: 90%;
-        box-sizing: border-box;
       }
       input[type=number]::-webkit-inner-spin-button, 
       input[type=number]::-webkit-outer-spin-button { 

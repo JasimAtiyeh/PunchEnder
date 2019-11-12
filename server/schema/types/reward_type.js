@@ -16,9 +16,9 @@ const RewardType = new GraphQLObjectType({
     name: { type: GraphQLString },
     description: { type: GraphQLString },
     tier: { type: GraphQLInt },
-    pledgeAmount: { type: GraphQLInt},
+    pledgeAmount: { type: GraphQLInt },
     project: { 
-      type: ProjectType,
+      type: require("./project_type"),
       resolve(parentValue) {
         return Project.findById(parentValue.project)
           .then(project => project)

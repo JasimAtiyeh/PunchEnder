@@ -13,6 +13,8 @@ const ProjectType = require("./project_type");
 const Project = mongoose.model("project");
 const CategoryType = require("./category_type");
 const Category = mongoose.model("category");
+const RewardType = require("./reward_type");
+const Reward = mongoose.model("reward");
 const CommentType = require("./comment_type");
 const Comment = mongoose.model("comment");
 
@@ -81,6 +83,23 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(_, args) {
         return Category.findById(args._id);
+      }
+    },
+    rewards: {
+      type: new GraphQLList(RewardType),
+      resolve() {
+        return Reward.find({});
+      }
+    },
+    reward: {
+      type: RewardType,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve(_, args) {
+        return Reward.findById(args._id);
       }
     }
   })

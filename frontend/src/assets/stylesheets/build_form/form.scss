@@ -19,17 +19,23 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  h1 {
+  .build-nav-logo {
     padding: 10px;
-    font-size: 20px;
+    font-weight: 900;
+    font-size: 24px;
+    color: #05ce78;
+    font-family: 'Fredoka One', cursive;
+    text-transform: uppercase;
   }
   > button {
     padding: 10px 20px;
     background-color: lightgreen;
+    border: 1px solid green;
   }
   > a {
     padding: 10px 20px;
     background-color: darkgreen;
+    border: 1px solid darkslategray;
   }
   #launch-button {
     padding: 10px 20px;

@@ -10,9 +10,11 @@ const {
 } = graphql;
 const UserType = require("./user_type");
 const CategoryType = require("./category_type");
+const RewardType = require("./reward_type");
 const Category = mongoose.model("category");
 const Project = mongoose.model("project");
 const User = mongoose.model("user");
+const Reward = mongoose.model("reward");
 
 const ProjectType = new GraphQLObjectType({
   name: "ProjectType",
@@ -67,7 +69,7 @@ const ProjectType = new GraphQLObjectType({
         return Project.findById(parentValue._id)
           .populate("rewards")
           .then(project => project.rewards)
-          .catch(err => null);
+          .catch(err => console.log(err));
       }
     },
     category: { 
@@ -75,7 +77,7 @@ const ProjectType = new GraphQLObjectType({
       resolve(parentValue) {
         return Category.findById(parentValue.category)
           .then(category => category)
-          .catch(err => null);
+          .catch(err => console.log(err));
       }
     },
     pledges: {

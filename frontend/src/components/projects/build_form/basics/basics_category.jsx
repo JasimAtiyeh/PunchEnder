@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import Queries from "../../../graphql/queries";
+import Queries from "../../../../graphql/queries";
 const { FETCH_CATEGORIES } = Queries;
 
 

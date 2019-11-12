@@ -83,6 +83,37 @@ export default {
       }
     }
   `,
+  FETCH_FINISHED_PROJECT: gql`
+    query FetchFinishedProject($_id: ID!) {
+      project(_id: $_id) {
+        _id
+        name
+        description
+        goal
+        endDate
+        amountRaised
+        launched
+        story
+        rewards {
+          _id
+          name
+          pledgeAmount
+          tier
+          description
+        }
+        backers {
+          _id
+        }
+        projectCreator {
+          _id
+        }  
+        category {
+          _id
+          name
+        }
+      }
+    }
+  `,
   FETCH_CATEGORIES: gql`
     query FetchCategories {
       categories {

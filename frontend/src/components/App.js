@@ -8,6 +8,7 @@ import "../assets/stylesheets/main.scss";
 import CreateForm from "./projects/create_form/form";
 import BuildForm from "./projects/build_form/form";
 import ProjectIndex from './projects/projects_index';
+import ProjectShow from './projects/show/showpage';
 import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
 
@@ -26,6 +27,7 @@ const App = () => {
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
+        <Route path="/projects/:projectId" component={ProjectShow} />
       </Switch>
       <AuthRoute exact path="/start" component={CreateForm} />
     </div>

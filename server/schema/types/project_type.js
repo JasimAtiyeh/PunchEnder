@@ -15,9 +15,14 @@ const Category = mongoose.model("category");
 const Project = mongoose.model("project");
 const User = mongoose.model("user");
 const Reward = mongoose.model("reward");
+const keys = require("../../../config/keys");
 
 const AWS = require("aws-sdk");
-AWS.config.loadFromPath("./credentials.json");
+AWS.config.update({
+  secretAccessKey: keys.secretAccessKey,
+  accessKeyId: keys.accessKeyId,
+  region: keys.region
+});
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 const ProjectType = new GraphQLObjectType({

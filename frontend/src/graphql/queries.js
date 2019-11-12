@@ -63,6 +63,7 @@ export default {
         description
         goal
         endDate
+        image
         launched
         story
         rewards {

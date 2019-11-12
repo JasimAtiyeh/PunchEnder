@@ -22,7 +22,7 @@ const BuildFormRewards = props => {
   const [pledgeAmount, setPledgeAmount] = useState("");
   const [tier, setTier] = useState(rewards ? rewards.length + 1 : 1);
 
-  // This mutation doesn't update the cache, so this was necessary...
+  // These mutations don't update the cache, so this was necessary...
   const [createReward] = useMutation(
     CREATE_REWARD,
     {
@@ -39,9 +39,9 @@ const BuildFormRewards = props => {
   const [deleteReward] = useMutation(
     DELETE_REWARD,
     {
-      update(cache, { data: { newReward } }) {
+      update(cache, { data: { deleteReward } }) {
         const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
-        qdata.project.rewards.push(newReward);
+        qdata.project.rewards = qdata.project.rewards.filter(reward => reward._id !== deleteReward._id);
         cache.writeQuery({
           query: FETCH_UNFINISHED_PROJECT,
           variables: { _id: project._id },

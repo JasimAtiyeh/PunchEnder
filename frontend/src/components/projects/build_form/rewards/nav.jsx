@@ -14,6 +14,8 @@ const BuildFormSecondNav = props => {
     updateReward } = props;
   const { project } = variables;
 
+  console.log(variables);
+
   let cancelButton;
   let saveButton;
 

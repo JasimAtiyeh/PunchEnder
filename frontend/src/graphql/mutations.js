@@ -76,6 +76,7 @@ export default {
         _id
         name
         description
+        pledgeAmount
         tier
         project {
           _id

@@ -7,8 +7,8 @@ const RewardPanel = props => {
   return (
     <li>
       <div className="reward-panel-info">
-        <p>US$</p>
-        <p></p>
+        <p>US$ {pledgeAmount}</p>
+        <p>{name}</p>
       </div>
       <div className="reward-panel-buttons">
         <button>Edit</button>

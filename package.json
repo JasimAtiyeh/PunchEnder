@@ -29,6 +29,7 @@
     "apollo-link": "^1.2.13",
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
+    "aws-sdk": "^2.569.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "canner-slate-editor": "^1.5.4",

@@ -1,27 +1,87 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { Query, useQuery } from 'react-apollo';
 import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from './projects_index_tile';
 
-const ProjectIndex = () => {
-  return (
-    <Query query={Queries.default.FETCH_PROJECTS}>
-      {({ loading, error, data }) => {
-        if (loading) return "Loading...";
-        if (error) return `Error! ${error.message}`
+class ProjectIndex extends React.Component {
+  constructor(props) {
+    super(props);
 
-        return (
-          <ul>
-            {data.projects.map(project => (
-              <li>
-                <ProjectIndexTile project={project} />
-              </li>
-            ))}
-          </ul>
-        )
-      }}
-    </Query>
-  )
+    this.state = {
+      category: undefined
+    };
+  }
+
+  selectCategory(category) {
+    this.setState({ category });
+  }
+
+  render() {
+    let projectDisplay;
+
+    if (this.state.category) {
+      projectDisplay = (
+        <Query
+          query={ Queries.default.FETCH_CATEGORY }
+          variables={{ _id: this.state.category }} >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error</p>;
+            return (
+              data.category.projects.map((project, idx) => (
+                <li key={idx}>
+                  <ProjectIndexTile project={project} />
+                </li>
+              ))
+            )
+          }}
+        </Query>
+      )
+    } else {
+      projectDisplay = (
+        <Query query={ Queries.default.FETCH_PROJECTS }>
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error</p>;
+            return (
+              <ul>
+                {data.projects.map((project, idx) => (
+                  <li key={idx}>
+                  <ProjectIndexTile project={project} />
+                </li>
+                ))}
+              </ul>
+            )
+          }}
+        </Query>
+      )
+    }
+
+    return (
+      <div>
+        <Query query={Queries.default.FETCH_CATEGORIES}>
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error</p>;
+            return (
+              <ul>
+                {data.categories.map((category, idx) => (
+                  <li
+                    key={idx}
+                    onClick={() => this.selectCategory(category._id)}>
+                      {category.name}
+                  </li>
+                ))}
+              </ul>
+            )
+          }}
+        </Query>
+        <div>
+          {projectDisplay}
+        </div>
+      </div>
+    )
+  }
 };
 
 export default ProjectIndex;

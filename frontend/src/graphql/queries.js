@@ -104,4 +104,44 @@ export default {
       }
     }
   `,
+  FETCH_CATEGORY: gql`
+    query FetchCategory($_id: ID!) {
+      category(_id: $_id) {
+        _id
+        name
+        projects {
+          projectCreator {
+            name
+          }
+          name
+          description
+          goal
+          amountRaised
+          category {
+            name
+          }
+        }
+      }
+    }
+  `,
+  FETCH_PROJECTS_CATEGORIES: gql`
+    query FetchCategories {
+      categories {
+        _id
+        name
+        projects {
+          projectCreator {
+            name
+          }
+          name
+          description
+          goal
+          amountRaised
+          category {
+            name
+          }
+        }
+      }
+    }
+  `,
 };

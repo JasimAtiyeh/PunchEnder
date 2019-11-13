@@ -1,8 +1,7 @@
 node_modules
 frontend/node_modules
-/config/keys_dev.js
+config/keys_dev.js
 Dockerfile
 docker-compose.yml
 .env
 .dockerignore
-/server/credentials.json

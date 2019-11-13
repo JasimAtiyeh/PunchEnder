@@ -4,6 +4,10 @@ import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../graphql/mutations";
 
 const ProjectIndexTile = props => {
+<<<<<<< HEAD
+=======
+  let percentFunded = (props.project.amountRaised / props.project.goal) * 100;
+>>>>>>> 51926ab... fix projects-index
   const { FOLLOW_PROJECT } = Mutations;
   const [followProject] = useMutation(FOLLOW_PROJECT);
   if (!props.project) { return null }

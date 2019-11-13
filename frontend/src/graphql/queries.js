@@ -21,6 +21,7 @@ export default {
           name
         }
         launched
+        image
       }
     }
   `,
@@ -157,6 +158,7 @@ export default {
             name
           }
           launched
+          image
         }
       }
     }
@@ -179,6 +181,7 @@ export default {
             name
           }
           launched
+          image
         }
       }
     }

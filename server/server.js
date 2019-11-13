@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const db = require("../config/keys").MONGO_URI;
 const expressGraphQL = require("express-graphql");
+const { graphqlUploadExpress } = require('graphql-upload');
 require("./models/index");
 const schema = require("./schema/schema");
 const cors = require("cors");
@@ -27,11 +27,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
-// remember we use bodyParser to parse requests into json
-app.use(bodyParser.json());
-
 app.use(
   "/graphql",
+  graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
   expressGraphQL(req => {
     return {
       schema,

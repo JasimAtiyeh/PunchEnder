@@ -7,8 +7,8 @@ import autosize from "autosize";
 import Tabs from "../tabs";
 import Nav from "./nav";
 import Mutations from "../../../../graphql/mutations";
-import { onSelectFile, cropImage } from '../../../../util/image_util';
-const { UPDATE_PROJECT_BASICS } = Mutations;
+import { onSelectFile } from '../../../../util/image_util';
+const { UPDATE_PROJECT_BASICS, UPLOAD_PROJECT_IMAGE } = Mutations;
 
 const BuildFormBasics = props => {
   const { project } = props;
@@ -18,9 +18,11 @@ const BuildFormBasics = props => {
   const [category, setCategory] = useState(project.category._id);
   const [goal, setGoal] = useState(project.goal);
   const [date, setDate] = useState(project.endDate);
-  const [image, setImage] = useState(project.image || '');
+  const [image, setImage] = useState(project.image);
+  const [tempImage, setTempImage] = useState('');
 
   const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
+  const [uploadImage] = useMutation(UPLOAD_PROJECT_IMAGE);
 
   const variables = { name, description, category, goal: parseInt(goal), endDate: date, _id: project._id };
 
@@ -92,7 +94,10 @@ const BuildFormBasics = props => {
           <div className="basics-form">
             <label>Image</label>
             <input 
-              onChange={e => onSelectFile(e, setImage)} 
+              onChange={e => { 
+                onSelectFile(e, setImage, uploadImage, project._id);
+                //uploadImage({ variables: { _id: project._id, image } } ) 
+              } } 
               id="image-file-input" 
               type="file" 
               accept="image/*"

@@ -71,8 +71,8 @@ export default {
     }
   `,
   UPLOAD_PROJECT_IMAGE: gql`
-    mutation UploadProjectImage($_id: ID!) {
-      uploadProject(_id: $_id) {
+    mutation UploadProjectImage($_id: ID!, $image: Upload!) {
+      uploadProjectImage(_id: $_id, image: $image) {
         _id
         image
       }

@@ -11,6 +11,7 @@
     "apollo-link": "^1.2.13",
     "apollo-link-error": "^1.1.12",
     "apollo-link-http": "^1.5.16",
+    "apollo-upload-client": "^11.0.0",
     "autosize": "^4.0.2",
     "draft-js": "^0.10.5",
     "draft-js-buttons": "^2.0.2",

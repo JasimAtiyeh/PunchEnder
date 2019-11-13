@@ -1,15 +1,18 @@
 
-export const onSelectFile = (e, setImage) => {
+export const onSelectFile = (e, setImage, upload, projectId) => {
   if (e.target.files && e.target.files.length > 0) {
     const reader = new FileReader();
-    reader.addEventListener('load', () => {
+    reader.onload = () => {
       cropImage(reader.result, 16/9)
         .then(canvas => { 
-          const croppedImage = canvas.toDataURL('image/jpeg', 1.0);
-          setImage(croppedImage);
+          // const image = canvas.toDataURL('image/jpeg', 1.0);
+          canvas.toBlob(blob => {
+            upload({ variables: { _id: projectId, image: blob } })
+              .then(res => setImage(res.data.uploadProjectImage.image));
+          }, 'image/jpeg', 1);
         })
-    });
-    reader.readAsDataURL(e.target.files[0]);
+    };
+    return reader.readAsDataURL(e.target.files[0]);
   }
 };
 
@@ -23,7 +26,7 @@ export const cropImage = (url, aspectRatio) => {
       const inputImageAspectRatio = inputWidth / inputHeight;
 
       const dWidth = 512
-      const dHeight = 288;
+      const dHeight = 288; // change these two for adjustment to resolution
       const dx = 0;
       const dy = 0;
       let sWidth
@@ -44,8 +47,8 @@ export const cropImage = (url, aspectRatio) => {
       }
 
       const outputImage = document.createElement('canvas');
-      outputImage.width = 512;
-      outputImage.height = 288;
+      outputImage.width = dWidth;
+      outputImage.height = dHeight;
       const ctx = outputImage.getContext('2d');
       ctx.drawImage(inputImage, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
       resolve(outputImage);

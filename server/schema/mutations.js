@@ -156,12 +156,13 @@ const mutation = new GraphQLObjectType({
         _id: { type: new GraphQLNonNull(GraphQLID) },
         image: { type: GraphQLUpload }
       },
-      async resolve(_, { _id, image }) {
+      async resolve(_, { _id, image }, context) {
         const validUser = await AuthService.verifyUser({ token: context.token });
         
         let imageUrl;
 
         if (image) {
+          console.log(image);
           const { filename, mimetype, createReadStream } = await image;
           const fileStream = createReadStream();
           // Promisify the stream and store the file, then…

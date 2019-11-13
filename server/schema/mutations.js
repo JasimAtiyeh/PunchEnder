@@ -23,6 +23,8 @@ const Comment = mongoose.model("comment");
 const RewardType = require("./types/reward_type");
 const Reward = mongoose.model("reward");
 const keys = require("../../config/keys");
+const User = mongoose.model("user");
+
 
 const AWS = require("aws-sdk");
 //AWS.config.loadFromPath("./credentials.json");
@@ -288,6 +290,24 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    followProject: {
+      type: UserType,
+      args: {
+        user_id: { type: new GraphQLNonNull(GraphQLID) },
+        project_id: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+          if (validUser.loggedIn) {
+            return User.findByIdAndUpdate(variables.user_id, { followedProjects: variables.project_id}, { new: true })
+              .then(user => user)
+              .catch(err => err);
+          } else {
+            throw new Error("sorry, you need to log in first");
+          }
+      }
+    }
   }
 });
 

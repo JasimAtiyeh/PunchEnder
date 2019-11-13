@@ -27,7 +27,7 @@ const App = () => {
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
-        <Route path="/projects/:projectId" component={ProjectShow} />
+        <Route exact path="/projects/:projectId" component={ProjectShow} />
       </Switch>
       <AuthRoute exact path="/start" component={CreateForm} />
     </div>

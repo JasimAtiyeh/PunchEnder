@@ -191,10 +191,25 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
+        icon: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(_, { name, description }) {
         const newCat = new Category({ name, description });
         return newCat.save()
+          .then(cat => cat)
+          .catch(err => err);
+      }
+    },
+    updateCategory: {
+      type: CategoryType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        icon: { type: GraphQLString }
+      },
+      resolve(_, variables) {
+        return Category.findByIdAndUpdate(variables._id, variables, { new: true })
           .then(cat => cat)
           .catch(err => err);
       }

@@ -2,6 +2,10 @@
   @return mix(white, $color, $percentage);
 }
 
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
 @import './reset';
 @import './session';
 @import './create_form/form';

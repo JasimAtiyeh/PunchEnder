@@ -110,6 +110,7 @@ export default {
         category {
           _id
           name
+          icon
         }
       }
     }

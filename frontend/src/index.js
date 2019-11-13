@@ -10,6 +10,9 @@ import { ApolloProvider } from "react-apollo";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { HashRouter } from "react-router-dom";
+import { setContext } from 'apollo-link-context'; //add apollo-link-client to client's package.json
+import { createUploadLink } from 'apollo-upload-client'
+
 
 import Mutations from "./graphql/mutations";
 const { VERIFY_USER } = Mutations;
@@ -21,7 +24,17 @@ if (process.env.NODE_ENV === "production") {
   uri = "http://localhost:5000/graphql";
 }
 
-const httpLink = createHttpLink({
+const authLink = setContext((_, { headers }) => { //include setContext to create header with updated token
+  const token = localStorage.getItem('auth-token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? token : ''
+    }
+  };
+});
+
+const httpLink = createUploadLink({
   uri,
   headers: {
     authorization: localStorage.getItem("auth-token") || ""
@@ -42,7 +55,7 @@ const cache = new InMemoryCache({
 // });
 
 const client = new ApolloClient({
-  link: ApolloLink.from([errorLink, httpLink]),
+  link: authLink.concat(httpLink, errorLink),
   cache,
   connectToDevTools: true,
   resolvers: {},

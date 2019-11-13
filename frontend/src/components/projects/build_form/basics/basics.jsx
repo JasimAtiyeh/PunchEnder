@@ -7,7 +7,8 @@ import autosize from "autosize";
 import Tabs from "../tabs";
 import Nav from "./nav";
 import Mutations from "../../../../graphql/mutations";
-const { UPDATE_PROJECT_BASICS } = Mutations;
+import { onSelectFile } from '../../../../util/image_util';
+const { UPDATE_PROJECT_BASICS, UPLOAD_PROJECT_IMAGE } = Mutations;
 
 const BuildFormBasics = props => {
   const { project } = props;
@@ -17,13 +18,15 @@ const BuildFormBasics = props => {
   const [category, setCategory] = useState(project.category._id);
   const [goal, setGoal] = useState(project.goal);
   const [date, setDate] = useState(project.endDate);
-  const [image, setImage] = useState(project.image || '');
+  const [image, setImage] = useState(project.image);
+  const [tempImage, setTempImage] = useState('');
 
   const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
-
+  const [uploadImage] = useMutation(UPLOAD_PROJECT_IMAGE);
 
   const variables = { name, description, category, goal: parseInt(goal), endDate: date, _id: project._id };
 
+  let fileInput;
   let textarea; // for the ref
   useEffect(() => {
     // this is the same as componentDidMount
@@ -85,10 +88,31 @@ const BuildFormBasics = props => {
         <div className="basics-panel">
           <div className="basics-info">
             <h4>Project Image</h4>
-            <p>Add an image that will represent your project on its page. The image will be cropped to a 16:9 ratio for usage.</p>
+            <p>Add an image that will represent your project on its page. The image will be cropped to a 16:9 ratio for usage, so upload an appropriate image.</p>
+            <p>Pick an image that will appeal to backers. Remember that an image is an import part of your story.</p>
           </div>
           <div className="basics-form">
             <label>Image</label>
+            <input 
+              onChange={e => { 
+                onSelectFile(e, setImage, uploadImage, project._id);
+                //uploadImage({ variables: { _id: project._id, image } } ) 
+              } } 
+              id="image-file-input" 
+              type="file" 
+              accept="image/*"
+              ref={node => { fileInput = node }}
+            />
+            { !image && 
+              <div 
+                className="add-image"
+                onClick={ () => fileInput.click() }>
+                <span>Click to add an image</span>
+              </div>
+            }
+            { image &&
+              <img className="change-image" src={image} onClick={ ()=> fileInput.click() } />
+            }
           </div>
         </div>
         <div className="basics-panel">

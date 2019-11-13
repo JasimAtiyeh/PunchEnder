@@ -49,7 +49,7 @@ const ProjectType = new GraphQLObjectType({
         let imageUrl;
         if (parentValue.image) {
           imageUrl = s3.getSignedUrl('getObject', {
-            Bucket: "punchender-dev",
+            Bucket: keys.bucket,
             Key: parentValue.image
           });
         }

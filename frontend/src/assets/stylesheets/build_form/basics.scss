@@ -42,7 +42,8 @@
     }
   }
   .basics-form {
-    padding: 40px;
+    padding: 80px 40px;
+    padding-left: 100px;
     width: 70%;
     label {
       display: block;
@@ -156,4 +157,29 @@
 
 .react-datepicker__triangle {
   display: none;
+}
+
+.add-image {
+  background-color: lightgray;
+  height: 288px;
+  width: 512px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; 
+  user-select: none;
+  cursor: pointer;
+}
+
+.change-image {
+  cursor: pointer;
+}
+
+#image-file-input {
+  visibility: hidden;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }

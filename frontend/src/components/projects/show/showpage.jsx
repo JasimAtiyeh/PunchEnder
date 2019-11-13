@@ -1,9 +1,10 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
 import Main from "./main_panel";
 import Tabs from "./tabs"
+import CampaignPage from './campaign';
 const { FETCH_FINISHED_PROJECT } = Queries;
 
 const ProjectShowPage = props => {
@@ -17,6 +18,9 @@ const ProjectShowPage = props => {
     <div className="project-show">
       <Main project={project}/>
       <Tabs projectId={project._id} />
+      <Route
+        exact path={`/projects/${projectId}`}
+        render={props => <CampaignPage {...props} project={project} />} />
     </div>
   ) 
 };

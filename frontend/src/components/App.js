@@ -14,7 +14,7 @@ import '../assets/stylesheets/main.scss';
 
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <Switch>
         <Route path="/projects/:projectId/build" component={null} />
         <Nav />
@@ -27,7 +27,7 @@ const App = () => {
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
-        <Route exact path="/projects/:projectId" component={ProjectShow} />
+        <Route path="/projects/:projectId" component={ProjectShow} />
       </Switch>
       <AuthRoute exact path="/start" component={CreateForm} />
     </div>

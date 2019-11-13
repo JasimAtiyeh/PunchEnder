@@ -5,7 +5,7 @@ const ProjectShowTabs = props => {
   const { projectId } = props;
   return (
     <div className="project-show-tabs">
-      <NavLink to={`/projects/${projectId}`}>Campaign</NavLink>
+      <NavLink exact to={`/projects/${projectId}`}>Campaign</NavLink>
       <NavLink to={`/projects/${projectId}/updates`}>Updates</NavLink>
       <NavLink to={`/projects/${projectId}/comments`}>Comments</NavLink>
     </div>

@@ -1,5 +1,20 @@
 .project-show-tabs {
+  display: flex;
   margin: 0 auto;
   width: 83%;
-  background-color: blue;
+  height: 60px;
+  box-sizing: content-box;
+  border-bottom: 2px solid lightgray;
+  border-top: 2px solid lightgray;
+  a {
+    display: block;
+    position: static;
+    padding: 20px 0;
+    margin-right: 25px;
+    box-sizing: border-box;
+  }
+
+  .active {
+    border-bottom: 3px solid black;
+  }
 }

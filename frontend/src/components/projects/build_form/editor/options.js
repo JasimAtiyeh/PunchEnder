@@ -13,7 +13,7 @@ export default {
   },
   link: {
     inDropdown: false,
-    showOpenOptionOnHover: true,
+    showOpenOptionOnHover: false,
     defaultTargetOption: '_self',
     options: ['link', 'unlink'],
   },

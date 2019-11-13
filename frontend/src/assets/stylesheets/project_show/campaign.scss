@@ -1,0 +1,29 @@
+.campaign-page {
+  display: grid;
+  grid-template-columns: 66% auto;
+  min-height: 300px;
+  background-color: red;
+  width: 80%;
+  margin: 0 auto;
+  .campaign-story {
+    padding-top: 60px;
+    > h2 {
+      font-size: 23px;
+    }
+    .story-wrapper {
+      width: 100%;
+      border: none;
+      .story-editor {
+        width: 100%;
+        min-height: 500px;
+        overflow: hidden;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  .campaign-rewards {
+    background-color: blue;
+  }
+}

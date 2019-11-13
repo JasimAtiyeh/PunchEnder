@@ -14,6 +14,7 @@ const CategoryType = new GraphQLObjectType({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
     description: { type: GraphQLString },
+    icon: { type: GraphQLString },
     projects: {
       type: new GraphQLList(require("./project_type")),
       resolve(parentValue) {

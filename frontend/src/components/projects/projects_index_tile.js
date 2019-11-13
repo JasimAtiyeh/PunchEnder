@@ -4,14 +4,15 @@ import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../graphql/mutations";
 
 const ProjectIndexTile = props => {
-  console.log(props.project);
-  let percentFunded = (props.project.amountRaised / props.project.goal) * 100;
   const { FOLLOW_PROJECT } = Mutations;
   const [followProject] = useMutation(FOLLOW_PROJECT);
+  if (!props.project) { return null }
+  const { amountRaised, goal, _id } = props.project;
+  let percentFunded = (amountRaised / goal) * 100;
 
   return (
     <div className='project-index-tile'>
-      <Link to='/'>
+      <Link to={`/projects/${_id}`}>
         <div className='project-index-tile-image'>
           <img src={props.project.image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={props.project.name} />
         </div>
@@ -32,8 +33,6 @@ const ProjectIndexTile = props => {
           <i
             className="material-icons"
             onClick={e => {
-              console.log(localStorage)
-              console.log(props)
               e.preventDefault();
               followProject({ variables: {
                 user_id: localStorage.userId,

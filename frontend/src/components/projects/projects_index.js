@@ -9,8 +9,7 @@ class ProjectIndex extends React.Component {
     super(props);
     if (!props.location.state) {
       props.location.state = { category: undefined };
-    }
-    console.log(props);
+    };
     this.state = {
       category: props.location.state.category
     };
@@ -31,25 +30,33 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
+
+            console.log(data.category);
+
             while( data.category.projects.length > 0) {
-              let projects = data.category.projects.splice(0, 4)
+              let projects;
+              if (data.category.projects.length >= 4) { 
+                projects = data.category.projects.splice(0,4);
+              } else {
+                projects = data.category.projects.splice(0,data.category.projects.length);
+              }
               return (
                 projects.map((project, idx) => {
                   if (project.launched) {
                     return (
                       <div key={idx} className='projects-index-segment'>
-                        <li>
+                        { projects.length >= 1 && <li>
                           <ProjectIndexLargeTile project={project} />
-                        </li>
-                        <li>
+                        </li> }
+                        { projects.length >= 2 && <li>
                           <ProjectIndexTile project={projects[idx + 1]} />
-                        </li>
-                        <li>
+                        </li> }
+                        { project.length >= 3 && <li>
                           <ProjectIndexTile project={projects[idx + 2]} />
-                        </li>
-                        <li>
+                        </li> }
+                        { projects.length >= 4 && <li>
                           <ProjectIndexTile project={projects[idx + 3]} />
-                        </li>
+                        </li> }
                       </div>
                     )
                   }
@@ -60,33 +67,36 @@ class ProjectIndex extends React.Component {
         </Query>
       )
     } else {
+      console.log(this.state.category);
       projectDisplay = (
         <Query query={ Queries.default.FETCH_PROJECTS }>
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            let projects = data.projects
             while(data.projects.length > 0) {
-              let projectsSplice = projects.splice(0, 4)
+              let projects = data.projects
+              if (data.projects.length >= 4) {
+                projects = data.projects.splice(0, 4);
+              } else {
+                projects = data.category.projects.splice(0, data.category.projects.length);
+              }
               return (
-                projectsSplice.map((project, idx) => {
+                projects.map((project, idx) => {
                   if (project.launched) {
                     return (
                       <div key={idx} className='projects-index-segment'>
-                        <li className='projects-index-segment-large-tile'>
+                        { projects.length >= 1 && <li>
                           <ProjectIndexLargeTile project={project} />
-                        </li>
-                        <div className='projects-index-segment-side'>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 1]} />
-                          </li>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 2]} />
-                          </li>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 3]} />
-                          </li>
-                        </div>
+                        </li> }
+                        { projects.length >= 2 && <li>
+                          <ProjectIndexTile project={projects[idx + 1]} />
+                        </li> }
+                        { project.length >= 3 && <li>
+                          <ProjectIndexTile project={projects[idx + 2]} />
+                        </li> }
+                        { projects.length >= 4 && <li>
+                          <ProjectIndexTile project={projects[idx + 3]} />
+                        </li> }
                       </div>
                     )
                   }

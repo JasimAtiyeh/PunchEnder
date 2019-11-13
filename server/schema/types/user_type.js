@@ -40,7 +40,7 @@ const UserType = new GraphQLObjectType({
       resolve(parentValue) {
         return User.findById(parentValue._id)
           .populate("backedProjects")
-          .then(user => user.backedProjects)
+          .then(user => user.followedProjects)
           .catch(err => null);      
       }
     },

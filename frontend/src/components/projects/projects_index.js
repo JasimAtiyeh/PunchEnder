@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query, useQuery } from 'react-apollo';
+import { Query } from 'react-apollo';
 import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from './projects_index_tile';
 import ProjectIndexLargeTile from './projects_index_large_tile';
@@ -7,9 +7,12 @@ import ProjectIndexLargeTile from './projects_index_large_tile';
 class ProjectIndex extends React.Component {
   constructor(props) {
     super(props);
-
+    if (!props.location.state) {
+      props.location.state = { category: undefined };
+    }
+    console.log(props);
     this.state = {
-      category: undefined
+      category: props.location.state.category
     };
   }
 
@@ -32,22 +35,24 @@ class ProjectIndex extends React.Component {
               let projects = data.category.projects.splice(0, 4)
               return (
                 projects.map((project, idx) => {
-                  return (
-                    <div className='projects-index-segment'>
-                      <li key={idx}>
-                        <ProjectIndexLargeTile project={project} />
-                      </li>
-                      <li key={idx}>
-                        <ProjectIndexTile project={projects[idx + 1]} />
-                      </li>
-                      <li key={idx}>
-                        <ProjectIndexTile project={projects[idx + 2]} />
-                      </li>
-                      <li key={idx}>
-                        <ProjectIndexTile project={projects[idx + 3]} />
-                      </li>
-                    </div>
-                  )
+                  if (project.launched) {
+                    return (
+                      <div key={idx} className='projects-index-segment'>
+                        <li>
+                          <ProjectIndexLargeTile project={project} />
+                        </li>
+                        <li>
+                          <ProjectIndexTile project={projects[idx + 1]} />
+                        </li>
+                        <li>
+                          <ProjectIndexTile project={projects[idx + 2]} />
+                        </li>
+                        <li>
+                          <ProjectIndexTile project={projects[idx + 3]} />
+                        </li>
+                      </div>
+                    )
+                  }
                 })
               )
             }
@@ -65,25 +70,26 @@ class ProjectIndex extends React.Component {
               let projectsSplice = projects.splice(0, 4)
               return (
                 projectsSplice.map((project, idx) => {
-                  console.log(projectsSplice)
-                  return (
-                    <div className='projects-index-segment'>
-                      <li key={idx} className='projects-index-segment-large-tile'>
-                        <ProjectIndexLargeTile project={project} />
-                      </li>
-                      <div className='projects-index-segment-side'>
-                        <li key={idx}>
-                          <ProjectIndexTile project={projects[idx + 1]} />
+                  if (project.launched) {
+                    return (
+                      <div key={idx} className='projects-index-segment'>
+                        <li className='projects-index-segment-large-tile'>
+                          <ProjectIndexLargeTile project={project} />
                         </li>
-                        <li key={idx}>
-                          <ProjectIndexTile project={projects[idx + 2]} />
-                        </li>
-                        <li key={idx}>
-                          <ProjectIndexTile project={projects[idx + 3]} />
-                        </li>
+                        <div className='projects-index-segment-side'>
+                          <li>
+                            <ProjectIndexTile project={projects[idx + 1]} />
+                          </li>
+                          <li>
+                            <ProjectIndexTile project={projects[idx + 2]} />
+                          </li>
+                          <li>
+                            <ProjectIndexTile project={projects[idx + 3]} />
+                          </li>
+                        </div>
                       </div>
-                    </div>
-                  )
+                    )
+                  }
                 })
               )
             }

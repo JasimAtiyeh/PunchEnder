@@ -9,6 +9,7 @@ export default {
   FETCH_PROJECTS: gql`
     {
       projects {
+        _id
         projectCreator {
           name
         }
@@ -19,6 +20,7 @@ export default {
         category {
           name
         }
+        launched
       }
     }
   `,
@@ -143,6 +145,7 @@ export default {
         _id
         name
         projects {
+          _id
           projectCreator {
             name
           }
@@ -153,6 +156,7 @@ export default {
           category {
             name
           }
+          launched
         }
       }
     }
@@ -163,6 +167,7 @@ export default {
         _id
         name
         projects {
+          _id
           projectCreator {
             name
           }
@@ -173,6 +178,7 @@ export default {
           category {
             name
           }
+          launched
         }
       }
     }

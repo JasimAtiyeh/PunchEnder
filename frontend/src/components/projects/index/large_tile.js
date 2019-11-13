@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import Mutations from "../../graphql/mutations";
+import Mutations from "../../../graphql/mutations";
 
 const ProjectIndexLargeTile = props => {
   const { FOLLOW_PROJECT } = Mutations;

@@ -7,7 +7,8 @@ import Nav from "./nav/Nav";
 import "../assets/stylesheets/main.scss";
 import CreateForm from "./projects/create_form/form";
 import BuildForm from "./projects/build_form/form";
-import ProjectIndex from './projects/projects_index';
+import ProjectIndex from './projects/index/projects_index';
+import CategoryIndex from './projects/index/category_index';
 import ProjectShow from './projects/show/showpage';
 import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
@@ -24,6 +25,7 @@ const App = () => {
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute exact path="/signup" component={Register} routeType="auth" />
         <Route exact path='/' component={ProjectIndex} />
+        <Route exact path="/categories/:categoryId" component={CategoryIndex} />
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />

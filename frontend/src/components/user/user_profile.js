@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from "react-apollo";
 import * as Queries from '../../graphql/queries';
-import ProjectIndexTile from '../projects/projects_index_tile';
+import ProjectIndexTile from '../projects/index/tile';
 import { Link } from 'react-router-dom';
 
 class UserProfile extends React.Component {

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
 import Main from "./main_panel";
+import Tabs from "./tabs"
 const { FETCH_FINISHED_PROJECT } = Queries;
 
 const ProjectShowPage = props => {
@@ -15,6 +16,7 @@ const ProjectShowPage = props => {
   return (
     <div className="project-show">
       <Main project={project}/>
+      <Tabs projectId={project._id} />
     </div>
   ) 
 };

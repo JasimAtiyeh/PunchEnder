@@ -10,7 +10,6 @@ class ProjectIndex extends React.Component {
     if (!props.location.state) {
       props.location.state = { category: undefined };
     }
-    console.log(props);
     this.state = {
       category: props.location.state.category
     };

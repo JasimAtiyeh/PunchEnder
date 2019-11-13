@@ -18,6 +18,7 @@ const BuildForm = props => {
   };
 
   const { project } = data;
+  if (!project) { return <div>Project does not exist</div> }
 
   const currentUser = localStorage.userId;
   const projectCreatorId = project.projectCreator._id;

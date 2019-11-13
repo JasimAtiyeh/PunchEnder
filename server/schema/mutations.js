@@ -168,7 +168,7 @@ const mutation = new GraphQLObjectType({
           // Promisify the stream and store the file, then…
           const Key = new Date().getTime().toString();
           const uploadParams = {
-            Bucket: "punchender-dev",
+            Bucket: keys.bucket,
             Key,
             Body: fileStream
           };

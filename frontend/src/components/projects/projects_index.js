@@ -30,28 +30,34 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            while( data.category.projects.length > 0) {
-              let projects = data.category.projects.splice(0, 4)
+            let projects = data.category.projects.filter(project => project.launched);
+            while(projects.length > 0) {
+              let projectsSplice;
+              if (data.category.projects.length >= 4) {
+                projectsSplice = projects.splice(0, 4)
+              } else {
+                projectsSplice = projects.splice(0, projects.length)
+              }
               return (
-                projects.map((project, idx) => {
-                  if (project.launched) {
-                    return (
-                      <div key={idx} className='projects-index-segment'>
-                        <li>
-                          <ProjectIndexLargeTile project={project} />
-                        </li>
-                        <li>
-                          <ProjectIndexTile project={projects[idx + 1]} />
-                        </li>
-                        <li>
-                          <ProjectIndexTile project={projects[idx + 2]} />
-                        </li>
-                        <li>
-                          <ProjectIndexTile project={projects[idx + 3]} />
-                        </li>
+                projectsSplice.map((project, idx) => {
+                  return (
+                    <div key={idx} className='projects-index-segment'>
+                      {project && <li className='projects-index-segment-large-tile'>
+                        <ProjectIndexLargeTile project={project} />
+                      </li>}
+                      <div className='projects-index-segment-side'>
+                        {projectsSplice[idx + 1] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 1]} />
+                        </li>}
+                        {projectsSplice[idx + 2] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 2]} />
+                        </li>}
+                        {projectsSplice[idx + 3] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 3]} />
+                        </li>}
                       </div>
-                    )
-                  }
+                    </div>
+                  )
                 })
               )
             }
@@ -64,31 +70,34 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            let projects = data.projects
-            while(data.projects.length > 0) {
-              let projectsSplice = projects.splice(0, 4)
+            let projects = data.projects.filter(project => project.launched);
+            while(projects.length > 0) {
+              let projectsSplice;
+              if (data.projects.length >= 4) {
+                projectsSplice = projects.splice(0, 4)
+              } else {
+                projectsSplice = projects.splice(0, projects.length)
+              }
               return (
                 projectsSplice.map((project, idx) => {
-                  if (project.launched) {
-                    return (
-                      <div key={idx} className='projects-index-segment'>
-                        <li className='projects-index-segment-large-tile'>
-                          <ProjectIndexLargeTile project={project} />
-                        </li>
-                        <div className='projects-index-segment-side'>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 1]} />
-                          </li>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 2]} />
-                          </li>
-                          <li>
-                            <ProjectIndexTile project={projects[idx + 3]} />
-                          </li>
-                        </div>
+                  return (
+                    <div key={idx} className='projects-index-segment'>
+                      {project && <li className='projects-index-segment-large-tile'>
+                        <ProjectIndexLargeTile project={project} />
+                      </li>}
+                      <div className='projects-index-segment-side'>
+                        {projectsSplice[idx + 1] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 1]} />
+                        </li>}
+                        {projectsSplice[idx + 2] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 2]} />
+                        </li>}
+                        {projectsSplice[idx + 3] && <li>
+                          <ProjectIndexTile project={projectsSplice[idx + 3]} />
+                        </li>}
                       </div>
-                    )
-                  }
+                    </div>
+                  )
                 })
               )
             }

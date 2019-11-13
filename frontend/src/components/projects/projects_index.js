@@ -2,6 +2,7 @@ import React from 'react';
 import { Query, useQuery } from 'react-apollo';
 import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from './projects_index_tile';
+import ProjectIndexLargeTile from './projects_index_large_tile';
 
 class ProjectIndex extends React.Component {
   constructor(props) {
@@ -27,13 +28,29 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            return (
-              data.category.projects.map((project, idx) => (
-                <li key={idx}>
-                  <ProjectIndexTile project={project} />
-                </li>
-              ))
-            )
+            while( data.category.projects.length > 0) {
+              let projects = data.category.projects.splice(0, 4)
+              return (
+                projects.map((project, idx) => {
+                  return (
+                    <div className='projects-index-segment'>
+                      <li key={idx}>
+                        <ProjectIndexLargeTile project={project} />
+                      </li>
+                      <li key={idx}>
+                        <ProjectIndexTile project={projects[idx + 1]} />
+                      </li>
+                      <li key={idx}>
+                        <ProjectIndexTile project={projects[idx + 2]} />
+                      </li>
+                      <li key={idx}>
+                        <ProjectIndexTile project={projects[idx + 3]} />
+                      </li>
+                    </div>
+                  )
+                })
+              )
+            }
           }}
         </Query>
       )
@@ -43,15 +60,33 @@ class ProjectIndex extends React.Component {
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
-            return (
-              <ul>
-                {data.projects.map((project, idx) => (
-                  <li key={idx}>
-                  <ProjectIndexTile project={project} />
-                </li>
-                ))}
-              </ul>
-            )
+            let projects = data.projects
+            while(data.projects.length > 0) {
+              let projectsSplice = projects.splice(0, 4)
+              return (
+                projectsSplice.map((project, idx) => {
+                  console.log(projectsSplice)
+                  return (
+                    <div className='projects-index-segment'>
+                      <li key={idx} className='projects-index-segment-large-tile'>
+                        <ProjectIndexLargeTile project={project} />
+                      </li>
+                      <div className='projects-index-segment-side'>
+                        <li key={idx}>
+                          <ProjectIndexTile project={projects[idx + 1]} />
+                        </li>
+                        <li key={idx}>
+                          <ProjectIndexTile project={projects[idx + 2]} />
+                        </li>
+                        <li key={idx}>
+                          <ProjectIndexTile project={projects[idx + 3]} />
+                        </li>
+                      </div>
+                    </div>
+                  )
+                })
+              )
+            }
           }}
         </Query>
       )
@@ -64,15 +99,18 @@ class ProjectIndex extends React.Component {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error</p>;
             return (
-              <ul>
-                {data.categories.map((category, idx) => (
-                  <li
-                    key={idx}
-                    onClick={() => this.selectCategory(category._id)}>
-                      {category.name}
-                  </li>
-                ))}
-              </ul>
+              <div className='projects-index-category-list'>
+                <ul>
+                  {data.categories.map((category, idx) => (
+                    <li
+                      className='projects-index-category-list-item'
+                      key={idx}
+                      onClick={() => this.selectCategory(category._id)}>
+                        {category.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )
           }}
         </Query>

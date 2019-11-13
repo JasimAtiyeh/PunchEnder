@@ -7,6 +7,7 @@ import autosize from "autosize";
 import Tabs from "../tabs";
 import Nav from "./nav";
 import Mutations from "../../../../graphql/mutations";
+import { onSelectFile, cropImage } from '../../../../util/image_util';
 const { UPDATE_PROJECT_BASICS } = Mutations;
 
 const BuildFormBasics = props => {
@@ -21,9 +22,9 @@ const BuildFormBasics = props => {
 
   const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
 
-
   const variables = { name, description, category, goal: parseInt(goal), endDate: date, _id: project._id };
 
+  let fileInput;
   let textarea; // for the ref
   useEffect(() => {
     // this is the same as componentDidMount
@@ -85,10 +86,28 @@ const BuildFormBasics = props => {
         <div className="basics-panel">
           <div className="basics-info">
             <h4>Project Image</h4>
-            <p>Add an image that will represent your project on its page. The image will be cropped to a 16:9 ratio for usage.</p>
+            <p>Add an image that will represent your project on its page. The image will be cropped to a 16:9 ratio for usage, so upload an appropriate image.</p>
+            <p>Pick an image that will appeal to backers. Remember that an image is an import part of your story.</p>
           </div>
           <div className="basics-form">
             <label>Image</label>
+            <input 
+              onChange={e => onSelectFile(e, setImage)} 
+              id="image-file-input" 
+              type="file" 
+              accept="image/*"
+              ref={node => { fileInput = node }}
+            />
+            { !image && 
+              <div 
+                className="add-image"
+                onClick={ () => fileInput.click() }>
+                <span>Click to add an image</span>
+              </div>
+            }
+            { image &&
+              <img className="change-image" src={image} onClick={ ()=> fileInput.click() } />
+            }
           </div>
         </div>
         <div className="basics-panel">

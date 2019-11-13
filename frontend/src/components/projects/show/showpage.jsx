@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Route } from 'react-router-dom';
+import { withRouter, Route, Redirect } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../../graphql/queries";
 import Main from "./main_panel";
@@ -13,6 +13,9 @@ const ProjectShowPage = props => {
   if (loading) { return <div>Loading...</div>};
   if (error) { return <div>Error!</div> };
   const { project } = data;
+  const projectCreatorId = project.projectCreator._id;
+  if (!project.launched && localStorage.currentUser === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build`} />};
+  if (!project.launched) { return <Redirect to="/" /> }
 
   return (
     <div className="project-show">

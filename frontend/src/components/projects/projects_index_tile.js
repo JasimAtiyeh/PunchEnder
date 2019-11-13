@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const ProjectIndexTile = props => {
+  console.log(props.project);
   let percentFunded = (props.project.amountRaised / props.project.goal) * 100;
 
   return (

@@ -21,7 +21,6 @@ const BuildForm = props => {
 
   const currentUser = localStorage.userId;
   const projectCreatorId = project.projectCreator._id;
-  console.log(currentUser, projectCreatorId);
   // Only let project creator access their build page.
   // And also only allow user to access the build page if the project is not launched.
   if (!currentUser || currentUser !== projectCreatorId) { return <Redirect to={`/projects/${project._id}`} /> }

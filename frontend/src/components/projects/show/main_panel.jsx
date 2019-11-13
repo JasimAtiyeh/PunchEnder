@@ -42,12 +42,7 @@ const MainPanel = props => {
       </div>
       <div className="main-content-category">
         <Link 
-          to={{
-            pathName: "/",
-            state: {
-              category: category._id
-            }
-          }}>
+          to={`/categories/${category._id}`}>
           <i className={`${category.icon}`} /> {category.name}
         </Link>
       </div>

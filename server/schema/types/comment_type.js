@@ -24,8 +24,8 @@ const CommentType = new GraphQLObjectType({
     project: { 
       type: require("./project_type"),
       resolve(parentValue) {
-        return User.findById(parentValue.author)
-          .then(user => user)
+        return Project.findById(parentValue.project)
+          .then(project => project)
           .catch(err => null);
       }
     }

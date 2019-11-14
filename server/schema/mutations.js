@@ -333,6 +333,23 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    newComment: {
+      type: CommentType,
+      args: {
+        body: { type: new GraphQLNonNull(GraphQLString) },
+        project: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_, { body, project }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          const author = validUser.id;
+          return new Comment({ body, project, author }).save();
+        } else {
+          throw new Error("You must login to make a comment.");
+        }
+      }
+    },
   }
 });
 

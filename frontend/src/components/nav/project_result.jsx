@@ -19,9 +19,9 @@ const ProjectResult = props => {
     <li className="project-result-panel">
       <Link to={`/projects/${_id}`}>
         <div className="project-result-panel-img-container">
-          <div 
+          <img 
             className="project-result-panel-img"
-            style={ { backgroundImage: `url(${image || defaultImage})` } }
+            src={ image || defaultImage }
           />
         </div>
         <div className="project-result-panel-info">

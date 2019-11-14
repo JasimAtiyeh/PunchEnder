@@ -151,6 +151,7 @@ export default {
       category(_id: $_id) {
         _id
         name
+        description
         projects {
           _id
           projectCreator {

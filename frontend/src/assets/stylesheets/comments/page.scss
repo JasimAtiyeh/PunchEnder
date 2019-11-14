@@ -1,0 +1,19 @@
+@import './panel';
+@import './form';
+.comment-page {
+  display: grid;
+  grid-template-columns: 66% auto;
+  min-height: 300px;
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 60px;
+  .comment-page-column-1 {
+    background-color: red;
+
+  }
+
+  .comment-page-column-2 {
+    background-color: blue;
+
+  }
+}

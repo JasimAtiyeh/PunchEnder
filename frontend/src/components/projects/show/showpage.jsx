@@ -5,6 +5,7 @@ import Queries from "../../../graphql/queries";
 import Main from "./main_panel";
 import Tabs from "./tabs"
 import CampaignPage from './campaign';
+import CommentPage from './comments/page';
 const { FETCH_FINISHED_PROJECT } = Queries;
 
 const ProjectShowPage = props => {
@@ -24,6 +25,9 @@ const ProjectShowPage = props => {
       <Route
         exact path={`/projects/${projectId}`}
         render={props => <CampaignPage {...props} project={project} />} />
+      <Route
+        exact path={`/projects/${projectId}/comments`}
+        render={props => <CommentPage {...props} projectId={project._id} />} />
     </div>
   ) 
 };

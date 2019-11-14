@@ -1,0 +1,17 @@
+.comment-form-container {
+  background-color: green;
+  border: 1px solid black;
+  display: flex;
+  height: 170px;
+  > div {
+    background-color: purple;
+    height: 100%;
+    width: 11%;
+  }
+  .comment-form {
+    textarea {
+      background-color: white;
+    }
+
+  }
+}

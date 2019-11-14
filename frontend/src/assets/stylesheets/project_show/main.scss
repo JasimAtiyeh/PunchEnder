@@ -2,20 +2,19 @@
   margin-top: 40px;
   margin-bottom: 40px;
   > h1 {
-    background-color: red;
     text-align: center;
-    font-size: 24px;
+    font-size: 30px;
     margin: 0 auto;
     margin-bottom: 15px;
     width: 70%;
   }
   > p {
-    background-color: blue;
     text-align: center;
     font-size: 18px;
     margin: 0 auto;
     margin-bottom: 40px;
     width: 70%;
+    color: gray;
   }
 }
 
@@ -26,10 +25,8 @@
   grid-template-columns: 65% 35%;
   height: 425px;
   padding: 0px 40px;
-  background-color: blue;
   > div {
     height: 100%;
-    border: 1px solid black;
     .main-content-amount,
     .main-content-backers,
     .main-content-date {
@@ -51,6 +48,13 @@
   }
   .main-content-column-1 {
     box-sizing: border-box;
+    .main-content-image {
+      background-color: green;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
   .main-content-column-2 {
     box-sizing: border-box;
@@ -87,7 +91,6 @@
 }
 
 .main-content-category {
-  background-color: green;
   margin: 0 auto;
   margin-top: 10px;
   width: 83%;

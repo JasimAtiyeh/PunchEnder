@@ -16,6 +16,7 @@ const CommentForm = props => {
           query: FETCH_PROJECT_COMMENTS,
           variables: { project: props.projectId }
         });
+        console.log(newComment);
         cache.writeQuery({
           query: FETCH_PROJECT_COMMENTS,
           variables: { project: props.projectId },
@@ -39,7 +40,8 @@ const CommentForm = props => {
           createComment({ variables: { body , project: props.projectId }})
             .then(() => setBody(''));
         }}>
-        <textarea 
+        <textarea
+          placeholder={"Say what's on your mind."}
           value={ body }
           onChange={ e => setBody(e.target.value) }/>
         <button>Post Comment</button>

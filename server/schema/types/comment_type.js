@@ -14,6 +14,7 @@ const CommentType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLID },
     body: { type: GraphQLString },
+    date: { type: GraphQLString },
     author: { 
       type: UserType,
       resolve(parentValue) {

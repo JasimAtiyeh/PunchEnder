@@ -156,6 +156,7 @@ export default {
       newComment(project: $project, body: $body) {
         _id
         body
+        date
         author {
           _id
           name

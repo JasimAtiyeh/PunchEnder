@@ -14,7 +14,8 @@ const CommentList = props => {
   if (error) { console.dir(error); return <p>Error</p> }
 
   const comments = data.projectComments;
-  const commentLis = comments.map(comment => {
+  const sortedComments = comments.sort((a,b) => parseInt(b.date) - parseInt(a.date));
+  const commentLis = sortedComments.map(comment => {
     return <Panel 
       key={comment._id} 
       comment={comment} 

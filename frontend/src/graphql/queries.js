@@ -241,6 +241,7 @@ export default {
       projectComments(project: $project) {
         _id
         body
+        date
         author {
           _id
           name

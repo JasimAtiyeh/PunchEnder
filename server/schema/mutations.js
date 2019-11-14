@@ -307,7 +307,7 @@ const mutation = new GraphQLObjectType({
             throw new Error("sorry, you need to log in first");
           }
       }
-    }
+    },
   }
 });
 

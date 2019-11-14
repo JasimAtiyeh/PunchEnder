@@ -1,0 +1,46 @@
+.comment-form-container {
+  border: 1px solid black;
+  display: flex;
+  height: 175px;
+  background-color: thistle;
+  > div {
+    height: 100%;
+    width: 70px;
+    box-sizing: border-box;
+    padding: 15px;
+    .comment-form-image-container {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: yellow;
+    }
+  }
+  .comment-form {
+    width: 100%;
+    textarea {
+      display: block;
+      box-sizing: border-box;
+      margin-top: 30px;
+      padding-left: 3px;
+      padding-right: 5px;
+      font-size: 15px;
+      line-height: 1.3;
+      height: 65px;
+      width: 97%;
+      background-color: white;
+      resize: none;
+      overflow-y: auto;
+    }
+    button {
+      margin-top: 18px;
+      background-color: black;
+      color: white;
+      padding: 12px 15px;
+    }
+    span {
+      color: red;
+      font-size: 14px;
+      margin-left: 18px;
+    }
+  }
+}

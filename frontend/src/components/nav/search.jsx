@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SearchResults from './search_results';
 

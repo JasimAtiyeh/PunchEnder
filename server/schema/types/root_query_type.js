@@ -52,6 +52,17 @@ const RootQueryType = new GraphQLObjectType({
         return Project.findById(args._id);
       }
     },
+    projectComments: {
+      type: new GraphQLList(CommentType),
+      args: {
+        project: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      resolve(_, args) {
+        return Project.findById(args.project)
+          .populate("comments")
+          .then(project => project.comments);
+      }
+    },
     comments: {
       type: new GraphQLList(CommentType),
       resolve() {

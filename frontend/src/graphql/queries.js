@@ -236,4 +236,20 @@ export default {
       }
     }
   `,
+  FETCH_PROJECT_COMMENTS: gql`
+    query FetchProjectComments($project: ID!) {
+      projectComments(project: $project) {
+        _id
+        body
+        date
+        author {
+          _id
+          name
+        }
+        project {
+          _id
+        }
+      }
+    }
+  `,
 };

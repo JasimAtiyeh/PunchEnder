@@ -16,7 +16,7 @@ class RewardsEditForm extends React.Component {
   }
 
   render() {
-    const { tier, name, description, pledgeAmount, setName, setPledgeAmount, setDescription } = this.props;
+    const { name, description, pledgeAmount, setName, setPledgeAmount, setDescription } = this.props;
     const message = "If you made a mistake with your reward, now is the time to fix it. Remember that you can't change rewards after your project launches!";
 
     return (

@@ -6,12 +6,13 @@ export const numWithCommas = num => {
 };
 
 // end date object is provided
-export const getDateNumAndText = endDateObj => {
+export const getDateNumAndText = dateObj => {
   const nowDateObj = new Date();
-  const timeDiff = endDateObj.getTime() - nowDateObj.getTime();
-  const minDiff = timeDiff / (1000 * 60);
-  const hourDiff = timeDiff / (1000 * 3600);
-  const dayDiff = timeDiff / (1000 * 3600 * 24);
+  const timeDiff = dateObj.getTime() - nowDateObj.getTime();
+  const secDiff = Math.abs(timeDiff / (1000));
+  const minDiff = Math.abs(timeDiff / (1000 * 60));
+  const hourDiff = Math.abs(timeDiff / (1000 * 3600));
+  const dayDiff = Math.abs(timeDiff / (1000 * 3600 * 24));
   let dateNum, dateText;
 
   if (dayDiff > 1) {
@@ -20,9 +21,12 @@ export const getDateNumAndText = endDateObj => {
   } else if (hourDiff > 1) {
     dateNum = Math.floor(hourDiff);
     dateText = "hours";
-  } else {
+  } else if(minDiff > 1) {
     dateNum = Math.floor(minDiff);
     dateText = "minutes";
+  } else {
+    dateNum = Math.floor(secDiff);
+    dateText = "seconds"
   }
 
   return [dateNum, dateText];

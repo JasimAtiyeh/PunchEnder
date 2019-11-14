@@ -7,6 +7,7 @@ const {
   GraphQLID
 } = graphql;
 const User = mongoose.model("user");
+const Project = mongoose.model("project");
 
 const CommentType = new GraphQLObjectType({
   name: "CommentType",

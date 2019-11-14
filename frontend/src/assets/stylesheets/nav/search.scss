@@ -57,4 +57,48 @@
     font-size: 14px;
     padding: 5px 24px;
   }
+  .project-result-panel {
+    a {
+      display: flex;
+      font-size: 18px;
+      padding: 12px 24px;
+      height: 100%;
+      width: 100%;
+      .project-result-panel-img-container {
+      background-color: purple;
+      width: 110px;
+      height: 62px;
+        .project-result-panel-img {
+          width: 100%;
+          height: 100%;
+          object-fit: container;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-position: center;
+        }
+      }
+      .project-result-panel-info {
+        background-color: yellow;
+        width: 500px;
+        margin-left: 12px;
+      }
+    }
+    a:hover {
+      background-color: shade(white, 10%);
+    }
+  }
+}
+
+.search-panel-info-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.search-panel-info-creator {
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.search-panel-info-etc {
+  font-size: 13px;
 }

@@ -11,6 +11,7 @@ export default {
       projects {
         _id
         projectCreator {
+          _id
           name
         }
         name
@@ -18,6 +19,7 @@ export default {
         goal
         amountRaised
         category {
+          _id
           name
         }
         launched
@@ -32,6 +34,7 @@ export default {
         name
         projects {
           projectCreator {
+            _id
             name
           }
           name
@@ -39,11 +42,13 @@ export default {
           goal
           amountRaised
           category {
+            _id
             name
           }
         }
         backedProjects {
           projectCreator {
+            _id
             name
           }
           name
@@ -51,6 +56,7 @@ export default {
           goal
           amountRaised
           category {
+            _id
             name
           }
         }
@@ -148,15 +154,13 @@ export default {
         projects {
           _id
           projectCreator {
+            _id
             name
           }
           name
           description
           goal
           amountRaised
-          category {
-            name
-          }
           launched
           image
         }
@@ -172,6 +176,7 @@ export default {
           _id
           projectCreator {
             name
+            _id
           }
           name
           description
@@ -179,6 +184,7 @@ export default {
           amountRaised
           category {
             name
+            _id
           }
           launched
           image

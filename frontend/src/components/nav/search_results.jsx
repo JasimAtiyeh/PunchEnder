@@ -12,10 +12,14 @@ const SearchResults = props => {
 if (error) { return <div>{error}</div> };
   const { searchCategories, searchProjects } = data;
   const categoryLis = searchCategories.map(category => {
-    return <CategoryResult key={category._id.concat('1')} category={category} />;
+    return <CategoryResult
+      key={category._id} 
+      category={category} />;
   });
   const projectLis = searchProjects.map(project => {
-    return <ProjectResult key={project._id.concat('1')} project={project} />;
+    return <ProjectResult
+      key={project._id} 
+      project={project} />;
   });
 
   return (

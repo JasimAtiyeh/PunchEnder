@@ -12,6 +12,7 @@ import CategoryIndex from './projects/index/category_index';
 import ProjectShow from './projects/show/showpage';
 import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
+import { Pledge } from "./pledge/pledge";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
       </Switch>
       <Switch>
         <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
+        <Route exact path="/projects/:projectId/pledge" component={Pledge} />
         <Route path="/projects/:projectId" component={ProjectShow} />
       </Switch>
       <AuthRoute exact path="/start" component={CreateForm} />

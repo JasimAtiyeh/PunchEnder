@@ -135,4 +135,20 @@ export default {
       }
     }
   `,
+  PLEDGE_PROJECT: gql`
+    mutation PledgeProject($user_id: ID!, $project_id: ID!, $reward_id:ID, $pledgeAmount: Int!) {
+      pledgeProject(user_id: $user_id, project_id: $project_id, reward_id: $reward_id, pledgeAmount: $pledgeAmount) {
+        _id
+        project {
+          _id
+          name
+        }
+        reward {
+          _id
+          name
+        }
+        amount
+      }
+    }
+  `,
 };

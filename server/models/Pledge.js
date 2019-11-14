@@ -12,10 +12,15 @@ const PledgesSchema = new Schema({
     ref: "project",
     required: true
   },
+  reward: {
+    type: Schema.Types.ObjectId,
+    ref: "reward",
+    required: false
+  },
   amount: {
     type: Number,
     required: true
-  }
+  },
 });
 
-module.exports = PledgesSchema;
+module.exports = mongoose.model("pledge", PledgesSchema);

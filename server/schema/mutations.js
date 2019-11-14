@@ -22,6 +22,8 @@ const CommentType = require("./types/comment_type");
 const Comment = mongoose.model("comment");
 const RewardType = require("./types/reward_type");
 const Reward = mongoose.model("reward");
+const PledgeType = require("./types/pledge_type");
+const Pledge = mongoose.model("pledge");
 const keys = require("../../config/keys");
 const User = mongoose.model("user");
 
@@ -196,7 +198,7 @@ const mutation = new GraphQLObjectType({
         icon: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(_, { name, description }) {
-        const newCat = new Category({ name, description, icon });
+        const newCat = new Category({ name, description });
         return newCat.save()
           .then(cat => cat)
           .catch(err => err);
@@ -306,6 +308,29 @@ const mutation = new GraphQLObjectType({
           } else {
             throw new Error("sorry, you need to log in first");
           }
+      }
+    },
+    pledgeProject: {
+      type: PledgeType,
+      args: {
+        user_id: { type: new GraphQLNonNull(GraphQLID) },
+        project_id: { type: new GraphQLNonNull(GraphQLID) },
+        reward_id: { type: GraphQLID },
+        pledgeAmount: { type: new GraphQLNonNull(GraphQLInt) }
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          new Pledge({
+            pledger: variables.user_id,
+            project: variables.project_id,
+            reward: variables.reward_id,
+            amount: variables.pledgeAmount 
+          }).save()
+        } else {
+          throw new Error("sorry, you need to log in first");
+        }
       }
     },
   }

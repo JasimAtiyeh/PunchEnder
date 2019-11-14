@@ -186,4 +186,26 @@ export default {
       }
     }
   `,
+  SEARCH_PROJECTS: gql`
+    query SearchProjects($filter: String!) {
+      searchProjects(filter: $filter) {
+        _id
+        name
+        image
+        projectCreator {
+          _id
+          name
+        }
+      }
+    }
+  `,
+  SEARCH_CATEGORIES: gql`
+    query SearchCategories($filter: String!) {
+      searchCategories(filter: $filter) {
+        _id
+        name
+        description
+    }
+  }
+  `,
 };

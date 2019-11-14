@@ -3,6 +3,27 @@
   background-color: lightgray;
 }
 
+.no-comments {
+  font-size: 20px;
+  padding-top: 30px;
+  padding-left: 16px;
+  min-height: 100px;
+}
+
+.comment-rules {
+  padding: 20px;
+  p {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 19px;
+  }
+  ol {
+    list-style: decimal;
+    line-height: 1.5;
+    padding-left: 20px;
+  }
+}
+
 .comment-panel {
   padding: 15px;
   margin-bottom: 12px;

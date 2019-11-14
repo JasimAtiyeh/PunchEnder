@@ -11,7 +11,14 @@ const CommentPage = props => {
         <List projectId={projectId} />
       </div>
       <div className="comment-page-column-2">
-
+        <div className="comment-rules">
+          <p>Remember the golden rules of commenting</p>
+          <ol>
+            <li>Treat others with respect.</li>
+            <li>Stay on subject.</li>
+            <li>Don't post spam or ads.</li> 
+          </ol>
+        </div>
       </div>
     </div>
   )

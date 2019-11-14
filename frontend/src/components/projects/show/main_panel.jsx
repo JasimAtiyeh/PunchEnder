@@ -4,7 +4,7 @@ import { numWithCommas, getDateNumAndText } from '../../../util/num_util';
 
 const MainPanel = props => {
   const { name, description, image, endDate, amountRaised, backers, goal, category } = props.project;
-
+  const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
   const endDateObj = new Date(endDate);
   const [dateNum, dateText] = getDateNumAndText(endDateObj);
 
@@ -14,7 +14,10 @@ const MainPanel = props => {
       <p>{description}</p>
       <div className="project-show-main-content">
         <div className="main-content-column-1">
-          <div className="main-content-image" />
+          <div 
+            className="main-content-image"
+            style={{ backgroundImage: `url(${image || defaultImage})`}}
+          />
         </div>
         <div className="main-content-column-2">
           <div className="main-content-amount">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { Mutation } from "react-apollo";
 import Mutations from "../../graphql/mutations";
 
 class RewardTile extends React.Component {
@@ -10,26 +10,10 @@ class RewardTile extends React.Component {
       show: false,
       pledge: this.props.reward.pledgeAmount
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   update(field) {
     return e => this.setState({ [field]: e.currentTarget.value });
-  }
-
-  handleSubmit() {
-    const { loading, error, data } = useMutation(
-      Mutations.PLEDGE_PROJECT_REWARD,
-      { variables: {
-        user_id: localStorage.userId,
-        project_id: this.props.project._id,
-        reward_id: this.props.reward._id,
-        pledgeAmount: this.state.pledge
-      } }
-    );
-    if (loading) { return <div>Loading...</div>};
-    if (error) { return <div>Error!</div> };
-    // redirect to the project show page
   }
 
   render() {
@@ -56,10 +40,23 @@ class RewardTile extends React.Component {
               type='number'
               value={this.state.pledge}
               onChange={this.update('pledge')}></input>
-            <input
-              type='submit'
-              value='Pledge'
-              onSubmit={this.handleSubmit}></input>
+            <Mutation mutation={Mutations.PLEDGE_PROJECT}>
+              {PLEDGE_PROJECT => (
+                <input
+                  type='submit'
+                  value='Pledge'
+                  onClick={e => {
+                    e.preventDefault();
+                    PLEDGE_PROJECT({
+                      variables: {
+                        user_id: localStorage.userId,
+                        project_id: this.props.projectId,
+                        reward_id: this.props.reward._id,
+                        pledgeAmount: this.state.pledge
+                      }
+                  })}}></input>
+              )}
+            </Mutation>
           </div>
         </div>}
       </div>

@@ -30,9 +30,9 @@ export const Pledge = props => {
       </div>
       <div className='pledge-tiles'>
         <div className='pledge-tiles-rewards'>
-          <PledgeTile project={project._id} />
+          <PledgeTile projectId={project._id} />
           {rewards.map((reward, idx) => (
-            <RewardTile key={idx} project={project._id} reward={reward} />
+            <RewardTile key={idx} projectId={project._id} reward={reward} />
           ))}
         </div>
         <div className='pledge-tiles-side-note'>

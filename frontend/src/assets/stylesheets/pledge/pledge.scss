@@ -1,0 +1,192 @@
+.pledge-header {
+  background-color: #FBFBFA;
+  padding: 40px 0;
+  border-top: 1px solid #F1EEEA;
+  border-bottom: 1px solid #F1EEEA;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.pledge-header-name {
+  color: #020621;
+  font-size: 32px;
+  line-height: 40px;
+  margin-bottom: 10px;
+  font-family: "Maison Neue Book", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", FreeSans, sans-serif;
+  font-weight: normal;
+}
+
+.pledge-header-creator {
+  color: #020621;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.pledge-note {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  margin-top: 40px;
+  padding: 0px 18px;
+}
+
+.pledge-tiles {
+  display: flex;
+  padding: 30px 18px;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.pledge-tiles-rewards {
+  width: 66.6%;
+  margin-right: 20px;
+}
+
+.pledge-tiles-rewards-header {
+  font-size: 22px;
+  line-height: 40px;
+  font-weight: 400;
+}
+
+.pledge-tiles-rewards-sub {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.pledge-tiles-rewards-tile {
+  border: 1px solid #DCDEDD;
+  transition: 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-duration: 100ms;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #656969;
+}
+
+.pledge-tiles-rewards-tile-option {
+  display: flex;
+
+  input[type='radio'] {
+    position: relative;
+    top: 21px;
+    left: 15px;
+  }
+}
+
+.pledge-tiles-rewards-tile-option-info {
+  padding-top: 20px;
+  margin: 0 20px 0 60px;
+}
+
+.pledge-tiles-rewards-tile-option-info-title {
+  color: #282828;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.pledge-tiles-rewards-tile-option-info-sub-no-reward {
+  margin-bottom: 20px;
+}
+
+.pledge-tiles-rewards-tile-option-info-sub {
+  font-size: 16px;
+  color: #656969;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.pledge-tiles-rewards-tile-option-info-description {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.pledge-tiles-rewards-tile-option-pledge {
+  padding: 0 18px;
+  margin-bottom: 18px;
+
+  :hover {
+    transform: none;
+  }
+}
+
+.pledge-tiles-rewards-tile-option-pledge-title {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #656969;
+}
+
+.pledge-tiles-rewards-tile-option-pledge-inputs {
+  display: flex;
+  justify-content: space-between;
+
+  input[type='submit'] {
+    background-color: #009E74;
+    color: #FFFFFF;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 500;
+    width: 25%;
+    text-align: center;
+  }
+}
+
+.pledge-tiles-rewards-tile-option-pledge-inputs-number {
+  border: 1px solid #DCDEDD;
+  // padding: 10px;
+  height: 42px;
+  line-height: 20px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  width: calc(75% - 70px);
+
+  i {
+    padding: 0px 20px;
+    font-size: 12px;
+  }
+
+  input[type='number'] {
+    padding-left: 10px;
+    border-left: 1px solid #DCDEDD;
+    height: 100%;
+
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.pledge-tiles-side-note {
+  width: 33.3%;
+  padding: 10px;
+}
+
+.pledge-tiles-side-note-header {
+  color: #000;
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  margin-top: 1px;
+  font-size: 16px;
+}
+
+.pledge-tiles-side-note-middle {
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 400;
+}
+
+.pledge-tiles-side-note-body {
+  font-size: 12px;
+  line-height: 18px;
+  padding-top: 8px;
+  margin-bottom: 5px;
+  font-weight: 100;
+}

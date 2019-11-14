@@ -7,7 +7,6 @@ class PledgeTile extends React.Component {
     super(props);
 
     this.state = {
-      show: false,
       pledge: 10
     };
   }
@@ -18,41 +17,45 @@ class PledgeTile extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className='pledge-tiles-rewards-tile'>
+        <div className='pledge-tiles-rewards-tile-option'>
           <input
             type='radio'
             name='pledge'
-            onChange={() => this.setState({ show: !this.state.show })}></input>
-          <div>
-            <div>Pledge without a reward</div>
-            <div>Back it because you believe in it.</div>
+            onChange={() => this.props.setShow(this.props.num)}></input>
+          <div className='pledge-tiles-rewards-tile-option-info'>
+            <div className='pledge-tiles-rewards-tile-option-info-title'>Pledge without a reward</div>
+            <div className='pledge-tiles-rewards-tile-option-info-sub-no-reward'>Back it because you believe in it.</div>
           </div>
         </div>
-        { this.state.show && <div>
-          <div>
+        { this.props.show === this.props.num && <div className='pledge-tiles-rewards-tile-option-pledge'>
+          <div className='pledge-tiles-rewards-tile-option-pledge-title'>
             Pledge amount
           </div>
           <div>
-            <i className="fas fa-dollar-sign"></i>
-            <input
-              type='number'
-              value={this.state.pledge}
-              onChange={this.update('pledge')}></input>
             <Mutation mutation={Mutations.PLEDGE_PROJECT}>
               {PLEDGE_PROJECT => (
-                <input
-                  type='submit'
-                  value='Pledge'
-                  onClick={e => {
-                    e.preventDefault();
-                    PLEDGE_PROJECT({
-                      variables: {
-                        user_id: localStorage.userId,
-                        project_id: this.props.projectId,
-                        pledgeAmount: this.state.pledge
-                      }
-                  })}}></input>
+                <div className='pledge-tiles-rewards-tile-option-pledge-inputs'>
+                  <div className='pledge-tiles-rewards-tile-option-pledge-inputs-number'>
+                    <i className="fas fa-dollar-sign"></i>
+                    <input
+                      type='number'
+                      value={this.state.pledge}
+                      onChange={this.update('pledge')}></input>
+                  </div>
+                  <input
+                    type='submit'
+                    value='Pledge'
+                    onClick={e => {
+                      e.preventDefault();
+                      PLEDGE_PROJECT({
+                        variables: {
+                          user_id: localStorage.userId,
+                          project_id: this.props.projectId,
+                          pledgeAmount: this.state.pledge
+                        }
+                    })}}></input>
+                </div>
               )}
             </Mutation>
           </div>

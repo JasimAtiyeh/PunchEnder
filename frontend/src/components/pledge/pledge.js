@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../graphql/queries";
 import PledgeTile from './pledge_tile';
@@ -6,6 +6,7 @@ import RewardTile from './reward_tile';
 
 export const Pledge = props => {
   let projectId = props.match.params.projectId;
+  const [show, setShow] = useState('');
   const { loading, error, data } = useQuery(
     Queries.FETCH_FINISHED_PROJECT,
     { variables: { _id: projectId } }
@@ -30,19 +31,35 @@ export const Pledge = props => {
       </div>
       <div className='pledge-tiles'>
         <div className='pledge-tiles-rewards'>
-          <PledgeTile projectId={project._id} />
+          <div className='pledge-tiles-rewards-header'>
+            Support this project
+          </div>
+          <div className='pledge-tiles-rewards-sub'>
+            Select an option below
+          </div>
+          <PledgeTile
+            num={0}
+            show={show}
+            setShow={setShow}
+            projectId={project._id} />
           {rewards.map((reward, idx) => (
-            <RewardTile key={idx} projectId={project._id} reward={reward} />
+            <RewardTile
+              num={idx + 1}
+              show={show}
+              setShow={setShow}
+              key={idx}
+              projectId={project._id}
+              reward={reward} />
           ))}
         </div>
         <div className='pledge-tiles-side-note'>
-          <div>
+          <div className='pledge-tiles-side-note-header'>
             PunchEnder is not a store.
           </div>
-          <div>
+          <div className='pledge-tiles-side-note-middle'>
             It's a way to bring creative projects to life.
           </div>
-          <div>
+          <div className='pledge-tiles-side-note-body'>
             PunchEnder does not guarantee projects or investigate a creator's ability to complete their project. It is the responsibility of the project creator to complete their project as promised, and the claims of this project are theirs alone.
           </div>
         </div>

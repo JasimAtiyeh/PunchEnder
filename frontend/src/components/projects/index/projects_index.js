@@ -1,139 +1,40 @@
 import React from 'react';
-import { Query } from 'react-apollo';
-import * as Queries from '../../../graphql/queries';
-import ProjectIndexTile from './projects_index_tile';
-import ProjectIndexLargeTile from './projects_index_large_tile';
+import { useQuery } from '@apollo/react-hooks';
+import Queries from '../../../graphql/queries';
+import IndexSegment from './segment';
+import Tabs from './tabs';
 
-class ProjectIndex extends React.Component {
-  constructor(props) {
-    super(props);
-    if (!props.location.state) {
-      props.location.state = { category: undefined };
-    }
-    this.state = {
-      category: props.location.state.category
-    };
+const { FETCH_PROJECTS } = Queries;
+
+const chunkArray = (array, size) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
   }
+  return chunks;
+}
 
-  selectCategory(category) {
-    this.setState({ category });
-  }
+const ProjectIndex = props => {
+  const { loading, error, data } = useQuery(FETCH_PROJECTS);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
-  render() {
-    let projectDisplay;
+  const allProjects = data.projects;
+  const launchedProjects = allProjects.filter(project => project.launched);
+  const projectChunks = chunkArray(launchedProjects, 4);
 
-    if (this.state.category) {
-      projectDisplay = (
-        <Query
-          query={ Queries.default.FETCH_CATEGORY }
-          variables={{ _id: this.state.category }} >
-          {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error</p>;
-            let projects = data.category.projects.filter(project => project.launched);
-            while(projects.length > 0) {
-              let projectsSplice;
-              if (data.category.projects.length >= 4) {
-                projectsSplice = projects.splice(0, 4)
-              } else {
-                projectsSplice = projects.splice(0, projects.length)
-              }
-              return (
-                projectsSplice.map((project, idx) => {
-                  return (
-                    <div key={idx} className='projects-index-segment'>
-                      {project && <li className='projects-index-segment-large-tile'>
-                        <ProjectIndexLargeTile project={project} />
-                      </li>}
-                      <div className='projects-index-segment-side'>
-                        {projectsSplice[idx + 1] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 1]} />
-                        </li>}
-                        {projectsSplice[idx + 2] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 2]} />
-                        </li>}
-                        {projectsSplice[idx + 3] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 3]} />
-                        </li>}
-                      </div>
-                    </div>
-                  )
-                })
-              )
-            }
-          }}
-        </Query>
-      )
-    } else {
-      projectDisplay = (
-        <Query query={ Queries.default.FETCH_PROJECTS }>
-          {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error</p>;
-            let projects = data.projects.filter(project => project.launched);
-            while(projects.length > 0) {
-              let projectsSplice;
-              if (data.projects.length >= 4) {
-                projectsSplice = projects.splice(0, 4)
-              } else {
-                projectsSplice = projects.splice(0, projects.length)
-              }
-              return (
-                projectsSplice.map((project, idx) => {
-                  return (
-                    <div key={idx} className='projects-index-segment'>
-                      {project && <li className='projects-index-segment-large-tile'>
-                        <ProjectIndexLargeTile project={project} />
-                      </li>}
-                      <div className='projects-index-segment-side'>
-                        {projectsSplice[idx + 1] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 1]} />
-                        </li>}
-                        {projectsSplice[idx + 2] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 2]} />
-                        </li>}
-                        {projectsSplice[idx + 3] && <li>
-                          <ProjectIndexTile project={projectsSplice[idx + 3]} />
-                        </li>}
-                      </div>
-                    </div>
-                  )
-                })
-              )
-            }
-          }}
-        </Query>
-      )
-    }
-
+  const segments = projectChunks.map((chunk, idx) => {
     return (
-      <div>
-        <Query query={Queries.default.FETCH_CATEGORIES}>
-          {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error</p>;
-            return (
-              <div className='projects-index-category-list'>
-                <ul>
-                  {data.categories.map((category, idx) => (
-                    <li
-                      className='projects-index-category-list-item'
-                      key={idx}
-                      onClick={() => this.selectCategory(category._id)}>
-                        {category.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          }}
-        </Query>
-        <div>
-          {projectDisplay}
-        </div>
-      </div>
+      <IndexSegment key={idx} first={chunk[0]} remainder={chunk.slice(1)} />
     )
-  }
+  });
+
+  return (
+    <div>
+      <Tabs />
+      {segments}
+    </div>
+  )
 };
 
 export default ProjectIndex;

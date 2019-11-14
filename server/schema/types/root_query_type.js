@@ -110,7 +110,8 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(_, { filter }) {
         const regExp = new RegExp(filter);
-        return Project.find({ name: { $regex: regExp, $options: 'i' } });
+        return Project.find({ name: { $regex: regExp, $options: 'i' } })
+          .sort({ 'name': -1 }).limit(5);
       }
     },
     searchCategories: {
@@ -120,7 +121,8 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(_, { filter }) {
         const regExp = new RegExp(filter);
-        return Category.find({ name: { $regex: regExp, $options: 'i' } });
+        return Category.find({ name: { $regex: regExp, $options: 'i' } })
+          .sort({ 'name': -1 }).limit(5);
       }
     }
   })

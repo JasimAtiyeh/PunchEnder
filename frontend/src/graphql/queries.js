@@ -208,4 +208,22 @@ export default {
     }
   }
   `,
+  SEARCH_PROJECTS_AND_CATEGORIES: gql`
+    query SearchProjectAndCategories($filter: String!) {
+      searchCategories(filter: $filter) {
+        _id
+        name
+        description
+      }
+      searchProjects(filter: $filter) {
+        _id
+        name
+        image
+        projectCreator {
+          _id
+          name
+        }
+      }
+    }
+  `,
 };

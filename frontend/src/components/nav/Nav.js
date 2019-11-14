@@ -52,8 +52,8 @@ const Nav = props => {
 																User Profile
 														</Link>
 														<button
-															onClick={() => setShow(false)}
 															onClick={e => {
+																setShow(false)
 																e.preventDefault();
 																localStorage.removeItem("auth-token");
 																localStorage.removeItem("userId");

@@ -151,4 +151,19 @@ export default {
       }
     }
   `,
+  CREATE_COMMENT: gql`
+    mutation CreateComment($project: ID!, $body: String!) {
+      newComment(project: $project, body: $body) {
+        _id
+        body
+        author {
+          _id
+          name
+        }
+        project {
+          _id
+        }
+      }
+    }
+  `,
 };

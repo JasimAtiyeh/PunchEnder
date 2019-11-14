@@ -19,7 +19,6 @@ const BuildFormBasics = props => {
   const [goal, setGoal] = useState(project.goal);
   const [date, setDate] = useState(project.endDate);
   const [image, setImage] = useState(project.image);
-  const [tempImage, setTempImage] = useState('');
 
   const [save, mdata] = useMutation(UPDATE_PROJECT_BASICS);
   const [uploadImage] = useMutation(UPLOAD_PROJECT_IMAGE);

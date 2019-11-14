@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const BuildFormSecondNav = props => {
   const { 
-    mdata, 
     variables, 
     creating, 
     editing, 
@@ -37,9 +36,7 @@ const BuildFormSecondNav = props => {
         }>
         Save
       </button>
-  } else {
-
-  }
+  } else { }
 
 
   return (

@@ -196,7 +196,7 @@ const mutation = new GraphQLObjectType({
         icon: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(_, { name, description }) {
-        const newCat = new Category({ name, description });
+        const newCat = new Category({ name, description, icon });
         return newCat.save()
           .then(cat => cat)
           .catch(err => err);
@@ -307,7 +307,7 @@ const mutation = new GraphQLObjectType({
             throw new Error("sorry, you need to log in first");
           }
       }
-    }
+    },
   }
 });
 

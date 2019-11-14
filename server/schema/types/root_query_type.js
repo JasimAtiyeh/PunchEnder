@@ -4,7 +4,8 @@ const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLID,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLString
 } = graphql;
 
 const UserType = require("./user_type");
@@ -100,6 +101,31 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(_, args) {
         return Reward.findById(args._id);
+      }
+    },
+    searchProjects: {
+      type: new GraphQLList(ProjectType),
+      args: {
+        filter: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(_, { filter }) {
+        const regExp = new RegExp(filter);
+        return Project.find({ name: { $regex: regExp, $options: 'i' } })
+          .where('launched').equals(true)
+          .sort({ 'name': -1 })
+          .limit(5);
+      }
+    },
+    searchCategories: {
+      type: new GraphQLList(CategoryType),
+      args: {
+        filter: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve(_, { filter }) {
+        const regExp = new RegExp(filter);
+        return Category.find({ name: { $regex: regExp, $options: 'i' } })
+          .sort({ 'name': -1 })
+          .limit(5);
       }
     }
   })

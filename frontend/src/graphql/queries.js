@@ -219,6 +219,9 @@ export default {
         _id
         name
         image
+        goal
+        amountRaised
+        endDate
         projectCreator {
           _id
           name

@@ -186,6 +186,10 @@ export default {
         date
         project {
           _id
+          projectCreator {
+            _id
+            name
+          }
         }
       }
     }
@@ -199,6 +203,10 @@ export default {
         date
         project {
           _id
+          projectCreator {
+            _id
+            name
+          }
         }
       }
     }

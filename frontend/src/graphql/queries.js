@@ -276,10 +276,15 @@ export default {
     query FetchProjectUpdates($project: ID!) {
       projectUpdates(project: $project) {
         _id
+        date
         title
         body
         project {
           _id
+          projectCreator {
+            _id
+            name
+          }
         }
       }
     }

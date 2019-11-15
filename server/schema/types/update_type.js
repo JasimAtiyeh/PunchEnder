@@ -20,7 +20,8 @@ const UpdateType = new GraphQLObjectType({
           .catch(err => null);
       }
     },
-    body: { type: GraphQLString }
+    body: { type: GraphQLString },
+    title: { type: GraphQLString }
   })
 });
 

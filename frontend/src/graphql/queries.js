@@ -272,4 +272,16 @@ export default {
       }
     }
   `,
+  FETCH_PROJECT_UPDATES: gql`
+    query FetchProjectUpdates($project: ID!) {
+      projectUpdates(project: $project) {
+        _id
+        title
+        body
+        project {
+          _id
+        }
+      }
+    }
+  `,
 };

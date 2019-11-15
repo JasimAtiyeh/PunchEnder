@@ -7,10 +7,14 @@ const UpdateSchema = new Schema({
     ref: "project",
     required: true
   },
+  title: {
+    type: String,
+    required: true
+  },
   body: {
     type: String,
     required: true
   }
 });
 
-module.exports = UpdateSchema;
+module.exports = mongoose.model("update", UpdateSchema);

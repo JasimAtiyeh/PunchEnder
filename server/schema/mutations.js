@@ -26,6 +26,8 @@ const PledgeType = require("./types/pledge_type");
 const Pledge = mongoose.model("pledge");
 const keys = require("../../config/keys");
 const User = mongoose.model("user");
+const UpdateType = require("./types/update_type");
+const Update = mongoose.model("update");
 
 
 const AWS = require("aws-sdk");
@@ -365,6 +367,22 @@ const mutation = new GraphQLObjectType({
           return new Comment({ body, project, author }).save();
         } else {
           throw new Error("You must login to make a comment.");
+        }
+      }
+    },
+    newUpdate: {
+      type: UpdateType,
+      args: {
+        title: { type: new GraphQLNonNull(GraphQLString) },
+        body: { type: new GraphQLNonNull(GraphQLString) },
+        project: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      async resolve(_, { title, body, project }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+        if (validUser.loggedIn) {
+          return new Update({ body, project, title }).save();
+        } else {
+          throw new Error("Could not create new update.");
         }
       }
     },

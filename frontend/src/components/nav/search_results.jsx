@@ -6,18 +6,20 @@ import ProjectResult from './project_result';
 const { SEARCH_PROJECTS_AND_CATEGORIES } = Queries;
 
 const SearchResults = props => {
-  const { filter } = props;
+  const { filter, setSearching } = props;
   const { loading, error, data } = useQuery(SEARCH_PROJECTS_AND_CATEGORIES, { variables: { filter } } );
   if (loading) return <div>Loading...</div>;
 if (error) { return <div>{error}</div> };
   const { searchCategories, searchProjects } = data;
   const categoryLis = searchCategories.map(category => {
     return <CategoryResult
+      setSearching={setSearching}
       key={category._id} 
       category={category} />;
   });
   const projectLis = searchProjects.map(project => {
     return <ProjectResult
+      setSearching={setSearching}
       key={project._id} 
       project={project} />;
   });

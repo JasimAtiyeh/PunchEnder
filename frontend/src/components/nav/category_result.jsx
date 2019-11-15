@@ -5,7 +5,9 @@ const CategoryResult = props => {
   const { category: { name, _id } } = props;
   return (
     <li className="category-result-panel">
-      <Link to={`/categories/${_id}`}>
+      <Link
+        onClick={() => props.setSearching(false)} 
+        to={`/categories/${_id}`}>
         {name}
       </Link>
     </li>

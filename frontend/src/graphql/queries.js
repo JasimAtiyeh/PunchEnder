@@ -46,7 +46,23 @@ export default {
             name
           }
         }
-        backedProjects {
+        pledges {
+          project {
+            projectCreator {
+              _id
+              name
+            }
+            name
+            description
+            goal
+            amountRaised
+            category {
+              _id
+              name
+            }
+          }
+        }
+        followedProjects {
           projectCreator {
             _id
             name

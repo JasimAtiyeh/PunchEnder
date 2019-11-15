@@ -16,6 +16,9 @@ const UserSchema = new Schema({
     min: 8,
     max: 32
   },
+  image: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

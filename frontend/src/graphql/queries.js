@@ -6,6 +6,14 @@ export default {
       isLoggedIn @client
     }
   `,
+  FETCH_USER_IMAGE: gql`
+    query user($_id: ID!) {
+      user(_id: $_id) {
+        _id
+        image
+      }
+    }
+  `,
   FETCH_PROJECTS: gql`
     {
       projects {
@@ -32,6 +40,7 @@ export default {
       user(_id: $id) {
         _id
         name
+        image
         projects {
           _id
           projectCreator {
@@ -266,6 +275,7 @@ export default {
         author {
           _id
           name
+          image
         }
         project {
           _id
@@ -285,6 +295,7 @@ export default {
           projectCreator {
             _id
             name
+            image
           }
         }
       }
@@ -302,6 +313,7 @@ export default {
           projectCreator {
             _id
             name
+            image
           }
         }
       }

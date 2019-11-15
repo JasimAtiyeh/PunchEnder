@@ -5,6 +5,7 @@ import Queries from "../../graphql/queries";
 import { ApolloConsumer } from "react-apollo";
 import { withRouter } from "react-router-dom";
 import Search from './search';
+import NavImage from './image'
 const { IS_LOGGED_IN } = Queries;
 
 const Nav = props => {
@@ -37,11 +38,7 @@ const Nav = props => {
 											Search <i className="fas fa-search" />
 										</button>
 										<div className="nav-dropdown">
-											<img
-												className = 'nav-dropdown-button'
-												onClick={() => setShow(true)}
-												src = "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45"
-												alt = 'user avatar logo' />
+											<NavImage setShow={setShow}/>
 											{ show &&
 												(<>
 													<div className="nav-modal" onClick={() => setShow(false)}></div>

@@ -32,7 +32,6 @@ const UpdateAddForm = props => {
 
   const submit = () => {
     const variables = { _id, title, body, project };
-    console.log(variables);
     return update ? updateUpdate({ variables }) : createUpdate({ variables });
   }
 

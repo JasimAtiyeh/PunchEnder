@@ -1,5 +1,5 @@
-
-export const onSelectFile = (e, setImage, upload, projectId) => {
+// this one's for projects...
+export const onSelectFile = (e, setImage, uploadFn, projectId) => {
   if (e.target.files && e.target.files.length > 0) {
     const reader = new FileReader();
     reader.onload = () => {
@@ -7,7 +7,7 @@ export const onSelectFile = (e, setImage, upload, projectId) => {
         .then(canvas => { 
           // const image = canvas.toDataURL('image/jpeg', 1.0);
           canvas.toBlob(blob => {
-            upload({ variables: { _id: projectId, image: blob } })
+            uploadFn({ variables: { _id: projectId, image: blob } })
               .then(res => setImage(res.data.uploadProjectImage.image));
           }, 'image/jpeg', 1);
         })
@@ -42,6 +42,64 @@ export const cropImage = (url, aspectRatio) => {
       } else if (inputImageAspectRatio > aspectRatio) {
         sHeight = inputHeight;
         sWidth = sHeight * 16 / 9;
+        sx = (inputWidth - sWidth) / 2;
+        sy = 0;
+      }
+
+      const outputImage = document.createElement('canvas');
+      outputImage.width = dWidth;
+      outputImage.height = dHeight;
+      const ctx = outputImage.getContext('2d');
+      ctx.drawImage(inputImage, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+      resolve(outputImage);
+    };
+
+    inputImage.src = url;
+  })
+};
+
+export const onSelectUserFile = (e, uploadFn, userId) => {
+  if (e.target.files && e.target.files.length > 0) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      cropUserImage(reader.result)
+        .then(canvas => {
+          // const image = canvas.toDataURL('image/jpeg', 1.0);
+          canvas.toBlob(blob => {
+            uploadFn({ variables: { _id: userId, image: blob } });
+          }, 'image/jpeg', 1);
+        })
+    };
+    return reader.readAsDataURL(e.target.files[0]);
+  }
+};
+
+export const cropUserImage = url => {
+  return new Promise(resolve => {
+    const aspectRatio = 1;
+    const inputImage = new Image();
+    inputImage.onload = () => {
+      const inputWidth = inputImage.naturalWidth;
+      const inputHeight = inputImage.naturalHeight;
+      const inputImageAspectRatio = inputWidth / inputHeight;
+
+      const dWidth = 200
+      const dHeight = 200; // change these two for adjustment to resolution
+      const dx = 0;
+      const dy = 0;
+      let sWidth
+      let sHeight
+      let sx;
+      let sy;
+
+      if (inputImageAspectRatio < aspectRatio) {
+        sWidth = inputWidth;
+        sHeight = sWidth;
+        sy = (inputHeight - sHeight) / 2;
+        sx = 0;
+      } else if (inputImageAspectRatio > aspectRatio) {
+        sHeight = inputHeight;
+        sWidth = sHeight;
         sx = (inputWidth - sWidth) / 2;
         sy = 0;
       }

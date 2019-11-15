@@ -16,6 +16,9 @@ const UpdateShow = props => {
   const { projectCreator } = project;
   const date = new Date(parseInt(update.date));
 
+  const image = projectCreator.image ?
+    projectCreator.image : "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45";
+
   const content = convertFromRaw(JSON.parse(update.body));
   const editorState = EditorState.createWithContent(content);
   return (
@@ -28,7 +31,9 @@ const UpdateShow = props => {
       </div>
       <h3>{update.title}</h3>
       <div className="update-info">
-        <div className="update-creator-image" />
+        <img 
+          className="update-creator-image" 
+          src={image}/>
         <div className="update-info-text">
           <div>{projectCreator.name} <span>Creator</span></div>
           <span>{date.toLocaleDateString("en-us", {

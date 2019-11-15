@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from "react-apollo";
 import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from '../projects/index/tile';
+import UserImage from './user_image';
 import { Link } from 'react-router-dom';
 
 class UserProfile extends React.Component {
@@ -67,10 +68,14 @@ class UserProfile extends React.Component {
             return (
               <div className='user-profile'>
                 <div className='user-profile-info'>
-                  < img 
-                    className='user-profile-info-avatar'
-                    src = "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45"
-                    alt='user avatar logo' />
+                  <UserImage
+                    userId={data.user._id}
+                    image={
+                      data.user.image ?
+                      data.user.image :
+                      "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45"
+                    } 
+                  />
                   <h2 className='user-profile-info-name'>
                     {data.user.name}
                   </h2>

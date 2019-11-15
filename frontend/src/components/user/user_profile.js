@@ -132,11 +132,11 @@ class UserProfile extends React.Component {
                       data.user.projects.length <= 0 && this.state.projects ?
                       <div className='user-profile-projects-display-none'>
                         <div>
-                          <strong>You haven't backed any projects. </strong>
-                          Let's change that!
+                          <strong>You haven't started any projects. </strong>
+                            Let's change that!
                         </div>
-                        <Link to='/'>
-                          Discover projects
+                          <Link to=''>
+                            Start a project
                         </Link>
                       </div> : null
                     }
@@ -152,11 +152,11 @@ class UserProfile extends React.Component {
                       data.user.pledges.length <= 0 && this.state.pledges ?
                       <div className='user-profile-projects-display-none'>
                         <div>
-                          <strong>You haven't started any projects. </strong>
+                          <strong>You haven't backed any projects. </strong>
                           Let's change that!
                         </div>
-                        <Link to=''>
-                          Start a project
+                          <Link to='/'>
+                            Discover projects
                         </Link>
                       </div> : null
                     }

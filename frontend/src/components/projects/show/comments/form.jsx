@@ -16,7 +16,6 @@ const CommentForm = props => {
           query: FETCH_PROJECT_COMMENTS,
           variables: { project: props.projectId }
         });
-        console.log(newComment);
         cache.writeQuery({
           query: FETCH_PROJECT_COMMENTS,
           variables: { project: props.projectId },

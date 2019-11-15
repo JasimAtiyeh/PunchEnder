@@ -1,0 +1,53 @@
+.update-form {
+  > input {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 19px;
+    line-height: 1.5;
+    background-color: white;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  .update-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #e9e9e9;
+    border: 1px solid lightgray;
+    margin-bottom: 20px;
+  }
+
+  .update-editor {
+    background-color: white;
+    min-height: 300px;
+    padding: 10px;
+  }
+}
+
+.update-form-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  .update-save {
+    padding: 8px 0;
+    width: 70px;
+    text-align: center;
+    margin-right: 10px;
+    background-color: lightgreen;
+  }
+  .update-cancel {
+    padding: 8px 0;
+    width: 70px;
+    text-align: center;
+    border: 1px solid black;
+  }
+  .update-save:hover {
+    background-color: shade(lightgreen, 20%);
+  }
+  .update-cancel:hover {
+    background-color: shade(white, 5%);
+  }
+}

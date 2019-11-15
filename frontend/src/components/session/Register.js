@@ -42,7 +42,7 @@ class Register extends Component {
           const { token } = data.register;
           localStorage.setItem("auth-token", token);
           localStorage.setItem("userId", data.register._id);
-          this.props.history.push("/");
+          this.props.history.goBack();
         }}
         onError={error => this.handleError(error)}
         update={(client, data) => this.updateCache(client, data)}

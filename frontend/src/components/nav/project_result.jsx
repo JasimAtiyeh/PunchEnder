@@ -17,7 +17,10 @@ const ProjectResult = props => {
   
   return (
     <li className="project-result-panel">
-      <Link to={`/projects/${_id}`}>
+      <Link 
+        to={`/projects/${_id}`}
+        onClick={() => props.setSearching(false)}
+        >
         <div className="project-result-panel-img-container">
           <img 
             className="project-result-panel-img"

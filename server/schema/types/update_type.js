@@ -15,12 +15,14 @@ const UpdateType = new GraphQLObjectType({
     project: {
       type: ProjectType,
       resolve(parentValue) {
-        return Project.findById(parentValue._id)
+        return Project.findById(parentValue.project)
           .then(project => project)
           .catch(err => null);
       }
     },
-    body: { type: GraphQLString }
+    body: { type: GraphQLString },
+    title: { type: GraphQLString },
+    date: { type: GraphQLString },
   })
 });
 

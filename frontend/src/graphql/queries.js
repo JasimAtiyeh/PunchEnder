@@ -241,6 +241,7 @@ export default {
         _id
         name
         description
+        icon
       }
       searchProjects(filter: $filter) {
         _id
@@ -268,6 +269,40 @@ export default {
         }
         project {
           _id
+        }
+      }
+    }
+  `,
+  FETCH_PROJECT_UPDATES: gql`
+    query FetchProjectUpdates($project: ID!) {
+      projectUpdates(project: $project) {
+        _id
+        date
+        title
+        body
+        project {
+          _id
+          projectCreator {
+            _id
+            name
+          }
+        }
+      }
+    }
+  `,
+  FETCH_UPDATE: gql`
+    query FetchUpdate($_id: ID!) {
+      update(_id: $_id) {
+        _id
+        date
+        title
+        body
+        project {
+          _id
+          projectCreator {
+            _id
+            name
+          }
         }
       }
     }

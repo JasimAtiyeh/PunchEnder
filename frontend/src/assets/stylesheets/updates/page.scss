@@ -1,0 +1,21 @@
+.update-page-wrapper {
+  width: 100%;
+}
+
+.update-page {
+  width: 48%;
+  min-height: 300px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.update-add {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: green;
+}
+
+.update-add:hover {
+  background-color: shade(green, 10%);
+}

@@ -177,4 +177,45 @@ export default {
       }
     }
   `,
+  CREATE_UPDATE: gql`
+    mutation CreateUpdate($project: ID!, $body: String!, $title: String!) {
+      newUpdate(project: $project, body: $body, title: $title) {
+        _id
+        body
+        title
+        date
+        project {
+          _id
+          projectCreator {
+            _id
+            name
+          }
+        }
+      }
+    }
+  `,
+  UPDATE_UPDATE: gql`
+    mutation UpdateUpdate($_id: ID!, $body: String!, $title: String!) {
+      updateUpdate(_id: $_id, body: $body, title: $title) {
+        _id
+        body
+        title
+        date
+        project {
+          _id
+          projectCreator {
+            _id
+            name
+          }
+        }
+      }
+    }
+  `,
+  DELETE_UPDATE: gql`
+    mutation deleteUpdate($_id: ID!) {
+      deleteUpdate(_id: $_id) {
+        _id
+      }
+    }
+  `,
 };

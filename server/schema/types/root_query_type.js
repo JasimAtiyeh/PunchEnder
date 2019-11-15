@@ -18,6 +18,8 @@ const RewardType = require("./reward_type");
 const Reward = mongoose.model("reward");
 const CommentType = require("./comment_type");
 const Comment = mongoose.model("comment");
+const UpdateType = require("./update_type");
+const Update = mongoose.model("update");
 
 const RootQueryType = new GraphQLObjectType({
   name: "RootQueryType",
@@ -61,6 +63,17 @@ const RootQueryType = new GraphQLObjectType({
         return Project.findById(args.project)
           .populate("comments")
           .then(project => project.comments);
+      }
+    },
+    projectUpdates: {
+      type: new GraphQLList(UpdateType),
+      args: {
+        project: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      resolve(_, args) {
+        return Project.findById(args.project)
+          .populate("updates")
+          .then(project => project.updates);
       }
     },
     comments: {
@@ -138,7 +151,18 @@ const RootQueryType = new GraphQLObjectType({
           .sort({ 'name': -1 })
           .limit(5);
       }
-    }
+    },
+    update: {
+      type: UpdateType,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve(_, args) {
+        return Update.findById(args._id);
+      }
+    },
   })
 });
 

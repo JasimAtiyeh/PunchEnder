@@ -111,6 +111,9 @@ const UpdatePanel = props => {
               </button>
             </div>
           }
+          { projectCreator._id !== localStorage.userId
+            && <div />
+          }
           <div className="update-read-more"><p>Read more</p> <i className="fas fa-chevron-right" /></div>
         </div>
       </Link>

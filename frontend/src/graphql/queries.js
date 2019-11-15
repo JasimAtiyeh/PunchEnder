@@ -241,6 +241,7 @@ export default {
         _id
         name
         description
+        icon
       }
       searchProjects(filter: $filter) {
         _id

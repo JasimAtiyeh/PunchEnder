@@ -17,7 +17,7 @@ const UpdatePage = props => {
   const { projectUpdates } = data;
   const updateLis = projectUpdates.map((update, idx) => {
     return <Panel key={update._id} update={update} num={idx + 1} />;
-  });
+  }).reverse();
 
   return (
     <div className="update-page-wrapper">

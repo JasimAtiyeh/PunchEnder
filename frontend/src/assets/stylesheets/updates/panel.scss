@@ -3,10 +3,45 @@
   margin-top: 30px;
   margin-bottom: 250px;
   .update-panel {
+    padding: 37px 33px;
     width: 100%;
-    height: 1000px;
     max-height: 500px;
-    background-color: red;
+
     border: 1px solid black;
+  }
+}
+
+.update-content {
+  .update-wrapper {
+    background-color: blue;
+  }
+  .update-editor {
+    position: relative;
+    background-color: white;
+    min-height: 50px;
+    max-height: 220px;
+    overflow: hidden;
+  }
+  .update-editor:after {
+    content:"";
+    position:absolute;
+    top:100px;
+    left:0;
+    height:120px;
+    width:100%;
+    z-index: 2;
+    background: -webkit-linear-gradient(transparent, white);
+    background: -o-linear-gradient(transparent, white);
+    background: -moz-linear-gradient(transparent, white);
+    background: linear-gradient(transparent, white);
+}
+}
+
+.update-info {
+  .update-creator-image {
+    width: 37px;
+    height: 37px;
+    background-color: yellow;
+    border-radius: 50%;
   }
 }

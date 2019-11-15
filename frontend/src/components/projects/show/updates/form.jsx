@@ -8,7 +8,6 @@ const { FETCH_PROJECT_UPDATES } = Queries;
 
 const UpdateAddForm = props => {
   const { update, cancel, projectId } = props;
-  console.log(update ? update.title : '');
   const [createUpdate] = useMutation(CREATE_UPDATE,
     {
       update(cache, { data: { newUpdate } }) {
@@ -32,6 +31,7 @@ const UpdateAddForm = props => {
 
   const submit = () => {
     const variables = { _id, title, body, project };
+    console.log(variables);
     return update ? updateUpdate({ variables }) : createUpdate({ variables });
   }
 

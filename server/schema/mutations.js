@@ -393,7 +393,7 @@ const mutation = new GraphQLObjectType({
         title: { type: GraphQLString },
         body: { type: GraphQLString },
       },
-      async resolve(_, { title, body, _id }, context) {
+      async resolve(_, variables, context) {
         const validUser = await AuthService.verifyUser({ token: context.token });
         
         if (validUser.loggedIn) {

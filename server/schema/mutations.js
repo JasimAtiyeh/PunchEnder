@@ -386,6 +386,25 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    updateUpdate: {
+      type: UpdateType,
+      args: {
+        _id: { type: GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLString },
+        body: { type: GraphQLString },
+      },
+      async resolve(_, { title, body, _id }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+        
+        if (validUser.loggedIn) {
+          return Update.findByIdAndUpdate(variables._id, variables, { new: true })
+            .then(update => update)
+            .catch(err => err);
+        } else {
+          throw new Error("Could not update the update.");
+        }
+      }
+    },
   }
 });
 

@@ -78,6 +78,14 @@ export default {
       }
     }
   `,
+  UPLOAD_USER_IMAGE: gql`
+    mutation UploadUserImage($_id: ID!, $image: Upload!) {
+      uploadUserImage(_id: $_id, image: $image) {
+        _id
+        image
+      }
+    }
+  `,
   CREATE_REWARD: gql`
     mutation CreateReward($name: String!, $description: String!, $tier: Int!, $pledgeAmount: Int!, $project: ID!) {
       newReward(pledgeAmount: $pledgeAmount, name: $name, description: $description, tier: $tier, project: $project) {

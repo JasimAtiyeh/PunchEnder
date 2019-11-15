@@ -168,7 +168,6 @@ const mutation = new GraphQLObjectType({
         let imageUrl;
 
         if (image) {
-          console.log(image);
           const { filename, mimetype, createReadStream } = await image;
           const fileStream = createReadStream();
           // Promisify the stream and store the file, then…
@@ -188,7 +187,39 @@ const mutation = new GraphQLObjectType({
             .then(project => project)
             .catch(err => err);
         } else {
-          throw new Error("sorry, you need to log in first");
+          throw new Error("Sorry, you need to log in first");
+        }
+      }
+    },
+    uploadUserImage: {
+      type: UserType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        image: { type: GraphQLUpload }
+      },
+      async resolve(_, { _id, image }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+        let imageUrl;
+
+        if (image) {
+          const { filename, mimetype, createReadStream } = await image;
+          const fileStream = createReadStream();
+          const Key = new Date().getTime().toString();
+          const uploadParams = {
+            Bucket: keys.bucket,
+            Key,
+            Body: fileStream
+          };
+          const result = await s3.upload(uploadParams).promise();
+          imageUrl = result.Key;
+        }
+
+        if (validUser.loggedIn) {
+          return User.findByIdAndUpdate(_id, { image: imageUrl }, { new: true })
+            .then(user => user)
+            .catch(err => err);
+        } else {
+          throw new Error("Sorry, you need to log in first");
         }
       }
     },

@@ -9,7 +9,7 @@ const SearchResults = props => {
   const { filter, setSearching } = props;
   const { loading, error, data } = useQuery(SEARCH_PROJECTS_AND_CATEGORIES, { variables: { filter } } );
   if (loading) return <div>Loading...</div>;
-if (error) { return <div>{error}</div> };
+  if (error) { return <div>{error}</div> };
   const { searchCategories, searchProjects } = data;
   const categoryLis = searchCategories.map(category => {
     return <CategoryResult

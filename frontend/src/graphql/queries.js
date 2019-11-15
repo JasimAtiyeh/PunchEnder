@@ -275,6 +275,7 @@ export default {
         author {
           _id
           name
+          image
         }
         project {
           _id

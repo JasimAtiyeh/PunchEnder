@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import Mutations from '../../../../graphql/mutations';
 import Queries from '../../../../graphql/queries';
 const { CREATE_COMMENT } = Mutations;
-const { FETCH_PROJECT_COMMENTS } = Queries;
+const { FETCH_PROJECT_COMMENTS, FETCH_USER_IMAGE } = Queries;
 
 const CommentForm = props => {
   const [body, setBody] = useState('');
@@ -24,11 +24,20 @@ const CommentForm = props => {
       }
     });
 
+  const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: localStorage.userId } });
+  if (loading) return <div>Loading...</div>;
+  if (error) { return <div>{error}</div> };
+
+  const { user } = data;
+  const image = user.image ?
+    user.image : "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45";
+
   return (
     <div className="comment-form-container">
       <div>
-        <div className="comment-form-image-container">
-        </div>
+        <img
+          src={image}
+          className="comment-form-image-container" />
       </div>
       <form 
         className="comment-form"

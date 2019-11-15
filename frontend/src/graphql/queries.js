@@ -33,6 +33,7 @@ export default {
         _id
         name
         projects {
+          _id
           projectCreator {
             _id
             name
@@ -45,9 +46,11 @@ export default {
             _id
             name
           }
+          launched
         }
         pledges {
           project {
+            _id
             projectCreator {
               _id
               name
@@ -63,6 +66,7 @@ export default {
           }
         }
         followedProjects {
+          _id
           projectCreator {
             _id
             name

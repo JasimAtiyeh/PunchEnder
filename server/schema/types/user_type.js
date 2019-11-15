@@ -39,9 +39,9 @@ const UserType = new GraphQLObjectType({
       type: new GraphQLList(require("./project_type")),
       resolve(parentValue) {
         return User.findById(parentValue._id)
-          .populate("backedProjects")
+          .populate("followedProjects")
           .then(user => user.followedProjects)
-          .catch(err => null);      
+          .catch(err => null);
       }
     },
     pledges: {

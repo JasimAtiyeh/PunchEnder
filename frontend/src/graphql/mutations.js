@@ -135,6 +135,16 @@ export default {
       }
     }
   `,
+  UNFOLLOW_PROJECT: gql`
+    mutation UnFollowProject($user_id: ID!, $project_id: ID!) {
+      unFollowProject(user_id: $user_id, project_id: $project_id) {
+        _id
+        followedProjects {
+          _id
+        }
+      }
+    }
+  `,
   PLEDGE_PROJECT: gql`
     mutation PledgeProject($user_id: ID!, $project_id: ID!, $reward_id:ID, $pledgeAmount: Int!) {
       pledgeProject(user_id: $user_id, project_id: $project_id, reward_id: $reward_id, pledgeAmount: $pledgeAmount) {

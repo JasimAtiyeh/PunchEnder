@@ -302,7 +302,25 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: context.token });
 
           if (validUser.loggedIn) {
-            return User.findByIdAndUpdate(variables.user_id, { followedProjects: variables.project_id}, { new: true })
+            return User.findByIdAndUpdate(variables.user_id, { $push:{ followedProjects: variables.project_id} }, { new: true })
+              .then(user => user)
+              .catch(err => err);
+          } else {
+            throw new Error("sorry, you need to log in first");
+          }
+      }
+    },
+    unFollowProject: {
+      type: UserType,
+      args: {
+        user_id: { type: new GraphQLNonNull(GraphQLID) },
+        project_id: { type: new GraphQLNonNull(GraphQLID) }
+      },
+      async resolve(_, variables, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+          if (validUser.loggedIn) {
+            return User.findByIdAndUpdate(variables.user_id, { $pull:{ followedProjects: variables.project_id} }, { new: true })
               .then(user => user)
               .catch(err => err);
           } else {

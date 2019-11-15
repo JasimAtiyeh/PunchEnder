@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
+import Queries from "../../../graphql/queries";
 
 const ProjectIndexLargeTile = props => {
   const { FOLLOW_PROJECT } = Mutations;
@@ -19,7 +20,7 @@ const ProjectIndexLargeTile = props => {
         </div>
         <div className='project-index-large-tile-bookmark'>
           <i
-            className="material-icons"
+            className='material-icons'
             onClick={e => {
               e.preventDefault();
               followProject({ variables: {

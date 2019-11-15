@@ -142,9 +142,9 @@ class UserProfile extends React.Component {
                     }
                     {
                       data.user.pledges.length > 0 && this.state.pledges ?
-                      data.user.pledges.map((backedProject, idx) => (
+                      data.user.pledges.map((pledge, idx) => (
                         <li key={idx}>
-                          <ProjectIndexTile project={backedProject} />
+                          <ProjectIndexTile project={pledge.project} />
                         </li>
                       )) : null
                     } 

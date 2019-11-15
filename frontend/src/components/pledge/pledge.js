@@ -41,6 +41,7 @@ export const Pledge = props => {
             num={0}
             show={show}
             setShow={setShow}
+            ownProps={props}
             projectId={project._id} />
           {rewards.map((reward, idx) => (
             <RewardTile
@@ -49,6 +50,7 @@ export const Pledge = props => {
               setShow={setShow}
               key={idx}
               projectId={project._id}
+              ownProps={props}
               reward={reward} />
           ))}
         </div>

@@ -15,7 +15,7 @@ const ProjectShowPage = props => {
   if (error) { return <div>Error!</div> };
   const { project } = data;
   const projectCreatorId = project.projectCreator._id;
-  if (!project.launched && localStorage.currentUser === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build`} />};
+  if (!project.launched && localStorage.userId === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build/basics`} />};
   if (!project.launched) { return <Redirect to="/" /> }
 
   return (

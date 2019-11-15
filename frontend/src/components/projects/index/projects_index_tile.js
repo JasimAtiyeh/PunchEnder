@@ -9,7 +9,7 @@ const ProjectIndexTile = props => {
   if (!props.project) { return null }
   const { amountRaised, goal, _id } = props.project;
   let percentFunded = (amountRaised / goal) * 100;
-
+  let funded = `${percentFunded}% funded`;
   return (
     <div className='project-index-tile'>
       <Link to={`/projects/${_id}`}>
@@ -22,7 +22,7 @@ const ProjectIndexTile = props => {
           </div>
           <div className='project-index-tile-info-detail'>
             <div className='project-index-tile-funded'>
-              {`${percentFunded}%`} funded
+              {props.project.launched ? funded : 'Project not launched'}
             </div>
             <div className='project-index-tile-project-creator'>
               By {props.project.projectCreator ? props.project.projectCreator.name : ''}

@@ -14,7 +14,7 @@ const ProjectShowPage = props => {
   const { projectId } = props.match.params;
   const { loading, error, data } = useQuery(FETCH_FINISHED_PROJECT, { variables: { _id: projectId } });
   if (loading) { return <div>Loading...</div>};
-  if (error) { return <div>Error!</div> };
+  if (error) { return <h2 className="not-found">Project not found!</h2> };
   const { project } = data;
   const projectCreatorId = project.projectCreator._id;
   if (!project.launched && localStorage.userId === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build/basics`} />};

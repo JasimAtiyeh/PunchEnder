@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import AppErrorBoundary from "./AppErrorBoundary";
 import AuthRoute from "../util/route_util";
 import Login from "./session/Login";
 import Register from "./session/Register";
@@ -16,25 +17,25 @@ import { Pledge } from "./pledge/pledge";
 
 const App = () => {
   return (
-    <div className="app">
-      <Switch>
-        <Route path="/projects/:projectId/build" component={null} />
-        <Nav />
-      </Switch>
-      <Switch>
-        <AuthRoute path="/user" component={UserProfile} />
-        <AuthRoute exact path="/login" component={Login} routeType="auth" />
-        <AuthRoute exact path="/signup" component={Register} routeType="auth" />
-        <Route exact path='/' component={ProjectIndex} />
-        <Route exact path="/categories/:categoryId" component={CategoryIndex} />
-      </Switch>
-      <Switch>
-        <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
-        <Route exact path="/projects/:projectId/pledge" component={Pledge} />
-        <Route path="/projects/:projectId" component={ProjectShow} />
-      </Switch>
-      <AuthRoute exact path="/start" component={CreateForm} />
-    </div>
+    <AppErrorBoundary>
+      <div className="app">
+        <Switch>
+          <Route path="/projects/:projectId/build" component={null} />
+          <Nav />
+        </Switch>
+        <Switch>
+          <AuthRoute exact path="/start" component={CreateForm} />
+          <AuthRoute path="/user" component={UserProfile} />
+          <AuthRoute exact path="/login" component={Login} routeType="auth" />
+          <AuthRoute exact path="/signup" component={Register} routeType="auth" />
+          <Route exact path='/' component={ProjectIndex} />
+          <Route exact path="/categories/:categoryId" component={CategoryIndex} />
+          <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
+          <Route exact path="/projects/:projectId/pledge" component={Pledge} />
+          <Route path="/projects/:projectId" component={ProjectShow} />
+        </Switch>
+      </div>
+    </AppErrorBoundary>
   );
 };
 

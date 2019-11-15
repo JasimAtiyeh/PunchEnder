@@ -62,7 +62,7 @@ class UserProfile extends React.Component {
         variables={{ id: localStorage.userId }} >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error</p>;
+          if (error) return <h2 className="not-found">User not found!</h2>;
             const date = new Date();
             date.setTime(data.user.date);
             return (

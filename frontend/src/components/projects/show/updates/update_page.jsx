@@ -9,14 +9,18 @@ const UpdatePage = props => {
   const { projectId, projectCreatorId } = props;
   const currentUser = localStorage.userId;
   const [adding, setAdding] = useState(false);
-  const [editing, setEditing] = useState('');
+  const [editing, setEditing] = useState(null);
   const { loading, error, data } = useQuery(FETCH_PROJECT_UPDATES, { variables: { project: projectId } });
   if (loading) { return <div>Loading...</div> };
   if (error) { return <div>Error!</div> };
 
   const { projectUpdates } = data;
   const updateLis = projectUpdates.map((update, idx) => {
-    return <Panel key={update._id} update={update} num={idx + 1} />;
+    return <Panel 
+      key={update._id}
+      setEditing={setEditing}
+      update={update} 
+      num={idx + 1} />;
   }).reverse();
 
   return (
@@ -39,9 +43,9 @@ const UpdatePage = props => {
             cancel={() => setAdding(false)}
             projectId={projectId} /> }
         {editing && 
-          <Form 
-            cancel={() => setEditing(false)}
-            projectId={projectId} 
+          <Form
+            cancel={() => setEditing(null)}
+            projectId={projectId}
             update={editing}/>}
       </div>
     </div>

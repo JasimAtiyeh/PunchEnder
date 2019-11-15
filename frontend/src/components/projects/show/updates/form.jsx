@@ -8,6 +8,7 @@ const { FETCH_PROJECT_UPDATES } = Queries;
 
 const UpdateAddForm = props => {
   const { update, cancel, projectId } = props;
+  console.log(update ? update.title : '');
   const [createUpdate] = useMutation(CREATE_UPDATE,
     {
       update(cache, { data: { newUpdate } }) {
@@ -40,8 +41,10 @@ const UpdateAddForm = props => {
         <input
           placeholder="Title your post."
           type="text"
+          value={title}
           onChange={e => setTitle(e.target.value)}/>
-        <Editor 
+        <Editor
+          body={body}
           setBody={setBody} />
         <div className="update-form-button-container">
           <button

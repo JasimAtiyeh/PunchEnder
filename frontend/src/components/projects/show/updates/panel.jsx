@@ -4,7 +4,7 @@ import { EditorState, convertFromRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const UpdatePanel = props => {
-  const { update, num } = props;
+  const { update, num, setEditing } = props;
   const { projectCreator } = update.project;
   const date = new Date(parseInt(update.date));
   const content = convertFromRaw(JSON.parse(update.body));
@@ -36,7 +36,9 @@ const UpdatePanel = props => {
         />
       </div>
       <div className="update-bottom">
-        { projectCreator._id === localStorage.userId && <button>Edit post</button>}
+        { projectCreator._id === localStorage.userId && 
+          <button onClick={() => setEditing(update)}>Edit post</button>
+        }
         <button>Read more</button>
       </div>
     </li>

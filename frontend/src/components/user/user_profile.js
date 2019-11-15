@@ -9,35 +9,52 @@ class UserProfile extends React.Component {
     super(props);
     this.state = {
       projects: true,
-      backedProjects: false,
+      pledges: false,
+      followedProjects: false,
       projectsShow: 'active',
-      backedProjectsShow: ''
+      pledgesShow: '',
+      followedProjectsShow: ''
     };
 
     this.showProjects = this.showProjects.bind(this);
-    this.showBackedProjects = this.showBackedProjects.bind(this);
+    this.showPledges = this.showPledges.bind(this);
+    this.showFollowedProjects = this.showFollowedProjects.bind(this);
   }
 
   showProjects() {
     this.setState({
       projects: true,
-      backedProjects: false,
+      pledges: false,
+      followedProjects: false,
       projectsShow: 'active',
-      backedProjectsShow: ''
+      pledgesShow: '',
+      followedProjectsShow: ''
     });
   }
 
-  showBackedProjects() {
+  showPledges() {
     this.setState({
       projects: false,
-      backedProjects: true,
+      pledges: true,
+      followedProjects: false,
       projectsShow: '',
-      backedProjectsShow: 'active'
+      pledgesShow: 'active',
+      followedProjectsShow: ''
+    });
+  }
+
+  showFollowedProjects() {
+    this.setState({
+      projects: false,
+      pledges: false,
+      followedProjects: true,
+      projectsShow: '',
+      pledgesShow: '',
+      followedProjectsShow: 'active'
     });
   }
 
   render() {
-
     return (
       < Query
         query={ Queries.default.FETCH_USER }
@@ -59,7 +76,7 @@ class UserProfile extends React.Component {
                   </h2>
                   <div className='user-profile-info-sub'>
                     <div>
-                      Backed {data.user.backedProjects.length} projects
+                      Backed {data.user.pledges.length} projects
                     </div>
                     <div>
                       &nbsp;&nbsp;·&nbsp;&nbsp;
@@ -80,42 +97,77 @@ class UserProfile extends React.Component {
                         Projects
                     </button>
                     <button
-                      onClick={this.showBackedProjects}
-                      className={this.state.backedProjectsShow}>
+                      onClick={this.showPledges}
+                      className={this.state.pledgesShow}>
                         Backed
+                    </button>
+                    <button
+                      onClick={this.showFollowedProjects}
+                      className={this.state.followedProjectsShow}>
+                        Followed
                     </button>
                   </div>
                   <div className='user-profile-projects-display'>
-                    { this.state.projects ?
+                    {
+                      data.user.projects.length > 0 && this.state.projects ?
                       data.user.projects.map((project, idx) => (
                         <li key={idx}>
                           <ProjectIndexTile project={project} />
                         </li>
-                      )) : <div
-                            className='user-profile-projects-display-none'>
-                              <div>
-                                <strong>You haven't backed any projects. </strong>
-                                Let's change that!
-                              </div>
-                              <Link to='/'>
-                                Discover projects
-                              </Link>
-                          </div> }
-                    { this.state.backedProjects ?
-                      data.user.backedProjects.map((backedProject, idx) => (
+                      )) : null
+                    }
+                    {
+                      data.user.projects.length <= 0 && this.state.projects ?
+                      <div className='user-profile-projects-display-none'>
+                        <div>
+                          <strong>You haven't backed any projects. </strong>
+                          Let's change that!
+                        </div>
+                        <Link to='/'>
+                          Discover projects
+                        </Link>
+                      </div> : null
+                    }
+                    {
+                      data.user.pledges.length > 0 && this.state.pledges ?
+                      data.user.pledges.map((backedProject, idx) => (
                         <li key={idx}>
                           <ProjectIndexTile project={backedProject} />
                         </li>
-                      )) : <div
-                            className='user-profile-projects-display-none'>
-                              <div>
-                                <strong>You haven't started any projects. </strong>
-                                Let's change that!
-                              </div>
-                              <Link to=''>
-                                Start a project
-                              </Link>
-                          </div> }
+                      )) : null
+                    } 
+                    {
+                      data.user.pledges.length <= 0 && this.state.pledges ?
+                      <div className='user-profile-projects-display-none'>
+                        <div>
+                          <strong>You haven't started any projects. </strong>
+                          Let's change that!
+                        </div>
+                        <Link to=''>
+                          Start a project
+                        </Link>
+                      </div> : null
+                    }
+                    {
+                      data.user.followedProjects.length > 0 && this.state.followedProjects ?
+                      data.user.followedProjects.map((followedProject, idx) => (
+                        <li key={idx}>
+                          <ProjectIndexTile project={followedProject} />
+                        </li>
+                      )) : null
+                    } 
+                    {
+                      data.user.followedProjects.length <= 0 && this.state.followedProjects ?
+                      <div className='user-profile-projects-display-none'>
+                        <div>
+                          <strong>You haven't followed any projects. </strong>
+                          Let's change that!
+                        </div>
+                        <Link to='/'>
+                          Discover projects
+                        </Link>
+                      </div> : null
+                    }
                   </div>
                 </div>
               </div>

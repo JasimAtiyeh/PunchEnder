@@ -211,4 +211,11 @@ export default {
       }
     }
   `,
+  DELETE_UPDATE: gql`
+    mutation deleteUpdate($_id: ID!) {
+      deleteUpdate(_id: $_id) {
+        _id
+      }
+    }
+  `,
 };

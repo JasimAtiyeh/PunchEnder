@@ -289,4 +289,21 @@ export default {
       }
     }
   `,
+  FETCH_UPDATE: gql`
+    query FetchUpdate($_id: ID!) {
+      update(_id: $_id) {
+        _id
+        date
+        title
+        body
+        project {
+          _id
+          projectCreator {
+            _id
+            name
+          }
+        }
+      }
+    }
+  `,
 };

@@ -21,7 +21,8 @@ const UpdateAddForm = props => {
           data: { projectUpdates: rootQuery.projectUpdates.concat([newUpdate]) },
         });
       }
-  })
+  });
+
   const [updateUpdate] = useMutation(UPDATE_UPDATE);
   
   const [title, setTitle] = useState(update ? update.title : '');

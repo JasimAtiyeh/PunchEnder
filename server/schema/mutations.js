@@ -405,6 +405,23 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    deleteUpdate: {
+      type: UpdateType,
+      args: {
+        _id: { type: GraphQLNonNull(GraphQLID) }
+      },
+      async resolve(_, { _id }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return Update.findByIdAndDelete(_id)
+            .then(update => update)
+            .catch(err => err);
+        } else {
+          throw new Error("Could not delete the update.");
+        }
+      }
+    },
   }
 });
 

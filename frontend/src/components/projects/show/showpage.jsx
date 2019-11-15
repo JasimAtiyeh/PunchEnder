@@ -7,6 +7,7 @@ import Tabs from "./tabs"
 import CampaignPage from './campaign';
 import CommentPage from './comments/page';
 import UpdatePage from './updates/update_page';
+import UpdateShow from './updates/update_show';
 const { FETCH_FINISHED_PROJECT } = Queries;
 
 const ProjectShowPage = props => {
@@ -32,6 +33,9 @@ const ProjectShowPage = props => {
       <Route
         exact path={`/projects/${projectId}/updates`}
         render={props => <UpdatePage {...props} projectCreatorId={projectCreatorId} projectId={project._id} />} />
+      <Route
+        exact path={`/projects/${projectId}/updates/:updateId`}
+        component={UpdateShow} />
     </div>
   ) 
 };

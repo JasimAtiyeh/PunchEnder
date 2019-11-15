@@ -151,7 +151,18 @@ const RootQueryType = new GraphQLObjectType({
           .sort({ 'name': -1 })
           .limit(5);
       }
-    }
+    },
+    update: {
+      type: UpdateType,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve(_, args) {
+        return Update.findById(args._id);
+      }
+    },
   })
 });
 

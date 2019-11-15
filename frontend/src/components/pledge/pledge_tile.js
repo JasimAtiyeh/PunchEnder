@@ -9,6 +9,7 @@ class PledgeTile extends React.Component {
     this.state = {
       pledge: 10
     };
+    this.history = this.props;
   }
 
   update(field) {
@@ -54,7 +55,9 @@ class PledgeTile extends React.Component {
                           project_id: this.props.projectId,
                           pledgeAmount: this.state.pledge
                         }
-                    })}}></input>
+                      })
+                      this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
+                    }}></input>
                 </div>
               )}
             </Mutation>

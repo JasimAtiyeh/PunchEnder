@@ -75,9 +75,21 @@ class UserProfile extends React.Component {
                     {data.user.name}
                   </h2>
                   <div className='user-profile-info-sub'>
-                    <div>
-                      Backed {data.user.pledges.length} projects
-                    </div>
+                    {this.state.projects ?
+                      <div>
+                        Started {data.user.projects.length} projects
+                      </div> : null
+                    }
+                    {this.state.pledges ?
+                      <div>
+                        Backed {data.user.pledges.length} projects
+                      </div> : null
+                    }
+                    {this.state.followedProjects ?
+                      <div>
+                        Follow {data.user.followedProjects.length} projects
+                      </div> : null
+                    }
                     <div>
                       &nbsp;&nbsp;·&nbsp;&nbsp;
                     </div>

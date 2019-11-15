@@ -295,6 +295,7 @@ export default {
           projectCreator {
             _id
             name
+            image
           }
         }
       }
@@ -312,6 +313,7 @@ export default {
           projectCreator {
             _id
             name
+            image
           }
         }
       }

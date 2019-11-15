@@ -15,6 +15,8 @@ const UpdatePanel = props => {
   const date = new Date(parseInt(update.date));
   const content = convertFromRaw(JSON.parse(update.body));
   const editorState = EditorState.createWithContent(content);
+  const image = update.project.projectCreator.image ?
+    update.project.projectCreator.image : "https://ksr-ugc.imgix.net/missing_user_avatar.png?ixlib=rb-2.1.0&w=80&h=80&fit=crop&v=&auto=format&frame=1&q=92&s=d89e3180fafd307918a94a3c9dd79c45";
 
   const [deleteUpdate] = useMutation(DELETE_UPDATE,
     {
@@ -70,7 +72,9 @@ const UpdatePanel = props => {
         <span className="update-no">Update #{num}</span>
         <h3>{update.title}</h3>
         <div className="update-info">
-          <div className="update-creator-image" />
+          <img 
+            src={image}
+            className="update-creator-image" />
           <div className="update-info-text">
             <div>{projectCreator.name} <span>Creator</span></div>
             <span>{date.toLocaleDateString("en-us", {

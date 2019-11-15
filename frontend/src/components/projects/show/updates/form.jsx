@@ -1,23 +1,37 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../../graphql/mutations";
+import Queries from "../../../../graphql/queries";
 import Editor from './editor/editor';
 const { CREATE_UPDATE, UPDATE_UPDATE } = Mutations;
+const { FETCH_PROJECT_UPDATES } = Queries;
 
 const UpdateAddForm = props => {
-  const { update, cancel } = props;
-  const [createUpdate] = useMutation(CREATE_UPDATE);
+  const { update, cancel, projectId } = props;
+  const [createUpdate] = useMutation(CREATE_UPDATE,
+    {
+      update(cache, { data: { newUpdate } }) {
+        const rootQuery = cache.readQuery({
+          query: FETCH_PROJECT_UPDATES,
+          variables: { project: projectId }
+        });
+        cache.writeQuery({
+          query: FETCH_PROJECT_UPDATES,
+          variables: { project: projectId },
+          data: { projectUpdates: rootQuery.projectUpdates.concat([newUpdate]) },
+        });
+      }
+  })
   const [updateUpdate] = useMutation(UPDATE_UPDATE);
+  
   const [title, setTitle] = useState(update ? update.title : '');
   const [body, setBody] = useState(update ? update.body : '');
   const _id = update ? update._id : '';
   const project = props.projectId;
-  const variables = { _id, title, body, project };
-  console.log(variables);
-  console.log(update);
 
   const submit = () => {
-    return update ? updateUpdate({ variables }) : createUpdate({variables});
+    const variables = { _id, title, body, project };
+    return update ? updateUpdate({ variables }) : createUpdate({ variables });
   }
 
   return (
@@ -31,7 +45,7 @@ const UpdateAddForm = props => {
           setBody={setBody} />
         <div className="update-form-button-container">
           <button
-            onClick={() => submit().then(() => cancel())} 
+            onClick={() => submit().then((res) => {console.dir(res);cancel()})} 
             className="update-save">
             Save
           </button>

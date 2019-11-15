@@ -21,7 +21,8 @@ const UpdateType = new GraphQLObjectType({
       }
     },
     body: { type: GraphQLString },
-    title: { type: GraphQLString }
+    title: { type: GraphQLString },
+    date: { type: GraphQLString },
   })
 });
 

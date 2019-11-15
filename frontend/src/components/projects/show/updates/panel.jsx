@@ -3,9 +3,9 @@ import React from 'react';
 const UpdatePanel = props => {
 
   return (
-    <div className="update-panel">
+    <li className="update-panel">
 
-    </div>
+    </li>
   )
 };
 

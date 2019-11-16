@@ -9,7 +9,7 @@ const ProjectIndexTile = props => {
   const [followProject] = useMutation(FOLLOW_PROJECT);
   const [unFollowProject] = useMutation(UNFOLLOW_PROJECT);
   const { FETCH_USER } = Queries;
-  const { loading, error, data } = useQuery(FETCH_USER, { variables: { id: localStorage.userId } });
+  const { loading, error, data } = useQuery(FETCH_USER, { variables: { _id: localStorage.userId } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };
   const followedProjects = data.user.followedProjects.map(project => project._id);

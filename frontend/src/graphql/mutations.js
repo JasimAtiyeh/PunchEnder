@@ -30,12 +30,14 @@ export default {
     mutation CreateProject($name: String!, $description: String!, $category: ID!) {
       newProject(name: $name, description: $description, category: $category) {
         _id
-        name
-        description
         category {
           _id
           name
         }
+        description
+        goal
+        launched
+        name
       }
     }
   `,

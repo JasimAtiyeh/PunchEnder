@@ -6,7 +6,7 @@ import NamePage from "./name_page";
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
 import { withRouter } from "react-router-dom";
-const { FETCH_PROJECTS } = Queries;
+const { FETCH_PROJECTS, FETCH_USER } = Queries;
 const  { CREATE_PROJECT } = Mutations;
 
 // Using hooks here to make it simpler to use multiple form components.
@@ -17,19 +17,7 @@ const ProjectCreateForm = props => {
   const [description, setDescription] = useState(null);
   const [page, setPage] = useState(1);
 
-  const [createProject] = useMutation(CREATE_PROJECT,
-    {
-      update(cache, { data: { newProject } }) {
-        try {
-          const rootQuery = cache.readQuery({ query: FETCH_PROJECTS });
-          cache.writeQuery({
-            query: FETCH_PROJECTS,
-            data: { projects: rootQuery.projects.concat([newProject]) },
-          });
-        } catch {
-        }
-      }
-    });
+  const [createProject] = useMutation(CREATE_PROJECT);
 
   let component;
   if (page === 1) {

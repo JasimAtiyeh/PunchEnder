@@ -69,8 +69,8 @@ export default {
     }
   `,
   FETCH_USER: gql`
-    query FetchUser($id: ID!) {
-      user(_id: $id) {
+    query FetchUser($_id: ID!) {
+      user(_id: $_id) {
         _id
         name
         image

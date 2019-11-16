@@ -20,11 +20,14 @@ const ProjectCreateForm = props => {
   const [createProject] = useMutation(CREATE_PROJECT,
     {
       update(cache, { data: { newProject } }) {
-        const rootQuery = cache.readQuery({ query: FETCH_PROJECTS });
-        cache.writeQuery({
-          query: FETCH_PROJECTS,
-          data: { projects: rootQuery.projects.concat([newProject]) },
-        });
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_PROJECTS });
+          cache.writeQuery({
+            query: FETCH_PROJECTS,
+            data: { projects: rootQuery.projects.concat([newProject]) },
+          });
+        } catch {
+        }
       }
     });
 

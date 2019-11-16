@@ -12,15 +12,18 @@ const CommentForm = props => {
   const [createComment] = useMutation(CREATE_COMMENT,
     {
       update(cache, { data: { newComment } }) {
-        const rootQuery = cache.readQuery({
-          query: FETCH_PROJECT_COMMENTS,
-          variables: { project: props.projectId }
-        });
-        cache.writeQuery({
-          query: FETCH_PROJECT_COMMENTS,
-          variables: { project: props.projectId },
-          data: { projectComments: rootQuery.projectComments.concat([newComment]) },
-        });
+        try {
+          const rootQuery = cache.readQuery({
+            query: FETCH_PROJECT_COMMENTS,
+            variables: { project: props.projectId }
+          });
+          cache.writeQuery({
+            query: FETCH_PROJECT_COMMENTS,
+            variables: { project: props.projectId },
+            data: { projectComments: rootQuery.projectComments.concat([newComment]) },
+          });
+        } catch {
+        }
       }
     });
 

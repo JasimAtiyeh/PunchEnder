@@ -11,15 +11,18 @@ const UpdateAddForm = props => {
   const [createUpdate] = useMutation(CREATE_UPDATE,
     {
       update(cache, { data: { newUpdate } }) {
-        const rootQuery = cache.readQuery({
-          query: FETCH_PROJECT_UPDATES,
-          variables: { project: projectId }
-        });
-        cache.writeQuery({
-          query: FETCH_PROJECT_UPDATES,
-          variables: { project: projectId },
-          data: { projectUpdates: rootQuery.projectUpdates.concat([newUpdate]) },
-        });
+        try {
+          const rootQuery = cache.readQuery({
+            query: FETCH_PROJECT_UPDATES,
+            variables: { project: projectId }
+          });
+          cache.writeQuery({
+            query: FETCH_PROJECT_UPDATES,
+            variables: { project: projectId },
+            data: { projectUpdates: rootQuery.projectUpdates.concat([newUpdate]) },
+          });
+        } catch {
+        }
       }
   });
 

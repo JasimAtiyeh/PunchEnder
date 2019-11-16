@@ -43,6 +43,12 @@ const RootQueryType = new GraphQLObjectType({
         return Project.find({});
       }
     },
+    finishedProjects: {
+      type: new GraphQLList(ProjectType),
+      resolve() {
+        return Project.find({}).where('launched').equals(true);
+      }
+    },
     project: {
       type: ProjectType,
       args: {

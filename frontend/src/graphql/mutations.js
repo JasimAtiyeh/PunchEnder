@@ -66,7 +66,21 @@ export default {
     mutation LaunchProject($_id: ID!) {
       launchProject(_id: $_id) {
         _id
+        projectCreator {
+          _id
+          name
+        }
+        category {
+          _id
+          name
+          description
+        }
+        name
+        description
+        goal
+        amountRaised
         launched
+        image
       }
     }
   `,

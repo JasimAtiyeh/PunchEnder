@@ -35,6 +35,27 @@ export default {
       }
     }
   `,
+  FETCH_FINISHED_PROJECTS: gql`
+    {
+      finishedProjects {
+        _id
+        projectCreator {
+          _id
+          name
+        }
+        name
+        description
+        goal
+        amountRaised
+        category {
+          _id
+          name
+        }
+        launched
+        image
+      }
+    }
+  `,
   FETCH_RANDOM_PROJECT: gql`
     {
       randomProject {

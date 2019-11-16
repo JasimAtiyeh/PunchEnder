@@ -4,7 +4,7 @@ import Queries from '../../../graphql/queries';
 import IndexSegment from './segment';
 import Tabs from './tabs';
 
-const { FETCH_PROJECTS } = Queries;
+const { FETCH_FINISHED_PROJECTS } = Queries;
 
 const chunkArray = (array, size) => {
   const chunks = [];
@@ -15,13 +15,12 @@ const chunkArray = (array, size) => {
 }
 
 const ProjectIndex = props => {
-  const { loading, error, data } = useQuery(FETCH_PROJECTS);
+  const { loading, error, data } = useQuery(FETCH_FINISHED_PROJECTS);
   if (loading) return null;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>Error!</div>;
 
-  const allProjects = data.projects;
-  const launchedProjects = allProjects.filter(project => project.launched);
-  const projectChunks = chunkArray(launchedProjects, 4);
+  const { finishedProjects } = data;
+  const projectChunks = chunkArray(finishedProjects, 4);
 
   const segments = projectChunks.map((chunk, idx) => {
     return (

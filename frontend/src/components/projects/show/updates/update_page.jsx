@@ -11,7 +11,7 @@ const UpdatePage = props => {
   const [adding, setAdding] = useState(false);
   const [editing, setEditing] = useState(null);
   const { loading, error, data } = useQuery(FETCH_PROJECT_UPDATES, { variables: { project: projectId } });
-  if (loading) { return <div>Loading...</div> };
+  if (loading) { return null };
   if (error) { return <div>Error!</div> };
 
   const { projectUpdates } = data;

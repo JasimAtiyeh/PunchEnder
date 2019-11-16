@@ -10,7 +10,7 @@ const ProjectIndexLargeTile = props => {
   const [unFollowProject] = useMutation(UNFOLLOW_PROJECT);
   const { FETCH_USER } = Queries;
   const { loading, error, data } = useQuery(FETCH_USER, { variables: { id: localStorage.userId } });
-  if (loading) { return <div>Loading...</div>};
+  if (loading) { return null};
   if (error) { return <div>Error!</div> };
   if (!props.project) { return null }
   const { _id, image, description, name } = props.project;

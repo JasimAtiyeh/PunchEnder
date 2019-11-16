@@ -7,7 +7,7 @@ const { FETCH_CATEGORIES } = Queries;
 
 const IndexTabs = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORIES);
-  if (loading) return <div>Loading...</div>;
+  if (loading) return null;
   if (error) return <div>{error}</div>;
 
   return(

@@ -35,6 +35,18 @@ export default {
       }
     }
   `,
+  FETCH_RANDOM_PROJECT: gql`
+    {
+      randomProject {
+        _id
+        name
+        projectCreator {
+          _id
+          name
+        }
+      }
+    }
+  `,
   FETCH_USER: gql`
     query FetchUser($id: ID!) {
       user(_id: $id) {

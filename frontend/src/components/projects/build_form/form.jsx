@@ -11,7 +11,7 @@ const { FETCH_UNFINISHED_PROJECT } = Queries;
 const BuildForm = props => {
   const { projectId } = props.match.params;
   const { loading, error, data } = useQuery(FETCH_UNFINISHED_PROJECT, { variables: { _id: projectId }});
-  if (loading) return <div>Loading...</div>;
+  if (loading) return null;
   if (error) { if (error) { return <h2 className="not-found">Project not found!</h2> }; };
 
   const { project } = data;

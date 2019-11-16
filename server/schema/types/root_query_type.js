@@ -54,6 +54,16 @@ const RootQueryType = new GraphQLObjectType({
         return Project.findById(args._id);
       }
     },
+    randomProject: {
+      type: ProjectType,
+      resolve() {
+        return Project.countDocuments({ launched: true }).then(count => {
+          const random = Math.floor(Math.random() * count);
+          return Project.findOne()
+            .where('launched').equals(true).skip(random);
+        });
+      }
+    },
     projectComments: {
       type: new GraphQLList(CommentType),
       args: {

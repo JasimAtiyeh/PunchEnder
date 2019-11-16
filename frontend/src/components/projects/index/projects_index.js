@@ -16,7 +16,7 @@ const chunkArray = (array, size) => {
 
 const ProjectIndex = props => {
   const { loading, error, data } = useQuery(FETCH_PROJECTS);
-  if (loading) return <div>Loading...</div>;
+  if (loading) return null;
   if (error) return <div>{error}</div>;
 
   const allProjects = data.projects;

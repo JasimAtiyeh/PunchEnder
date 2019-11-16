@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import AppErrorBoundary from "./AppErrorBoundary";
+import NotFound from "./NotFound";
 import AuthRoute from "../util/route_util";
 import Login from "./session/Login";
 import Register from "./session/Register";
@@ -33,6 +34,7 @@ const App = () => {
           <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
           <Route exact path="/projects/:projectId/pledge" component={Pledge} />
           <Route path="/projects/:projectId" component={ProjectShow} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </div>
     </AppErrorBoundary>

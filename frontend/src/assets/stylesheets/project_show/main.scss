@@ -1,72 +1,78 @@
+.project-show {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+}
+
 .project-show-main {
   margin-top: 40px;
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+
   > h1 {
     text-align: center;
     font-size: 30px;
     margin: 0 auto;
     margin-bottom: 15px;
-    width: 70%;
   }
   > p {
     text-align: center;
     font-size: 18px;
     margin: 0 auto;
     margin-bottom: 40px;
-    width: 70%;
     color: gray;
   }
 }
 
 .project-show-main-content {
-  display: grid;
-  margin: 0 auto;
-  width: 90%;
-  grid-template-columns: 65% 35%;
-  height: 425px;
-  padding: 0px 40px;
+  display: flex;
+
   > div {
-    height: 100%;
+    width: 100%;
+    height: 355px;
+
     .main-content-amount,
     .main-content-backers,
     .main-content-date {
       color: rgb(110, 110, 110);
+      display: flex;
+      flex-direction: column;
+
       .amount-total {
         color: green;
       }
       em {
-        display: block;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 4px;
       }
       > span {
-        display: block;
         margin-bottom: 28px;
       }
     }
   }
   .main-content-column-1 {
-    box-sizing: border-box;
+
     .main-content-image {
-      background-color: green;
-      width: 100%;
       height: 100%;
-      background-repeat: no-repeat;
       background-size: cover;
     }
   }
   .main-content-column-2 {
-    box-sizing: border-box;
-    padding-top: 20px;
-    margin-left: 35px;
+    padding-left: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
 
 .main-content-buttons {
+  display: flex;
+  flex-direction: column;
+
   a {
-    display: block;
-    width: 100%;
     background-color: teal;
     padding: 12px 0;
     color: white;
@@ -77,12 +83,10 @@
     background-color: shade(teal, 20%);
   }
   button {
-    display: block;
-    width: 50%;
-    background-color: white;
     border: 1px solid gray;
     padding: 12px 0;
     text-align: center;
+    width: 40%;
   }
   button:hover {
     background-color: shade(white, 10%);
@@ -91,8 +95,6 @@
 }
 
 .main-content-category {
-  margin: 0 auto;
   margin-top: 10px;
-  width: 83%;
   padding: 8px 1px;
 }

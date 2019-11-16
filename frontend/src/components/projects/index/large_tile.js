@@ -18,7 +18,7 @@ const ProjectIndexLargeTile = props => {
   let followed = followedProjects.includes(_id) ? 'followed' : '';
 
   return (
-    <div className='project-index-large-tile'>
+    <div className={props.only ? "project-index-large-tile only" : "project-index-large-tile"}>
       <div className='project-index-large-tile-image-container'>
         <div className='project-index-large-tile-image'>
           <Link to={`/projects/${_id}`}>

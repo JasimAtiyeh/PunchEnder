@@ -75,6 +75,14 @@
   padding-right: 30px;
 }
 
+.project-index-large-tile.only {
+  // border-right: 1px solid #DCDEDD;
+  // padding: 0px 40px 0px 0px;
+  // height: 600px;
+  padding-right: 0;
+  padding-left: 10px;
+}
+
 .project-index-large-tile-image-container {
   // width: 391px;
 }
@@ -137,6 +145,10 @@
 
 .projects-index-segment-large-tile {
   border-right: 1px solid #DCDEDD;
+}
+
+.projects-index-segment-large-tile.only {
+  border-right: none;
 }
 
 .projects-index-segment-side {

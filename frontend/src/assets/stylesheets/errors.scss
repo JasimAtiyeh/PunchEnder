@@ -1,0 +1,41 @@
+.not-found {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-top: 4em;
+}
+
+.not-found-page {
+  h2 {
+    font-size: 48px;
+    margin-top: 2.5em;
+    margin-bottom: 0.4em;
+  }
+  p:first-of-type {
+    margin-bottom: 0.7em;
+    font-size: 22px;
+  }
+  p:last-of-type {
+    margin-bottom: 2.2em;
+    font-size: 18px;
+  }
+  .not-found-button-container {
+    a {
+      padding: 8px 12px;
+      border: 1px solid lightgray;
+    }
+    .not-found-return:hover {
+      border: 1px solid black;
+    }
+    .not-found-checkout {
+      background-color: black;
+      color: white;
+      margin-right: 15px;
+      border: 1px solid black;
+    }
+    .not-found-checkout:hover {
+      background-color: tint(black, 20%);
+    }
+  }
+}

@@ -5,6 +5,11 @@
   align-items: center;
   padding: 10px;
   height: 40px;
+  z-index: 100;
+}
+
+.nav-dropdown-button:hover {
+  cursor: pointer;
 }
 
 .nav-links {

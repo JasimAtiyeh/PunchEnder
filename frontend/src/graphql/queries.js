@@ -35,9 +35,42 @@ export default {
       }
     }
   `,
+  FETCH_FINISHED_PROJECTS: gql`
+    {
+      finishedProjects {
+        _id
+        projectCreator {
+          _id
+          name
+        }
+        name
+        description
+        goal
+        amountRaised
+        category {
+          _id
+          name
+        }
+        launched
+        image
+      }
+    }
+  `,
+  FETCH_RANDOM_PROJECT: gql`
+    {
+      randomProject {
+        _id
+        name
+        projectCreator {
+          _id
+          name
+        }
+      }
+    }
+  `,
   FETCH_USER: gql`
-    query FetchUser($id: ID!) {
-      user(_id: $id) {
+    query FetchUser($_id: ID!) {
+      user(_id: $_id) {
         _id
         name
         image

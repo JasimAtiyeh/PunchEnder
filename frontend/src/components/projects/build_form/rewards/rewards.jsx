@@ -27,26 +27,33 @@ const BuildFormRewards = props => {
     CREATE_REWARD,
     {
       update(cache, { data: { newReward } }) {
-        const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
-        qdata.project.rewards.push(newReward);
-        cache.writeQuery({
-          query: FETCH_UNFINISHED_PROJECT,
-          variables: { _id: project._id },
-          data: { project: qdata.project },
-        });
+        try {
+          const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
+          qdata.project.rewards.push(newReward);
+          cache.writeQuery({
+            query: FETCH_UNFINISHED_PROJECT,
+            variables: { _id: project._id },
+            data: { project: qdata.project },
+          });
+        } catch {
+
+        }
       }
   });
   const [deleteReward] = useMutation(
     DELETE_REWARD,
     {
       update(cache, { data: { deleteReward } }) {
-        const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
-        qdata.project.rewards = qdata.project.rewards.filter(reward => reward._id !== deleteReward._id);
-        cache.writeQuery({
-          query: FETCH_UNFINISHED_PROJECT,
-          variables: { _id: project._id },
-          data: { project: qdata.project },
-        });
+        try {
+          const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
+          qdata.project.rewards = qdata.project.rewards.filter(reward => reward._id !== deleteReward._id);
+          cache.writeQuery({
+            query: FETCH_UNFINISHED_PROJECT,
+            variables: { _id: project._id },
+            data: { project: qdata.project },
+          });
+        } catch {
+        }
       }
   });
   const [updateReward] = useMutation(UPDATE_REWARD);

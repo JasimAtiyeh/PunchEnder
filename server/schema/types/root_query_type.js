@@ -43,6 +43,12 @@ const RootQueryType = new GraphQLObjectType({
         return Project.find({});
       }
     },
+    finishedProjects: {
+      type: new GraphQLList(ProjectType),
+      resolve() {
+        return Project.find({}).where('launched').equals(true);
+      }
+    },
     project: {
       type: ProjectType,
       args: {
@@ -52,6 +58,16 @@ const RootQueryType = new GraphQLObjectType({
       },
       resolve(_, args) {
         return Project.findById(args._id);
+      }
+    },
+    randomProject: {
+      type: ProjectType,
+      resolve() {
+        return Project.countDocuments({ launched: true }).then(count => {
+          const random = Math.floor(Math.random() * count);
+          return Project.findOne()
+            .where('launched').equals(true).skip(random);
+        });
       }
     },
     projectComments: {

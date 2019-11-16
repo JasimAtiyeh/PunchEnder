@@ -13,7 +13,7 @@ const AuthRoute = ({
 }) => (
   <Query query={IS_LOGGED_IN}>
     {({ data, loading, error }) => {
-      if (loading) { return <p>loading...</p> }
+      if (loading) return null;
       if (error) return `Error! ${error.message}`;
 
       if (routeType === "auth") {

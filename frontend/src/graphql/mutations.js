@@ -30,12 +30,14 @@ export default {
     mutation CreateProject($name: String!, $description: String!, $category: ID!) {
       newProject(name: $name, description: $description, category: $category) {
         _id
-        name
-        description
         category {
           _id
           name
         }
+        description
+        goal
+        launched
+        name
       }
     }
   `,
@@ -66,7 +68,21 @@ export default {
     mutation LaunchProject($_id: ID!) {
       launchProject(_id: $_id) {
         _id
+        projectCreator {
+          _id
+          name
+        }
+        category {
+          _id
+          name
+          description
+        }
+        name
+        description
+        goal
+        amountRaised
         launched
+        image
       }
     }
   `,

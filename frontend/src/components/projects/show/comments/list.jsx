@@ -10,7 +10,7 @@ const CommentList = props => {
     FETCH_PROJECT_COMMENTS, 
     { variables: { project: projectId } }
   );
-  if (loading) return <p>Loading...</p>;
+  if (loading) return null;
   if (error) { console.dir(error); return <p>Error</p> }
 
   const comments = data.projectComments;

@@ -5,8 +5,8 @@ const { FETCH_CATEGORIES } = Queries;
 
 const CategoryPage = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORIES);
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return null;
+  if (error) return <div>Error!</div>;
   const options =  data.categories.map(category => (
     <option 
       key={category._id} 

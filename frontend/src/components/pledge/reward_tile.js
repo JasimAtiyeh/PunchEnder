@@ -17,11 +17,14 @@ class RewardTile extends React.Component {
 
   render() {
     return (
-      <div className='pledge-tiles-rewards-tile'>
+      <div 
+        className='pledge-tiles-rewards-tile'
+        onClick={() => this.props.setShow(this.props.num)}>
         <div className='pledge-tiles-rewards-tile-option'>
           <input
             type='radio'
             name='pledge'
+            checked={this.props.num === this.props.show}
             onChange={() => this.props.setShow(this.props.num)}></input>
           <div className='pledge-tiles-rewards-tile-option-info'>
             <div className='pledge-tiles-rewards-tile-option-info-title'>${this.props.reward.pledgeAmount} or more</div>
@@ -48,6 +51,7 @@ class RewardTile extends React.Component {
                     type='submit'
                     value='Pledge'
                     onClick={e => {
+                      e.stopPropagation();
                       e.preventDefault();
                       PLEDGE_PROJECT({
                         variables: {

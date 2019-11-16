@@ -5,8 +5,8 @@
   .campaign-story {
     width: 75%;
     text-align: left;
-    padding-right: 40px;
-
+    margin-right: 40px;
+    border-right: 1px solid lightgray;
     > h2 {
       font-size: 23px;
     }

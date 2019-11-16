@@ -17,8 +17,8 @@ const chunkArray = (array, size) => {
 
 const CategoryIndex = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORY, { variables: { _id: props.match.params.categoryId } });
-  if (loading) return <p>Loading...</p>;
-  if (error) { return <p>Error</p> }
+  if (loading) return null;
+  if (error) return <p>Error!</p>;
 
   const { category } = data;
   const launchedProjects = category.projects.filter(project => project.launched);

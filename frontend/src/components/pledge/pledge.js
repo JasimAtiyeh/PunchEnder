@@ -11,7 +11,7 @@ export const Pledge = props => {
     Queries.FETCH_FINISHED_PROJECT,
     { variables: { _id: projectId } }
   );
-  if (loading) { return null};
+  if (loading) { return null };
   if (error) { return <div>Error!</div> };
   const { project } = data;
   const rewards = Array.from(data.project.rewards);

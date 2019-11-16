@@ -28,7 +28,7 @@ const Nav = props => {
 				{client => (
 					<Query query={IS_LOGGED_IN}>
 						{({ data, loading, error }) => {
-							if (loading) { return <p>loading...</p> }
+							if (loading) return null;
 							if (error) return `Error! ${error.message}`;
 							if (data.isLoggedIn) {
 								return (

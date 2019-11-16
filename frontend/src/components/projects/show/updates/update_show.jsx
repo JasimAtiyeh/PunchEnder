@@ -9,7 +9,7 @@ const { FETCH_UPDATE } = Queries;
 
 const UpdateShow = props => {
   const { loading, error, data } = useQuery(FETCH_UPDATE, { variables: { _id: props.match.params.updateId } });
-  if (loading) { return null };
+  if (loading) return null;
   if (error) { return <div>Error!</div> };
   const { update } = data;
   const { project } = update;

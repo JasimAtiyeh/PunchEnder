@@ -61,7 +61,7 @@ class UserProfile extends React.Component {
         query={ Queries.default.FETCH_USER }
         variables={{ id: localStorage.userId }} >
           {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
+            if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;
             const date = new Date();
             date.setTime(data.user.date);

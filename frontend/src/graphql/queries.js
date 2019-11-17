@@ -39,20 +39,26 @@ export default {
     {
       finishedProjects {
         _id
-        projectCreator {
-          _id
-          name
-        }
         name
         description
         goal
         amountRaised
+        launched
+        image
+        category {
+          _id
+        }
+        followedBy {
+          _id
+        }
+        projectCreator {
+          _id
+          name
+        }
         category {
           _id
           name
         }
-        launched
-        image
       }
     }
   `,
@@ -76,6 +82,9 @@ export default {
         image
         projects {
           _id
+          followedBy {
+            _id
+          }
           projectCreator {
             _id
             name
@@ -93,6 +102,9 @@ export default {
         pledges {
           project {
             _id
+            followedBy {
+              _id
+            }
             projectCreator {
               _id
               name
@@ -110,6 +122,9 @@ export default {
         }
         followedProjects {
           _id
+          followedBy {
+            _id
+          }
           projectCreator {
             _id
             name
@@ -168,6 +183,9 @@ export default {
         amountRaised
         launched
         story
+        followedBy {
+          _id
+        }
         rewards {
           _id
           name
@@ -219,9 +237,15 @@ export default {
         description
         projects {
           _id
+          category {
+            _id
+          }
           projectCreator {
             _id
             name
+          }
+          followedBy {
+            _id
           }
           name
           description

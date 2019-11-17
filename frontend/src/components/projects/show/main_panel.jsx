@@ -5,10 +5,11 @@ import { numWithCommas, getDateNumAndText } from '../../../util/num_util';
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
 
 const MainPanel = props => {
-  const { name, description, image, endDate, amountRaised, backers, goal, category } = props.project;
+  const { name, description, image, endDate, amountRaised, backers, goal, category, followedBy } = props.project;
   const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
   const endDateObj = new Date(endDate);
   const [dateNum, dateText] = getDateNumAndText(endDateObj);
+  const followed = followedBy.some(u => u._id === localStorage.userId);
 
   return (
     <div className="project-show-main">
@@ -40,7 +41,11 @@ const MainPanel = props => {
               className="project-back-link">
               Back this project
             </Link>
-            <button>Remind me</button>
+            { followed ? 
+              <button>Remind me</button>
+              :
+              <button>Unfollow</button>
+            }
           </div>
 
         </div>

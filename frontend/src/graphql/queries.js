@@ -99,6 +99,7 @@ export default {
             }
             name
             description
+            launched
             goal
             amountRaised
             category {
@@ -115,6 +116,7 @@ export default {
           }
           name
           description
+          launched
           goal
           amountRaised
           category {

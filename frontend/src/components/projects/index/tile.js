@@ -13,7 +13,7 @@ const ProjectIndexTile = props => {
   if (loading) return null;
   if (error) { return <div>Error!</div> };
   const followedProjects = data.user.followedProjects.map(project => project._id);
-  if (!props.project) { return null }
+  if (!props.project) return null;
   const { amountRaised, goal, _id } = props.project;
   let percentFunded = (amountRaised / goal) * 100;
   let funded = `${percentFunded}% funded`;

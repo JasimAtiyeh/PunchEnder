@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Mutations from "../../../graphql/mutations";
 import { numWithCommas, getDateNumAndText } from '../../../util/num_util';
+const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
 
 const MainPanel = props => {
   const { name, description, image, endDate, amountRaised, backers, goal, category } = props.project;
-  console.log(props.project);
   const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
   const endDateObj = new Date(endDate);
   const [dateNum, dateText] = getDateNumAndText(endDateObj);

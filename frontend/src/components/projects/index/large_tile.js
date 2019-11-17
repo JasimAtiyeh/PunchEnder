@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
+const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
+const { FETCH_USER } = Queries;
 
 const ProjectIndexLargeTile = props => {
-  const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
   const [followProject] = useMutation(FOLLOW_PROJECT);
   const [unFollowProject] = useMutation(UNFOLLOW_PROJECT);
-  const { FETCH_USER } = Queries;
   const { loading, error, data } = useQuery(FETCH_USER, { variables: { _id: localStorage.userId } });
   if (loading) return null;
   if (error) return <div>Error!</div>;
+  
   if (!props.project) { return null }
   const { _id, image, description, name } = props.project;
   const followedProjects = data.user.followedProjects.map(project => project._id);

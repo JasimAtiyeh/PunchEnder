@@ -90,6 +90,7 @@ export default {
             name
           }
           name
+          image
           description
           goal
           amountRaised
@@ -110,6 +111,7 @@ export default {
               name
             }
             name
+            image
             description
             launched
             goal
@@ -132,6 +134,7 @@ export default {
           name
           description
           launched
+          image
           goal
           amountRaised
           category {

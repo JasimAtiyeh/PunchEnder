@@ -4,6 +4,7 @@ import { numWithCommas, getDateNumAndText } from '../../../util/num_util';
 
 const MainPanel = props => {
   const { name, description, image, endDate, amountRaised, backers, goal, category } = props.project;
+  console.log(props.project);
   const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
   const endDateObj = new Date(endDate);
   const [dateNum, dateText] = getDateNumAndText(endDateObj);

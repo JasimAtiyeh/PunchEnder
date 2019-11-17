@@ -161,6 +161,7 @@ export default {
         name
         description
         goal
+        image
         endDate
         amountRaised
         launched

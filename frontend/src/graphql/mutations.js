@@ -153,6 +153,9 @@ export default {
     mutation FollowProject($user_id: ID!, $project_id: ID!) {
       followProject(user_id: $user_id, project_id: $project_id) {
         _id
+        followedProjects {
+          _id
+        }
       }
     }
   `,
@@ -160,6 +163,9 @@ export default {
     mutation UnFollowProject($user_id: ID!, $project_id: ID!) {
       unFollowProject(user_id: $user_id, project_id: $project_id) {
         _id
+        followedProjects {
+          _id
+        }
       }
     }
   `,

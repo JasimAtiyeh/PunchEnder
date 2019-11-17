@@ -1,5 +1,5 @@
 import React from 'react';
-import { Query } from "react-apollo";
+import { Query, withApollo } from "react-apollo";
 import * as Queries from '../../graphql/queries';
 import ProjectIndexTile from '../projects/index/tile';
 import UserImage from './user_image';
@@ -20,6 +20,13 @@ class UserProfile extends React.Component {
     this.showProjects = this.showProjects.bind(this);
     this.showPledges = this.showPledges.bind(this);
     this.showFollowedProjects = this.showFollowedProjects.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.client.query({
+      query: Queries.default.FETCH_USER,
+      variables: { _id: localStorage.userId }
+    });
   }
 
   showProjects() {
@@ -63,7 +70,6 @@ class UserProfile extends React.Component {
           {({ loading, error, data, refetch }) => {
             if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;
-            refetch();
             const date = new Date();
             date.setTime(data.user.date);
             return (
@@ -196,4 +202,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default withApollo(UserProfile);

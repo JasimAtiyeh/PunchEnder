@@ -29,7 +29,7 @@ const CommentForm = props => {
 
   const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: localStorage.userId } });
   if (loading) return null;
-  if (error) { return <div>{error}</div> };
+  if (error) { return <div>Error!</div> };
 
   const { user } = data;
   const image = user.image ?

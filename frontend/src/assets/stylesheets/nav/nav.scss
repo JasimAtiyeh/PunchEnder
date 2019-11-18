@@ -44,29 +44,6 @@
   border-radius: 50%;
 }
 
-.nav-dropdown-content {
-  display: grid;
-  position: fixed;
-  // box-shadow: 0px 0px 6px 0px darkgrey;
-  right: 15px;
-  top: 65px;
-  padding: 15px 25px;
-  border: 1px solid #9B9E9E;
-  text-transform: uppercase;
-  font-size: 14px;
-  line-height: 24px;
-  color: #282828;
-}
-
-.nav-modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-color: transparent;
-}
-
 .nav-login-links {
   color: #282828;
   font-size: 14px;

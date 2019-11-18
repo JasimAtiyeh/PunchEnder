@@ -6,6 +6,11 @@ export default {
       isLoggedIn @client
     }
   `,
+  CURRENT_USER: gql`
+    query currentUser {
+      currentUser @client
+    }
+  `,
   FETCH_USER_IMAGE: gql`
     query user($_id: ID!) {
       user(_id: $_id) {

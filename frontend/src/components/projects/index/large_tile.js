@@ -67,7 +67,6 @@ const ProjectIndexLargeTile = props => {
       }
     });
 
-
   const isFollowing = followedBy.some(u => u._id === localStorage.userId);
   let followed = isFollowing ? 'followed' : '';
 

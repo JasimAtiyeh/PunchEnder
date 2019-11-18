@@ -54,7 +54,7 @@ const Nav = props => {
 																e.preventDefault();
 																localStorage.removeItem("auth-token");
 																localStorage.removeItem("userId");
-																client.writeData({ data: { isLoggedIn: false } });
+																client.writeData({ data: { isLoggedIn: false, currentUser: null } });
 															}} >
 															Logout
 														</button>

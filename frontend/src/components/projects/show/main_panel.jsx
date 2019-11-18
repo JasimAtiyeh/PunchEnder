@@ -1,15 +1,107 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { withApollo } from 'react-apollo';
+import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
+import Queries from "../../../graphql/queries";
 import { numWithCommas, getDateNumAndText } from '../../../util/num_util';
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
+const { FETCH_FINISHED_PROJECT, FETCH_FINISHED_PROJECTS, FETCH_CATEGORY, CURRENT_USER } = Queries;
 
 const MainPanel = props => {
-  const { name, description, image, endDate, amountRaised, backers, goal, category, followedBy } = props.project;
+  const { name, description, image, endDate, amountRaised, backers, goal, category, followedBy, _id } = props.project;
+  const followed = followedBy.some(u => u._id === localStorage.userId);
+  const currentUser = props.client.readQuery({ query: CURRENT_USER }).currentUser;
+  console.log(currentUser);
+
+  const [followProject] = useMutation(
+    FOLLOW_PROJECT,
+    {
+      update(cache, { data: { followProject } }) {
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_FINISHED_PROJECTS });
+          const relevantProject = rootQuery.finishedProjects.find(p => p._id === _id);
+          // followProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy.push(followProject);
+          cache.writeQuery({
+            query: FETCH_FINISHED_PROJECTS,
+            data: { finishedProjects: rootQuery.finishedProjects },
+          });
+        } catch {
+        }
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_CATEGORY, variables: { _id: category._id }, });
+          const relevantProject = rootQuery.category.projects.find(p => p._id === _id);
+          // followProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy.push(followProject);
+          cache.writeQuery({
+            query: FETCH_CATEGORY,
+            variables: { _id: category._id },
+            data: { category: rootQuery.category },
+          });
+        } catch {
+        }
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_FINISHED_PROJECT, variables: { _id }, });
+          const relevantProject = rootQuery.project;
+          // followProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy.push(followProject);
+          cache.writeQuery({
+            query: FETCH_FINISHED_PROJECT,
+            variables: { _id },
+            data: { project: rootQuery.project },
+          });
+        } catch {
+
+        }
+      }
+    });
+  const [unFollowProject] = useMutation(
+    UNFOLLOW_PROJECT,
+    {
+      update(cache, { data: { unFollowProject } }) {
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_FINISHED_PROJECTS });
+          const relevantProject = rootQuery.finishedProjects.find(p => p._id === _id);
+          // unFollowProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy = relevantProject.followedBy.filter(u => u._id !== unFollowProject._id);
+          cache.writeQuery({
+            query: FETCH_FINISHED_PROJECTS,
+            data: { finishedProjects: rootQuery.finishedProjects },
+          });
+        } catch {
+        }
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_CATEGORY, variables: { _id: category._id }, });
+          const relevantProject = rootQuery.category.projects.find(p => p._id === _id);
+          // followProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy = relevantProject.followedBy.filter(u => u._id !== unFollowProject._id);
+          cache.writeQuery({
+            query: FETCH_CATEGORY,
+            variables: { _id: category._id },
+            data: { category: rootQuery.category },
+          });
+        } catch {
+        }
+        try {
+          const rootQuery = cache.readQuery({ query: FETCH_FINISHED_PROJECT, variables: { _id }, });
+          const relevantProject = rootQuery.project;
+          // followProject returns a user object, which is why this might be confusing...
+          relevantProject.followedBy = relevantProject.followedBy.filter(u => u._id !== unFollowProject._id);
+          cache.writeQuery({
+            query: FETCH_FINISHED_PROJECT,
+            variables: { _id },
+            data: { project: rootQuery.project },
+          });
+        } catch {
+
+        }
+      }
+    });
+  
   const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
   const endDateObj = new Date(endDate);
   const [dateNum, dateText] = getDateNumAndText(endDateObj);
-  const followed = followedBy.some(u => u._id === localStorage.userId);
 
   return (
     <div className="project-show-main">
@@ -41,11 +133,35 @@ const MainPanel = props => {
               className="project-back-link">
               Back this project
             </Link>
-            { followed ? 
-              <button>Remind me</button>
+            { currentUser && (followed ? 
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  unFollowProject({
+                    variables: {
+                      user_id: localStorage.userId,
+                      project_id: props.project._id
+                    }
+                  })
+                }}
+              >
+                Unfollow
+              </button>
               :
-              <button>Unfollow</button>
-            }
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  followProject({
+                    variables: {
+                      user_id: localStorage.userId,
+                      project_id: props.project._id
+                    }
+                  })
+                }}
+              >
+                Remind Me
+              </button>
+            )}
           </div>
 
         </div>
@@ -60,4 +176,4 @@ const MainPanel = props => {
   )
 };
 
-export default MainPanel;
+export default withApollo(MainPanel);

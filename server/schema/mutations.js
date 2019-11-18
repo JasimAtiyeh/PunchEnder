@@ -93,7 +93,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: context.token });
 
         if (validUser.loggedIn) {
-          const projectCreator = validUser.id;
+          const projectCreator = validUser._id;
           return new Project({ name, description, category, projectCreator }).save();
         } else {
           throw new Error("sorry, you need to log in first");
@@ -394,7 +394,7 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: context.token });
 
         if (validUser.loggedIn) {
-          const author = validUser.id;
+          const author = validUser._id;
           return new Comment({ body, project, author }).save();
         } else {
           throw new Error("You must login to make a comment.");

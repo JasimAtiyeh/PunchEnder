@@ -9,18 +9,21 @@ const IndexTabs = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORIES);
   if (loading) return null;
   if (error) return <div>{error}</div>;
+  let aNode;
 
   return(
     <div className='projects-index-category-list'>
       <ul>
         <li
-          className='projects-index-category-list-item'>
+          className='projects-index-category-list-item'
+          onClick={e => e.currentTarget.childNodes.item(0).click()}>
           <Link to="/">
             Home
           </Link>
         </li>
         {data.categories.map((category, idx) => (
           <li
+            onClick={e => e.currentTarget.childNodes.item(0).click()}
             className='projects-index-category-list-item'
             key={idx}>
             <Link to={`/categories/${category._id}`}>

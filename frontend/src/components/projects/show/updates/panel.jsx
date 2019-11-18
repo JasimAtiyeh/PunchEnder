@@ -45,21 +45,23 @@ const UpdatePanel = props => {
       background:-o-linear-gradient(transparent, white);\
       background:-moz-linear-gradient(transparent, white);\
       background:linear-gradient(transparent, white);"
-    blur.style.cssText = blurStyle;
-    blur.textContent = "";
-    const pane = document.getElementById(`update-panel-${num}`);
-    ed = pane.getElementsByClassName("update-editor").item(0);
-    ed.appendChild(blur);
+    if (blur) {
+      blur.style.cssText = blurStyle;
+      blur.textContent = "";
+      const pane = document.getElementById(`update-panel-${num}`);
+      ed = pane.getElementsByClassName("update-editor").item(0);
+      ed.appendChild(blur);
+    }
   }, []);
 
   const shrink = () => {
-    blur.style.top = "100px";
-    ed.style.maxHeight = "220px";
+    if (blur) blur.style.top = "100px";
+    if (ed) ed.style.maxHeight = "220px";
   };
 
   const expand = () => {
-    blur.style.top = "250px";
-    ed.style.maxHeight = "370px"
+    if (blur) blur.style.top = "250px";
+    if (ed) ed.style.maxHeight = "370px"
   }
 
   return (

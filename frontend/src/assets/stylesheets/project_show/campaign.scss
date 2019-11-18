@@ -26,10 +26,25 @@
     }
   }
   .campaign-rewards {
-
+    .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover {
+    }
+    .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover::after {
+      content: '';
+      color: white;
+      height: 100%;
+      width: 100%;
+      font-size: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      position: absolute;
+      display: block;
+      top: 0;
+      background-color: #008040;
+      opacity: 0.5;
+      pointer-events: none;
+    }
     .pledge-tiles-rewards-tile {
-
-
+      position: relative;
       .pledge-tiles-rewards-tile-option {
 
         input[type='radio'] {

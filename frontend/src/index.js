@@ -13,7 +13,6 @@ import { HashRouter } from "react-router-dom";
 import { setContext } from 'apollo-link-context'; //add apollo-link-client to client's package.json
 import { createUploadLink } from 'apollo-upload-client'
 
-
 import Mutations from "./graphql/mutations";
 const { VERIFY_USER } = Mutations;
 
@@ -69,7 +68,8 @@ const token = localStorage.getItem("auth-token");
 
 cache.writeData({
   data: {
-    isLoggedIn: Boolean(token)
+    isLoggedIn: Boolean(token),
+    currentUser: null
   }
 });
 
@@ -79,14 +79,16 @@ if (token) {
     .then(({ data }) => {
       cache.writeData({
         data: {
-          isLoggedIn: data.verifyUser.loggedIn
+          isLoggedIn: data.verifyUser.loggedIn,
+          currentUser: data.verifyUser._id
         }
       });
     });
 } else {
   cache.writeData({
     data: {
-      isLoggedIn: false
+      isLoggedIn: false,
+      currentUser: null
     }
   });
 }

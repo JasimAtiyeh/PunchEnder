@@ -9,8 +9,14 @@
     margin-left: 50px;
     margin-right: -20px;
   }
-
+  a:hover {
+    color: green;
+  }
+  .active:hover {
+    color: shade(green, 30%);
+  }
   .active {
     border-bottom: 3px solid black;
+    font-weight: 500;
   }
 }

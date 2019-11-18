@@ -69,7 +69,7 @@ const login = async data => {
     }
 
     const token = jwt.sign({ id: existingUser._id }, keys.secretOrKey);
-    return { token, loggedIn: true, ...existingUser._doc, password: null, userId: existingUser._id };
+    return { token, loggedIn: true, ...existingUser._doc, password: null };
     
   } catch (err) {
     throw err;
@@ -85,9 +85,9 @@ const verifyUser = async data => {
             return user ? true : false;
         });
 
-        return { loggedIn, id };
+        return { loggedIn, _id: id };
     } catch (err) {
-        return { loggedIn: false };
+        return { loggedIn: false, _id: null };
     }
 };
 

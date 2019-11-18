@@ -7,7 +7,7 @@ const CommentPage = props => {
   return (
     <div className="comment-page">
       <div className="comment-page-column-1">
-        <Form projectId={projectId} />
+        { localStorage.userId && <Form projectId={projectId} /> } 
         <List projectId={projectId} />
       </div>
       <div className="comment-page-column-2">

@@ -43,6 +43,14 @@ const ProjectType = new GraphQLObjectType({
     amountRaised: { type: GraphQLInt },
     endDate: { type: GraphQLString },
     story: { type: GraphQLString },
+    followedBy: { 
+      type: GraphQLList(UserType),
+      resolve(parentValue) {
+        return Project.findById(parentValue._id)
+          .populate("followedBy")
+          .then(project => project.followedBy);
+      }
+    },
     image: {
       type: GraphQLString,
       resolve(parentValue) {

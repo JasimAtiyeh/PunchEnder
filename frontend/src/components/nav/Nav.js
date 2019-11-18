@@ -16,7 +16,7 @@ const Nav = props => {
 	return (
 		<div className='nav'>
 			<div className='nav-links'>
-				<Link to='/'>Explore &nbsp;&nbsp;&nbsp;</Link>
+				<Link to='/'>Explore</Link>
 				<Link to='/start'>Start a project</Link>
 			</div>
 			<Link to="/">
@@ -54,7 +54,8 @@ const Nav = props => {
 																e.preventDefault();
 																localStorage.removeItem("auth-token");
 																localStorage.removeItem("userId");
-																client.writeData({ data: { isLoggedIn: false } });
+																client.writeData({ data: { isLoggedIn: false, currentUser: null } });
+																window.location.reload();
 															}} >
 															Logout
 														</button>
@@ -67,7 +68,7 @@ const Nav = props => {
 							} else {
 								return (
 									<div className='nav-login-links'>
-										<Link to="/login">Log In &nbsp;&nbsp;&nbsp;</Link>
+										<Link to="/login">Log In</Link>
 										<Link to="/signup">Sign Up</Link>
 									</div>
 								);

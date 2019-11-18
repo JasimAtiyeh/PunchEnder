@@ -48,6 +48,12 @@ const ProjectSchema = new Schema({
   }
 });
 
+ProjectSchema.virtual('followedBy', {
+  ref: 'user',
+  localField: '_id',
+  foreignField: 'followedProjects'
+});
+
 ProjectSchema.virtual('comments', {
   ref: 'comment',
   localField: '_id',

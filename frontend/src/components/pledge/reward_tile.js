@@ -16,9 +16,10 @@ class RewardTile extends React.Component {
   }
 
   render() {
+    const inactiveOnCampaign = this.props.onCampaign && this.props.num !== this.props.show;
     return (
       <div 
-        className='pledge-tiles-rewards-tile'
+        className={`pledge-tiles-rewards-tile ${inactiveOnCampaign ? 'inactive-campaign-reward-tile' : ''}`}
         onClick={() => this.props.setShow(this.props.num)}>
         <div className='pledge-tiles-rewards-tile-option'>
           <input

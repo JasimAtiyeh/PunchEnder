@@ -28,8 +28,8 @@ const NavDropdown = props => {
   for (let i = 0; i < tableLength; i++) {
     const row = (
       <tr>
-        { launchedProjects.length > 0 && <Panel project={launchedProjects[i]}/> }
-        { unfinishedProjects.length > 0 && <Panel project={unfinishedProjects[i]} /> }
+        { launchedProjects.length > 0 && <Panel setShow={setShow} project={launchedProjects[i]}/> }
+        {unfinishedProjects.length > 0 && <Panel setShow={setShow} project={unfinishedProjects[i]} /> }
       </tr>
     )
     tableRows.push(row);

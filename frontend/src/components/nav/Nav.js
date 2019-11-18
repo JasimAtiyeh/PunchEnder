@@ -55,6 +55,7 @@ const Nav = props => {
 																localStorage.removeItem("auth-token");
 																localStorage.removeItem("userId");
 																client.writeData({ data: { isLoggedIn: false, currentUser: null } });
+																window.location.reload();
 															}} >
 															Logout
 														</button>

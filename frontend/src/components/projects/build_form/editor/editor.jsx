@@ -28,6 +28,7 @@ class StoryEditor extends React.Component {
   render() {
     return (
       <Editor
+        placeholder="Story here."
         editorState={this.state.editorState}
         toolbarClassName="story-toolbar"
         wrapperClassName="story-wrapper"

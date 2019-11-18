@@ -39,6 +39,7 @@ const CampaignPage = props => {
         {rewards.map((reward, idx) => (
           <RewardTile
             num={idx + 1}
+            onCampaign={true}
             show={show}
             setShow={setShow}
             key={idx}

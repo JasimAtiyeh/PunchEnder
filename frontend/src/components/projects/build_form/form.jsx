@@ -15,8 +15,7 @@ const BuildForm = props => {
   if (error) { if (error) { return <h2 className="not-found">Project not found!</h2> }; };
 
   const { project } = data;
-  if (!project) { return <div>Project does not exist</div> }
-
+  if (!project) return <div>Project does not exist</div>;
   const currentUser = localStorage.userId;
   const projectCreatorId = project.projectCreator._id;
   // Only let project creator access their build page.

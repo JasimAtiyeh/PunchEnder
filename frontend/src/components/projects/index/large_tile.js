@@ -72,46 +72,52 @@ const ProjectIndexLargeTile = props => {
 
   return (
     <div className={props.only ? "project-index-large-tile only" : "project-index-large-tile"}>
-      <div className='project-index-large-tile-image-container'>
-        <div className='project-index-large-tile-image'>
-          <Link to={`/projects/${_id}`}>
-            <img src={image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={name} />
-          </Link>
-        </div>
-        { localStorage.userId && <div className={`project-index-large-tile-bookmark ${followed}`}>
-          <i
-            className="material-icons"
-            onClick={e => {
-              e.preventDefault();
-              if (isFollowing) {
-                unFollowProject({ variables: {
-                  user_id: localStorage.userId,
-                  project_id: props.project._id
-                }})
-              } else {
-                followProject({ variables: {
-                  user_id: localStorage.userId,
-                  project_id: props.project._id
-                }})
-              }
-            }}>
-              bookmark_border
-          </i>
-        </div> }
-      </div>
-      <div className='project-index-large-tile-info'>
-        <Link to={`/projects/${_id}`}>
-          <div className='project-index-large-tile-name'>
-            {name}
+      <Link
+        className="large-tile-link" 
+        to={`/projects/${_id}`}
+        onHover={e => {}}>
+        <div className='project-index-large-tile-image-container'>
+          <div className='project-index-large-tile-image'>
+            <div>
+              <img src={image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={name} />
+            </div>
           </div>
-        </Link>
-        <div className='project-index-large-tile-description'>
-          {description}
+          { localStorage.userId && <div className={`project-index-large-tile-bookmark ${followed}`}>
+            <i
+              className="material-icons"
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (isFollowing) {
+                  unFollowProject({ variables: {
+                    user_id: localStorage.userId,
+                    project_id: props.project._id
+                  }})
+                } else {
+                  followProject({ variables: {
+                    user_id: localStorage.userId,
+                    project_id: props.project._id
+                  }})
+                }
+              }}>
+                bookmark_border
+            </i>
+          </div> }
         </div>
-        <div className='project-index-large-tile-project-creator'>
-          By {props.project.projectCreator ? props.project.projectCreator.name : ''}
+        <div className='project-index-large-tile-info'>
+          <div>
+            <div className='project-index-large-tile-name'>
+              {name}
+            </div>
+          </div>
+          <div className='project-index-large-tile-description'>
+            {description}
+          </div>
+          <div className='project-index-large-tile-project-creator'>
+            By {props.project.projectCreator ? props.project.projectCreator.name : ''}
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   )
 }

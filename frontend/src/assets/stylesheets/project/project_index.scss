@@ -160,25 +160,39 @@
 }
 
 .projects-index-category-list {
+  display: flex;
   border-top: 1px solid #E8E8E8;
   border-bottom: 1px solid #E8E8E8;
-  padding-left: 60px;
-  padding-right: 60px;
+  height: 4em;
+  padding: 12px 0;
   margin: 0 auto;
-  display: flex;
-
+  box-sizing: border-box;
   ul {
     display: flex;
     width: fit-content;
     margin: 0 auto;
+    box-sizing: border-box;
   }
 }
 
 .projects-index-category-list-item {
-  margin: 18px;
+  padding: 8px 12px;
+  margin: 0 10px;
   color: #656969;
   font-size: 16px;
-  line-height: 24px;
+  box-sizing: border-box;
+  a {
+    transition: border-width 0.5s, padding-bottom 0.5s;
+  }
+}
+
+.projects-index-category-list-item:hover {
+  cursor: pointer;
+  a {
+    color: darkgreen;
+    border-bottom: 3px solid darkgreen;
+    padding-bottom: 4px;
+  }
 }
 
 .category-index-header {

@@ -17,6 +17,7 @@
   }
   .comment-form {
     width: 100%;
+    position: relative;
     textarea {
       display: block;
       box-sizing: border-box;
@@ -32,10 +33,17 @@
       overflow-y: auto;
     }
     button {
+      position: relative;
       margin-top: 18px;
       background-color: black;
       color: white;
       padding: 12px 15px;
+      transition: bottom 0.8s;
+      bottom: 0;
+    }
+    button:hover {
+      background-color: tint(black, 20%);
+      bottom: 1px;
     }
     span {
       color: red;

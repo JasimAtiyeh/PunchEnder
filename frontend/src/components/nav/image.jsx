@@ -18,7 +18,7 @@ const NavImage = props => {
     <img
       className='nav-dropdown-button'
       onClick={() => setShow(true)}
-      src={user.image}
+      src={image}
       alt='user avatar logo' />
   )
 };

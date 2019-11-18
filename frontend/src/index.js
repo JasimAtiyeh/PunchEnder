@@ -13,7 +13,6 @@ import { HashRouter } from "react-router-dom";
 import { setContext } from 'apollo-link-context'; //add apollo-link-client to client's package.json
 import { createUploadLink } from 'apollo-upload-client'
 
-
 import Mutations from "./graphql/mutations";
 const { VERIFY_USER } = Mutations;
 

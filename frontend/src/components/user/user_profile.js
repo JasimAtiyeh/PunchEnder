@@ -68,10 +68,22 @@ class UserProfile extends React.Component {
         query={ Queries.default.FETCH_USER }
         variables={{ _id: localStorage.userId }} >
           {({ loading, error, data, refetch }) => {
-            if (loading) return null;
+          if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;
-            const date = new Date();
-            date.setTime(data.user.date);
+          const date = new Date();
+          date.setTime(data.user.date);
+
+          // Getting pledges to not repeat projects on this page.
+          const pledges = data.user.pledges;
+          const pledgeMap = new Map();
+          const uniqPledges = [];
+          for (const pledge of pledges) {
+            if (!pledgeMap.has(pledge.project._id)) {
+              pledgeMap.set(pledge.project._id, true);    // set any value to Map
+              uniqPledges.push(pledge);
+            }
+          };
+
             return (
               <div className='user-profile'>
                 <div className='user-profile-info'>
@@ -153,8 +165,8 @@ class UserProfile extends React.Component {
                       </div> : null
                     }
                     {
-                      data.user.pledges.length > 0 && this.state.pledges ?
-                      data.user.pledges.map((pledge, idx) => (
+                      uniqPledges.length > 0 && this.state.pledges ?
+                      uniqPledges.map((pledge, idx) => (
                         <li key={idx}>
                           <ProjectIndexTile project={pledge.project} />
                         </li>

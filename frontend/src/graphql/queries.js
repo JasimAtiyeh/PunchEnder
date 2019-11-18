@@ -106,6 +106,7 @@ export default {
           launched
         }
         pledges {
+          _id
           project {
             _id
             followedBy {

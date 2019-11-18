@@ -11,6 +11,9 @@
     margin-right: 20px;
     padding: 12px;
   }
+  > button:hover {
+    color: darkgreen;
+  }
   .search-results {
     position: absolute;
     min-height: 60px;

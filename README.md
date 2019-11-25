@@ -34,10 +34,10 @@
 PunchEnder is a clone of the popular crowd sourcing website KickStarter.
 
 ### Overview
-PunchEnder gives users the ability to create a project that they would like to be funded by our base of users. PunchEnder also gives users the ability to discover projects that they would like to fund. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
+PunchEnder gives users the ability to create a charitable project that they would like to be funded by our base of users. PunchEnder also gives users the ability to discover projects that they would like to fund. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
 
 ### Functionality & MVP
-* Projects - Users can create projects that can be completely funded by our community of users. Creating a project entails adding details, a goal for funding, and rewards that users can get for backing a project.
+* Projects - Users can create charitable projects that can be completely funded by our community of users. Creating a project entails adding details, a goal for funding, and rewards that users can get for backing a project.
 
 * Backing projects & rewards - Users that explore PunchEnder can find projects that they are interested in and can back those projects through funding them. When a project is backed, the user backing the project can choose to fund a specific amount to get a reward from the user that is creating the project. This is usually a gesture or special gift for being backed.
 

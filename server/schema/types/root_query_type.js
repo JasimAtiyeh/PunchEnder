@@ -37,6 +37,13 @@ const RootQueryType = new GraphQLObjectType({
         return User.findById(args._id);
       }
     },
+    userProjects: {
+      type: GraphQLList(ProjectType),
+      args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_, { _id }) {
+        return Project.find({ projectCreator: _id });
+      }
+    },
     projects: {
       type: new GraphQLList(ProjectType),
       resolve() {

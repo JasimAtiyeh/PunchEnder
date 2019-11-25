@@ -74,8 +74,7 @@ const ProjectIndexLargeTile = props => {
     <div className={props.only ? "project-index-large-tile only" : "project-index-large-tile"}>
       <Link
         className="large-tile-link" 
-        to={`/projects/${_id}`}
-        onHover={e => {}}>
+        to={`/projects/${_id}`}>
         <div className='project-index-large-tile-image-container'>
           <div className='project-index-large-tile-image'>
             <div>

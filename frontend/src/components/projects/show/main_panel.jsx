@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import { useMutation } from '@apollo/react-hooks';

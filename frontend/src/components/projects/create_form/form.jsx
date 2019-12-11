@@ -4,9 +4,7 @@ import CategoryPage from "./category_page";
 import DescriptionPage from "./description_page";
 import NamePage from "./name_page";
 import Mutations from "../../../graphql/mutations";
-import Queries from "../../../graphql/queries";
 import { withRouter } from "react-router-dom";
-const { FETCH_PROJECTS, FETCH_USER } = Queries;
 const  { CREATE_PROJECT } = Mutations;
 
 // Using hooks here to make it simpler to use multiple form components.

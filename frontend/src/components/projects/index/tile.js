@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;

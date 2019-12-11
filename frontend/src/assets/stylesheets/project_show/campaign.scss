@@ -3,7 +3,8 @@
   padding-top: 60px;
 
   .campaign-story {
-    width: 75%;
+    width: 65%;
+    padding-left: 0.8em;
     text-align: left;
     margin-right: 40px;
     border-right: 1px solid lightgray;
@@ -26,6 +27,7 @@
     }
   }
   .campaign-rewards {
+    width: 33%;
     .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover {
     }
     .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover::after {

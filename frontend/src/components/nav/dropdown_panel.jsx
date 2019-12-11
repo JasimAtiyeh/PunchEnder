@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const DropdownPanel = props => {
   const { project, setShow } = props;
   if (!project) return <td className="dropdown-project-cell"></td>;
-  const defaultImage = "https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg";
+  const defaultImage = require('../../assets/images/default_article.png');
 
   return (
     <td className="dropdown-project-cell">

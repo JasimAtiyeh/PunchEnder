@@ -24,7 +24,9 @@
   
   img {
     height: 90px;
-    width: auto;
+    width: 270px;
+    object-fit: cover;
+    object-position: center;
   }
 }
 

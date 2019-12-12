@@ -29,14 +29,20 @@
     text-transform: uppercase;
   }
   > button {
-    padding: 10px 20px;
-    background-color: lightgreen;
-    border: 1px solid green;
+    padding: 14px 25px;
+    background-color: #05ce78;
+    // border: 1px solid darkslategray;
+    align-self: center;
+    border-radius: 5px;
+    color: white;
   }
   > a {
-    padding: 10px 20px;
-    background-color: darkgreen;
-    border: 1px solid darkslategray;
+    padding: 14px 25px;
+    background-color: #05ce78;
+    // border: 1px solid darkslategray;
+    align-self: center;
+    border-radius: 5px;
+    color: white;
   }
   #launch-button {
     padding: 10px 20px;

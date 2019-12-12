@@ -14,6 +14,7 @@ import ProjectShow from './projects/show/showpage';
 import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
 import { Pledge } from "./pledge/pledge";
+import Footer from './footer/footer';
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/projects/:projectId" component={ProjectShow} />
         <Route path="*" component={NotFound} />
       </Switch>
+      <Footer/>
     </div>
   );
 };

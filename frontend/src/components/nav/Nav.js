@@ -40,8 +40,7 @@ const Nav = props => {
 										</button>
 										<div className="nav-dropdown">
 											<NavImage setShow={setShow}/>
-											{ show && <NavDropDown client={client} setShow={setShow}/>
-											}
+											{ show && <NavDropDown client={client} setShow={setShow}/>}
 										</div>
 									</div>
 								);

@@ -1,11 +1,25 @@
 .nav {
   background-color: white;
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   height: 40px;
   z-index: 100;
+  > a {
+    .nav-logo {
+      font-family: 'Fredoka One', cursive;
+      font-weight: 900;
+      font-size: x-large;
+      color: #05ce78;
+      margin: 0 auto;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
 .nav-dropdown-button:hover {
@@ -27,15 +41,6 @@
   a:hover {
     color: darkgreen;
   }
-}
-
-.nav-logo {
-  font-family: 'Fredoka One', cursive;
-  margin-right: 125px;
-  font-weight: 900;
-  font-size: x-large;
-  color: #05ce78;
-  margin: 0 auto;
 }
 
 .nav-dropdown-button {

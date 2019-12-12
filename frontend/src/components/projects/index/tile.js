@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
@@ -60,12 +60,13 @@ const ProjectIndexTile = props => {
   let funded = `${percentFunded}% funded`;
   const isFollowing = followedBy.some(u => u._id === localStorage.userId);
   let followed = isFollowing ? 'followed' : '';
+  const defaultImage = require('../../../assets/images/default_article.png');
 
   return (
     <div className='project-index-tile'>
       <Link to={`/projects/${_id}`}>
         <div className='project-index-tile-image'>
-          <img src={props.project.image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={props.project.name} />
+          <img src={props.project.image || defaultImage} alt={props.project.name} />
         </div>
         <div className='project-index-tile-info'>
           <div className='project-index-tile-name'>

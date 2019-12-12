@@ -9,7 +9,6 @@ const IndexTabs = props => {
   const { loading, error, data } = useQuery(FETCH_CATEGORIES);
   if (loading) return null;
   if (error) return <div>{error}</div>;
-  let aNode;
 
   return(
     <div className='projects-index-category-list'>

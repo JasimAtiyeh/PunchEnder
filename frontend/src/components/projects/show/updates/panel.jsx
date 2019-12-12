@@ -6,12 +6,14 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../../graphql/mutations";
 import Queries from "../../../../graphql/queries";
+import { withApollo } from 'react-apollo';
 const { DELETE_UPDATE } = Mutations;
 const { FETCH_PROJECT_UPDATES } = Queries;
 
 const UpdatePanel = props => {
   const { update, num, setEditing } = props;
   const { projectCreator } = update.project;
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
   const date = new Date(parseInt(update.date));
   const content = convertFromRaw(JSON.parse(update.body));
   const editorState = EditorState.createWithContent(content);
@@ -97,7 +99,7 @@ const UpdatePanel = props => {
           />
         </div>
         <div className="update-panel-bottom">
-          { projectCreator._id === localStorage.userId && 
+          { projectCreator._id === currentUser && 
             <div className="update-bottom-button-container">
               <button 
                 className="update-edit-button"
@@ -117,7 +119,7 @@ const UpdatePanel = props => {
               </button>
             </div>
           }
-          { projectCreator._id !== localStorage.userId
+          { projectCreator._id !== currentUser
             && <div />
           }
           <div className="update-read-more"><p>Read more</p> <i className="fas fa-chevron-right" /></div>
@@ -127,4 +129,4 @@ const UpdatePanel = props => {
   )
 };
 
-export default UpdatePanel;
+export default withApollo(UpdatePanel);

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
+import { withApollo } from 'react-apollo';
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
 const { FETCH_FINISHED_PROJECTS, FETCH_CATEGORY } = Queries;
 
 const ProjectIndexTile = props => {
   const { amountRaised, goal, _id, followedBy, category } = props.project;
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
 
   const [followProject] = useMutation(
     FOLLOW_PROJECT,
@@ -58,7 +60,7 @@ const ProjectIndexTile = props => {
 
   let percentFunded = (amountRaised / goal) * 100;
   let funded = `${percentFunded}% funded`;
-  const isFollowing = followedBy.some(u => u._id === localStorage.userId);
+  const isFollowing = followedBy.some(u => u._id === currentUser);
   let followed = isFollowing ? 'followed' : '';
   const defaultImage = require('../../../assets/images/default_article.png');
 
@@ -82,19 +84,19 @@ const ProjectIndexTile = props => {
           </div>
         </div>
         
-        { localStorage.userId && <div className={`project-index-tile-bookmark ${followed}`}>
+        { currentUser && <div className={`project-index-tile-bookmark ${followed}`}>
           <i
             className='material-icons'
             onClick={e => {
               e.preventDefault();
               if (isFollowing) {
                 unFollowProject({ variables: {
-                  user_id: localStorage.userId,
+                  user_id: currentUser,
                   project_id: props.project._id
                 }})
               } else {
                 followProject({ variables: {
-                  user_id: localStorage.userId,
+                  user_id: currentUser,
                   project_id: props.project._id
                 }})
               }
@@ -107,4 +109,4 @@ const ProjectIndexTile = props => {
   )
 }
 
-export default ProjectIndexTile;
+export default withApollo(ProjectIndexTile);

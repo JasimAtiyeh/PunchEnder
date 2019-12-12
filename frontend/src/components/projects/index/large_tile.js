@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import Mutations from "../../../graphql/mutations";
 import Queries from "../../../graphql/queries";
+import { withApollo } from 'react-apollo';
 const { FOLLOW_PROJECT, UNFOLLOW_PROJECT } = Mutations;
 const { FETCH_FINISHED_PROJECTS, FETCH_CATEGORY } = Queries;
 
 const ProjectIndexLargeTile = props => {
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
   const { followedBy, _id, image, description, name, category } = props.project;
   const [followProject] = useMutation(
     FOLLOW_PROJECT,
@@ -67,7 +69,7 @@ const ProjectIndexLargeTile = props => {
       }
     });
 
-  const isFollowing = followedBy.some(u => u._id === localStorage.userId);
+  const isFollowing = followedBy.some(u => u._id === currentUser);
   let followed = isFollowing ? 'followed' : '';
 
   return (
@@ -81,7 +83,7 @@ const ProjectIndexLargeTile = props => {
               <img src={image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={name} />
             </div>
           </div>
-          { localStorage.userId && <div className={`project-index-large-tile-bookmark ${followed}`}>
+          { currentUser && <div className={`project-index-large-tile-bookmark ${followed}`}>
             <i
               className="material-icons"
               onClick={e => {
@@ -89,12 +91,12 @@ const ProjectIndexLargeTile = props => {
                 e.stopPropagation();
                 if (isFollowing) {
                   unFollowProject({ variables: {
-                    user_id: localStorage.userId,
+                    user_id: currentUser,
                     project_id: props.project._id
                   }})
                 } else {
                   followProject({ variables: {
-                    user_id: localStorage.userId,
+                    user_id: currentUser,
                     project_id: props.project._id
                   }})
                 }
@@ -121,4 +123,4 @@ const ProjectIndexLargeTile = props => {
   )
 }
 
-export default ProjectIndexLargeTile;
+export default withApollo(ProjectIndexLargeTile);

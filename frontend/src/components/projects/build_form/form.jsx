@@ -5,10 +5,12 @@ import Queries from "../../../graphql/queries";
 import Basics from "./basics/basics";
 import Rewards from "./rewards/rewards"
 import Story from "./story/story"
+import { withApollo } from 'react-apollo';
 
 const { FETCH_UNFINISHED_PROJECT } = Queries;
 
 const BuildForm = props => {
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
   const { projectId } = props.match.params;
   const { loading, error, data } = useQuery(FETCH_UNFINISHED_PROJECT, { variables: { _id: projectId }});
   if (loading) return null;
@@ -16,7 +18,6 @@ const BuildForm = props => {
 
   const { project } = data;
   if (!project) return <div>Project does not exist</div>;
-  const currentUser = localStorage.userId;
   const projectCreatorId = project.projectCreator._id;
   // Only let project creator access their build page.
   // And also only allow user to access the build page if the project is not launched.
@@ -38,4 +39,4 @@ const BuildForm = props => {
   )
 };
 
-export default BuildForm;
+export default withApollo(BuildForm);

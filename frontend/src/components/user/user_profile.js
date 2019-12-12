@@ -14,7 +14,8 @@ class UserProfile extends React.Component {
       followedProjects: false,
       projectsShow: 'active',
       pledgesShow: '',
-      followedProjectsShow: ''
+      followedProjectsShow: '',
+	    currentUser: props.client.cache.data.data.ROOT_QUERY.currentUser
     };
 
     this.showProjects = this.showProjects.bind(this);
@@ -25,7 +26,7 @@ class UserProfile extends React.Component {
   componentDidMount() {
     this.props.client.query({
       query: Queries.default.FETCH_USER,
-      variables: { _id: localStorage.userId }
+      variables: { _id: this.state.currentUser }
     });
   }
 
@@ -66,7 +67,7 @@ class UserProfile extends React.Component {
     return (
       < Query
         query={ Queries.default.FETCH_USER }
-        variables={{ _id: localStorage.userId }} >
+        variables={{ _id: this.state.currentUser }} >
           {({ loading, error, data, refetch }) => {
           if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;

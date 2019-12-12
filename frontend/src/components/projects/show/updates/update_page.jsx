@@ -3,11 +3,13 @@ import { useQuery } from '@apollo/react-hooks';
 import Panel from './panel';
 import Form from './form';
 import Queries from '../../../../graphql/queries';
+import { withApollo } from 'react-apollo';
 const { FETCH_PROJECT_UPDATES } = Queries;
 
 const UpdatePage = props => {
   const { projectId, projectCreatorId } = props;
-  const currentUser = localStorage.userId;
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  // const currentUser = localStorage.userId;
   const [adding, setAdding] = useState(false);
   const [editing, setEditing] = useState(null);
   const { loading, error, data } = useQuery(FETCH_PROJECT_UPDATES, { variables: { project: projectId } });
@@ -52,4 +54,4 @@ const UpdatePage = props => {
   )
 };
 
-export default UpdatePage
+export default withApollo(UpdatePage)

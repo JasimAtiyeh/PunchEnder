@@ -10,10 +10,11 @@ const { FETCH_FINISHED_PROJECT, FETCH_FINISHED_PROJECTS, FETCH_CATEGORY, CURRENT
 
 const MainPanel = props => {
   const { name, description, image, endDate, amountRaised, backers, goal, category, followedBy, _id } = props.project;
-  const followed = followedBy.some(u => u._id === localStorage.userId);
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  const followed = followedBy.some(u => u._id === currentUser);
 
   // This "currentUser" uses the client rather than the localStorage.
-  const currentUser = props.client.readQuery({ query: CURRENT_USER }).currentUser;
+  // const currentUser = props.client.readQuery({ query: CURRENT_USER }).currentUser;
 
   const [followProject] = useMutation(
     FOLLOW_PROJECT,
@@ -140,7 +141,7 @@ const MainPanel = props => {
                   e.preventDefault();
                   unFollowProject({
                     variables: {
-                      user_id: localStorage.userId,
+                      user_id: currentUser,
                       project_id: props.project._id
                     }
                   })
@@ -154,7 +155,7 @@ const MainPanel = props => {
                   e.preventDefault();
                   followProject({
                     variables: {
-                      user_id: localStorage.userId,
+                      user_id: currentUser,
                       project_id: props.project._id
                     }
                   })

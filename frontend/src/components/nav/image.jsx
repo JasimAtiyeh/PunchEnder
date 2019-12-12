@@ -1,12 +1,13 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../graphql/queries";
+import { withApollo } from 'react-apollo';
 const { FETCH_USER_IMAGE } = Queries;
 
 const NavImage = props => {
   const { setShow } = props;
-  console.log(localStorage.userId);
-  const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: localStorage.userId } });
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };
 
@@ -24,4 +25,4 @@ const NavImage = props => {
   )
 };
 
-export default NavImage;
+export default withApollo(NavImage);

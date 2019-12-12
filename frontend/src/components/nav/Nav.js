@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import Search from './search';
 import NavImage from './image';
 import NavDropDown from './dropdown';
+import { withApollo } from 'react-apollo';
 const { IS_LOGGED_IN } = Queries;
 
 const Nav = props => {
@@ -40,7 +41,33 @@ const Nav = props => {
 										</button>
 										<div className="nav-dropdown">
 											<NavImage setShow={setShow}/>
+<<<<<<< HEAD
 											{ show && <NavDropDown client={client} setShow={setShow}/>}
+=======
+											{ show &&
+												(<>
+													<div className="nav-modal" onClick={() => setShow(false)}></div>
+													<div className="nav-dropdown-content">
+														<Link
+															to='/user'
+															onClick={() => setShow(false)}>
+																User Profile
+														</Link>
+														<button
+															onClick={e => {
+																setShow(false)
+																e.preventDefault();
+																localStorage.removeItem("auth-token");
+																localStorage.removeItem("userId");
+																client.writeData({ data: { isLoggedIn: false, currentUser: null } });
+																window.location.reload();
+															}} >
+															Logout
+														</button>
+													</div>
+												</>)
+											}
+>>>>>>> d82939b... move user if from localStorage to Apollo cache
 										</div>
 									</div>
 								);
@@ -60,4 +87,4 @@ const Nav = props => {
 	);
 };
 
-export default withRouter(Nav);
+export default withApollo(Nav);

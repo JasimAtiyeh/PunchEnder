@@ -149,6 +149,7 @@ export default {
           }
         }
         date
+        funBucks
       }
     }
   `,

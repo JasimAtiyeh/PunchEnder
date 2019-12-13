@@ -7,6 +7,7 @@ const {
   GraphQLBoolean,
   GraphQLNonNull,
   GraphQLList,
+  GraphQLFloat
 } = graphql;
 
 const { GraphQLUpload } = require('graphql-upload');
@@ -371,6 +372,7 @@ const mutation = new GraphQLObjectType({
       },
       async resolve(_, variables, context) {
         const validUser = await AuthService.verifyUser({ token: context.token });
+        console.log(variables)
 
         if (validUser.loggedIn) {
           new Pledge({
@@ -379,6 +381,11 @@ const mutation = new GraphQLObjectType({
             reward: variables.reward_id,
             amount: variables.pledgeAmount 
           }).save()
+          User.findByIdAndUpdate(variables.user_id, {
+            $inc: {
+              funBucks: -(variables.pledgeAmount)
+            }
+          })
         } else {
           throw new Error("sorry, you need to log in first");
         }

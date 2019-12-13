@@ -1,4 +1,5 @@
 import React from 'react';
+import autosize from "autosize";
 
 class RewardsEditForm extends React.Component {
   constructor(props) {
@@ -9,6 +10,8 @@ class RewardsEditForm extends React.Component {
 
   componentDidMount() {
     this.scrollToForm();
+    let textarea = document.getElementById("reward-textarea");
+    autosize(textarea);
   }
 
   scrollToForm() {
@@ -33,7 +36,7 @@ class RewardsEditForm extends React.Component {
               <input type="number" value={pledgeAmount} onChange={e => setPledgeAmount(e.target.value)} />
             </div>
             <label>Description</label>
-            <textarea maxLength={135} value={description} onChange={e => setDescription(e.target.value)} />
+            <textarea id="reward-textarea" maxLength={135} value={description} onChange={e => setDescription(e.target.value)} />
           </div>
         </form>
       </div>

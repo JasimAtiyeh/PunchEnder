@@ -28,14 +28,14 @@
     width: 30%;
     padding: 40px;
     h4 {
-      font-size: 19px;
+      font-size: 1.19em;
       margin-bottom: 10px;
     }
     p {
       font-size: 15px;
       color: gray;
       line-height: 1.6;
-      margin-bottom: 15px;
+      margin-bottom: 0.94em;
     }
     p:last-of-type {
       margin-bottom: 5px;
@@ -48,7 +48,7 @@
     label {
       display: block;
       margin-bottom: 10px;
-      font-size: 15px;
+      font-size: 0.94em;
     }
     input, select, textarea {
       background-color: white;
@@ -64,6 +64,7 @@
     }
     textarea {
       resize: none;
+      line-height: 1.6;
     }
     select {
       option {
@@ -97,6 +98,7 @@
     .date-group {
       display: flex;
       align-items: center;
+      font-size: 16px;
       #year-container {
         width:80px;
         input {

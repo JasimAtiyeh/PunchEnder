@@ -40,7 +40,7 @@
   flex-direction: column;
   justify-content: space-between;
   .project-index-tile-name {
-    font-size: 1.1em;
+    font-size: 1.25em;
     color: #282828;
     @include md {
       overflow: hidden;
@@ -145,10 +145,16 @@
   width: 92%;
   .project-index-large-tile-name {
     color: #282828;
-    font-size: 1.375em;
+    font-size: 1.45em;
     line-height: 1.2em;
     box-sizing: border-box;
     margin-bottom: 1.0em;
+    @include md {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;      
+    }
   }
   .project-index-large-tile-description {
     color: #282828;

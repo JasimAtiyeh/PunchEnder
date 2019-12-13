@@ -94,12 +94,13 @@
 
   li {
     list-style: none;
-    margin: 20px 0px 40px 0px;
+    padding: 20px 0px 20px 0px;
     justify-content: space-evenly;
-
+    border-bottom: 1px solid #E8E8E8;
     div {
       margin: 0 auto;
       max-width: 600px;
+      padding: 0.1em 0;
 
       a {
 

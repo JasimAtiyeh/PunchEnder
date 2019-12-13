@@ -1,19 +1,28 @@
 .footer {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   border-top: 1px solid #dddedd;
-  position: absolute;
   bottom: 0;
   width: 100%;
+  position: absolute;
 
   p {
-    width: fit-content;
-    align-self: center;
-    padding: 10px 125px 4px 125px;
     font-size: 18px;
+    color: transparent;
+    position: relative;
+    top: -24px;
+    padding-left: 15px;
+    height: 0px;
+  }
+}
+
+.footer:hover {
+  background-color: whitesmoke;
+
+  p {
+    transition-delay: 100ms;
+    transition-duration: 150ms;
     color: #676767;
-    border-bottom: 1px solid #dddedd;
   }
 }
 
@@ -22,41 +31,44 @@
   justify-content: space-evenly;
 
   .footer-tile:hover {
-    background-color: whitesmoke;
+    background-color: lightgray;
     border: 1px solid #dddedd;
   }
 }
 
 .footer-tile {
-  padding: 5px 40px 0px 40px;
-  margin-bottom: 5px;
+  display: flex;
+  padding: 10px 40px 10px 40px;
+  margin-bottom: 10px;
   border: 1px solid transparent;
+  padding-bottom: 10px;
+  margin-top: 5px;
 }
 
 .footer-tile-name {
   text-align: right;
-  padding-bottom: 6px;
-  border-bottom: 3px solid #dddedd;
-  font-size: 18px;
-  color: #676767;
+  border-bottom: 3px solid #4d4d4d;
+  font-size: 16px;
+  color: #4d4d4d;
+  align-self: flex-end;
+  padding-left: 40px;
 }
 
 .footer-tile-links {
   display: flex;
-  padding: 12px 0px 12px 0px;
   align-items: baseline;
 }
 
 a.footer-tile-link {
-  padding-left: 30px;
+  padding-left: 20px;
 }
 
 .footer-tile-logo {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 
 }
 
 #linkedin {
-  height: 40px;
+  height: 30px;
 }

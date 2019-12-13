@@ -23,3 +23,13 @@
 @import './updates/main';
 @import './errors';
 @import './footer/footer.scss';
+
+
+.app {
+  position: relative;
+  min-height: 100vh;
+}
+
+.main-page-content {
+  padding-bottom: 9.5rem
+}

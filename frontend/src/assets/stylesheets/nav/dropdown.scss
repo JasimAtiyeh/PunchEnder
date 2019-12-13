@@ -2,7 +2,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 85vw;
+  width: 80vw;
   // box-shadow: 0px 0px 6px 0px darkgrey;
   right: 0;
   top: 4.5em;
@@ -40,9 +40,15 @@
     margin-bottom: 0;
   }
   * {
+    display: table;
     font-size: 1.1em;
+    margin-right: auto;
     margin-bottom: 3px;
-    width: 100%;
+    include md {
+      margin: 0;
+      display: block;
+      width: 100%;
+    }
   }
   span {
     margin-bottom: 13px;

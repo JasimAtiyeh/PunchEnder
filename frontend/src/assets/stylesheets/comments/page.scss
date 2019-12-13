@@ -1,14 +1,21 @@
 @import './panel';
 @import './form';
 .comment-page {
-  display: grid;
-  grid-template-columns: 66% auto;
+  display: block;
   min-height: 300px;
-  width: 80%;
+  width: 97%;
   margin: 0 auto;
   padding-top: 60px;
-
+  @include md {
+    width: 85%;
+    display: grid;
+    grid-template-columns: 66% auto;
+  }
   .comment-page-column-2 {
     padding-left: 15px;
+    display: none;
+    @include lg {
+      display: block;
+    }
   }
 }

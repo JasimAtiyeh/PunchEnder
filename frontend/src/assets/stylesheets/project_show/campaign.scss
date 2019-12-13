@@ -3,11 +3,14 @@
   padding-top: 60px;
 
   .campaign-story {
-    width: 65%;
-    padding-left: 0.8em;
+    width: 95%;
     text-align: left;
-    margin-right: 40px;
-    border-right: 1px solid lightgray;
+    @include md {
+      border-right: 1px solid lightgray;
+      padding-left: 0.8em;
+      margin-right: 40px;
+      width: 65%;
+    }
     > h2 {
       font-size: 23px;
     }
@@ -27,7 +30,11 @@
     }
   }
   .campaign-rewards {
-    width: 33%;
+    display: none;
+    @include md {
+      display: block;
+      width: 33%;
+    }
     .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover {
     }
     .pledge-tiles-rewards-tile.inactive-campaign-reward-tile:hover::after {

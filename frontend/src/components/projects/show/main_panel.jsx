@@ -119,7 +119,7 @@ const MainPanel = props => {
         <div className="main-content-column-2">
           <div className="main-content-amount">
             <em className="amount-total">${numWithCommas(amountRaised)}</em>
-            <span className="amount-goal">pledged of ${numWithCommas(goal)} goal</span>
+            <span className="amount-goal">pledged of ${numWithCommas(goal)} <div>goal</div></span>
           </div>
           <div className="main-content-backers">
             <em className="backer-num">{backers.length}</em>

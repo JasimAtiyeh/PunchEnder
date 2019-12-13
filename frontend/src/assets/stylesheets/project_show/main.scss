@@ -37,13 +37,19 @@
     flex-direction: row;
   }
   > div {
-    height: 385px;
+    @include md {
+      height: 23em;
+    }
     .main-content-amount,
     .main-content-backers,
     .main-content-date {
+      margin-right: 1em;
       color: rgb(110, 110, 110);
       display: flex;
       flex-direction: column;
+      @include md {
+        margin-right: 0;
+      }
       .amount-total {
         color: green;
       }
@@ -56,7 +62,18 @@
         }
       }
       > span {
-        font-size: 0.9em;
+        font-size: 15px;
+        white-space: nowrap;
+        div {
+          display: none;
+        }
+        @include md {
+          white-space: normal;
+          font-size: 0.9em;
+          div {
+            display: inline-block;
+          }
+        }
         &:last-of-type {
           @include md {
             margin-bottom: 20px;
@@ -66,14 +83,14 @@
     }
   }
   .main-content-column-1 {
-    margin-bottom: 2.2em;
+    margin-bottom: 1.2em;
     width: 100%;
     @include md {
       margin: 0;
       width: 70%;
     }
     .main-content-image {
-      height: 100%;
+      height: 23em;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -95,8 +112,8 @@
   display: flex;
   flex-direction: column;
   font-size: 0.7em;
-  width: 100%;
   flex-wrap: wrap;
+  width: 50%;
   @include md {
     flex-wrap: nowrap;
     width: auto;
@@ -104,13 +121,13 @@
   }
   a {
     background-color: teal;
-    padding: 12px 0;
+    padding: 12px 8px;
     color: white;
     text-align: center;
     margin: 0 auto;
     margin-bottom: 20px;
-    width: 42%;
     @include md {
+      padding: 12px 0;
       margin: 0;
       margin-bottom: 20px;
       width: auto;
@@ -121,11 +138,11 @@
   }
   button {
     border: 1px solid gray;
-    padding: 12px 0;
+    padding: 12px 8px;
     text-align: center;
-    width: 35%;
     margin: 0 auto;
     @include md {
+      padding: 12px 0;
       margin: 0;
       width: 75%;
     }

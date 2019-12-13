@@ -39,8 +39,11 @@
 }
 
 .pledge-tiles-rewards {
-  width: 66.6%;
-  margin-right: 20px;
+  width: 100%;
+  @include md {
+    margin-right: 20px;
+    width: 66.6%;
+  }
 }
 
 .pledge-tiles-rewards-header {
@@ -168,8 +171,12 @@
 }
 
 .pledge-tiles-side-note {
-  width: 33.3%;
+  display: none;
   padding: 10px;
+  @include md {
+    width: 33.3%;
+    display: block;
+  }
 }
 
 .pledge-tiles-side-note-header {

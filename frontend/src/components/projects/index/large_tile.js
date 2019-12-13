@@ -78,10 +78,8 @@ const ProjectIndexLargeTile = props => {
         className="large-tile-link" 
         to={`/projects/${_id}`}>
         <div className='project-index-large-tile-image-container'>
-          <div className='project-index-large-tile-image'>
-            <div>
-              <img src={image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={name} />
-            </div>
+          <div className="content">
+            <img src={image || 'https://punchender-dev.s3.us-east-2.amazonaws.com/StockSnap_Q1KHHDXXZT.jpg'} alt={name} />
           </div>
           { currentUser && <div className={`project-index-large-tile-bookmark ${followed}`}>
             <i

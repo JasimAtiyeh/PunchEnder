@@ -32,7 +32,7 @@ const CategoryIndex = props => {
   });
   
   return (
-    <div>
+    <div className="project-index-page">
       <Tabs />
       <h1 className="category-index-header">
         {category.name}

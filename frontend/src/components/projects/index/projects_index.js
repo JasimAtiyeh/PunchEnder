@@ -29,7 +29,7 @@ const ProjectIndex = props => {
   });
 
   return (
-    <div>
+    <div className="project-index-page">
       <Tabs />
       {segments}
     </div>

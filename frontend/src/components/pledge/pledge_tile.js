@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mutation } from "react-apollo";
 import Mutations from "../../graphql/mutations";
+import { withApollo } from 'react-apollo';
 
 class PledgeTile extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class PledgeTile extends React.Component {
   }
 
   render() {
+  	const currentUser = this.props.client.cache.data.data.ROOT_QUERY.currentUser;
     return (
       <div 
         className='pledge-tiles-rewards-tile'
@@ -55,7 +57,7 @@ class PledgeTile extends React.Component {
                       e.preventDefault();
                       PLEDGE_PROJECT({
                         variables: {
-                          user_id: localStorage.userId,
+                          user_id: currentUser,
                           project_id: this.props.projectId,
                           pledgeAmount: this.state.pledge
                         }
@@ -72,4 +74,4 @@ class PledgeTile extends React.Component {
   }
 }
 
-export default PledgeTile;
+export default withApollo(PledgeTile);

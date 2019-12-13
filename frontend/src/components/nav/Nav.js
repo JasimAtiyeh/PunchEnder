@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import Search from './search';
 import NavImage from './image';
 import NavDropDown from './dropdown';
+import { withApollo } from 'react-apollo';
 const { IS_LOGGED_IN } = Queries;
 
 const Nav = props => {
@@ -40,8 +41,7 @@ const Nav = props => {
 										</button>
 										<div className="nav-dropdown">
 											<NavImage setShow={setShow}/>
-											{ show && <NavDropDown client={client} setShow={setShow}/>
-											}
+											{ show && <NavDropDown client={client} setShow={setShow}/>}
 										</div>
 									</div>
 								);
@@ -61,4 +61,4 @@ const Nav = props => {
 	);
 };
 
-export default withRouter(Nav);
+export default withApollo(Nav);

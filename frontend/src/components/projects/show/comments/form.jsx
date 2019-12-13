@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import Mutations from '../../../../graphql/mutations';
 import Queries from '../../../../graphql/queries';
+import { withApollo } from 'react-apollo';
 const { CREATE_COMMENT } = Mutations;
 const { FETCH_PROJECT_COMMENTS, FETCH_USER_IMAGE } = Queries;
 
 const CommentForm = props => {
   const [body, setBody] = useState('');
   const [showError, setShowError] = useState(false);
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
 
   const [createComment] = useMutation(CREATE_COMMENT,
     {
@@ -27,7 +29,7 @@ const CommentForm = props => {
       }
     });
 
-  const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: localStorage.userId } });
+  const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };
 
@@ -62,4 +64,4 @@ const CommentForm = props => {
   )
 };
 
-export default CommentForm;
+export default withApollo(CommentForm);

@@ -1,13 +1,15 @@
 import React from 'react';
 import Form from './form';
 import List from './list';
+import { withApollo } from 'react-apollo';
 
 const CommentPage = props => {
   const { projectId } = props;
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
   return (
     <div className="comment-page">
       <div className="comment-page-column-1">
-        { localStorage.userId && <Form projectId={projectId} /> } 
+        { currentUser && <Form projectId={projectId} /> } 
         <List projectId={projectId} />
       </div>
       <div className="comment-page-column-2">
@@ -24,4 +26,4 @@ const CommentPage = props => {
   )
 };
 
-export default CommentPage;
+export default withApollo(CommentPage);

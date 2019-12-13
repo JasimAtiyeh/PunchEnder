@@ -8,16 +8,18 @@ import CampaignPage from './campaign';
 import CommentPage from './comments/page';
 import UpdatePage from './updates/update_page';
 import UpdateShow from './updates/update_show';
+import { withApollo } from 'react-apollo';
 const { FETCH_FINISHED_PROJECT } = Queries;
 
 const ProjectShowPage = props => {
   const { projectId } = props.match.params;
+	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
   const { loading, error, data } = useQuery(FETCH_FINISHED_PROJECT, { variables: { _id: projectId } });
   if (loading) return null;
   if (error) { return <h2 className="not-found">Project not found!</h2> };
   const { project } = data;
   const projectCreatorId = project.projectCreator._id;
-  if (!project.launched && localStorage.userId === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build/basics`} />};
+  if (!project.launched && currentUser === projectCreatorId) { return <Redirect to={`/projects/${project._id}/build/basics`} />};
   if (!project.launched) { return <Redirect to="/" /> }
 
   return (
@@ -40,4 +42,4 @@ const ProjectShowPage = props => {
   ) 
 };
 
-export default withRouter(ProjectShowPage);
+export default withRouter(withApollo(ProjectShowPage));

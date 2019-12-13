@@ -3,7 +3,10 @@
   flex-direction: column;
   margin: 0 auto;
   margin-bottom: 80px;
-  width: 80%;
+  width: 97%;
+  @include md {
+    width: 80%;
+  }
 }
 
 .project-show-main {
@@ -11,7 +14,6 @@
   margin-bottom: 40px;
   display: flex;
   flex-direction: column;
-
   > h1 {
     text-align: center;
     font-size: 30px;
@@ -29,33 +31,47 @@
 
 .project-show-main-content {
   display: flex;
-
+  flex-direction: column;
+  @include md {
+    margin: 0;
+    flex-direction: row;
+  }
   > div {
-    width: 100%;
-    height: 355px;
-
+    height: 385px;
     .main-content-amount,
     .main-content-backers,
     .main-content-date {
       color: rgb(110, 110, 110);
       display: flex;
       flex-direction: column;
-
       .amount-total {
         color: green;
       }
       em {
-        font-size: 32px;
         font-weight: 700;
         margin-bottom: 4px;
+        font-size: 1em;
+        @include md {
+          font-size: 2em;
+        }
       }
       > span {
-        margin-bottom: 28px;
+        font-size: 0.9em;
+        &:last-of-type {
+          @include md {
+            margin-bottom: 20px;
+          }
+        }
       }
     }
   }
   .main-content-column-1 {
-
+    margin-bottom: 2.2em;
+    width: 100%;
+    @include md {
+      margin: 0;
+      width: 70%;
+    }
     .main-content-image {
       height: 100%;
       background-size: cover;
@@ -64,23 +80,41 @@
     }
   }
   .main-content-column-2 {
-    padding-left: 35px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    width: 100%;
+    @include md {
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30%;
+      padding-left: 35px;
+    }
   }
 }
 
 .main-content-buttons {
   display: flex;
   flex-direction: column;
-
+  font-size: 0.7em;
+  width: 100%;
+  flex-wrap: wrap;
+  @include md {
+    flex-wrap: nowrap;
+    width: auto;
+    font-size: 19px;
+  }
   a {
     background-color: teal;
     padding: 12px 0;
     color: white;
     text-align: center;
+    margin: 0 auto;
     margin-bottom: 20px;
+    width: 42%;
+    @include md {
+      margin: 0;
+      margin-bottom: 20px;
+      width: auto;
+    }
   }
   a:hover {
     background-color: shade(teal, 20%);
@@ -89,7 +123,12 @@
     border: 1px solid gray;
     padding: 12px 0;
     text-align: center;
-    width: 40%;
+    width: 35%;
+    margin: 0 auto;
+    @include md {
+      margin: 0;
+      width: 75%;
+    }
   }
   button:hover {
     background-color: shade(white, 10%);

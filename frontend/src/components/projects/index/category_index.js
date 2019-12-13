@@ -34,13 +34,15 @@ const CategoryIndex = props => {
   return (
     <div className="project-index-page">
       <Tabs />
-      <h1 className="category-index-header">
-        {category.name}
-      </h1>
-      <h2 className="category-index-description">
-        {category.description}
-      </h2>
-      {segments}
+      <div className="project-index-segments-container">
+        <h1 className="category-index-header">
+          {category.name}
+        </h1>
+        <h2 className="category-index-description">
+          {category.description}
+        </h2>
+        {segments}
+      </div>
     </div>
   )
 };

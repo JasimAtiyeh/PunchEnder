@@ -10,7 +10,10 @@
     font-size: 19px;
     margin: 0 auto;
     margin-bottom: 30px;
-    width: 42%;
+    width: 80%;
+    @include md {
+      width: 42%;
+    }
   }
   .create-form-input-container {
     padding-bottom: 75px;

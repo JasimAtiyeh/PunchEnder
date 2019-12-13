@@ -10,7 +10,10 @@
     font-size: 19px;
     margin: 0 auto;
     margin-bottom: 30px;
-    width: 42%;
+    width: 80%;
+    @include md {
+      width: 42%;
+    }
   }
   .create-form-input-container {
     padding-bottom: 75px;
@@ -25,10 +28,9 @@
       min-height: 60px;
       max-height: 500px;
       width: 100%;
-      min-width: 400px;
-      max-width: 500px;
       padding: 5px;
       font-size: 17px;
+      box-sizing: border-box;
       background-color: white;
       resize: none;
       border: 1px solid #d4d4d4;

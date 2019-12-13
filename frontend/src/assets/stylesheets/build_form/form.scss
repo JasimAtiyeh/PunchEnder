@@ -21,11 +21,13 @@
   justify-content: space-between;
   padding: 10px;
   .build-nav-logo {
-    padding: 10px;
-    font-weight: 900;
+    a {
+      font-family: 'Fredoka One', cursive;
+      font-weight: 900;
+      color: #05ce78;
+    }
     font-size: 24px;
-    color: #05ce78;
-    font-family: 'Fredoka One', cursive;
+    padding: 10px;
     text-transform: uppercase;
   }
   > button {

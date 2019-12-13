@@ -16,8 +16,12 @@
 }
 
 .build-form-basics-form {
-  height: 100px;
   border-top: 1px solid black;
+  margin: 0 auto;
+  width: 97.5%;
+  @include md {
+    width: 100%;
+  }
 }
 
 .basics-panel {
@@ -36,6 +40,12 @@
       color: gray;
       line-height: 1.6;
       margin-bottom: 0.94em;
+      &:nth-of-type(2) {
+        display: none;
+        @include md {
+          display: block;
+        }
+      }
     }
     p:last-of-type {
       margin-bottom: 5px;

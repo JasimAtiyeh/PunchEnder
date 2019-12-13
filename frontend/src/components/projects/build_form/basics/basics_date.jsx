@@ -108,6 +108,7 @@ class BasicsDate extends React.Component {
           <div className="datepicker-container">
             <DatePicker 
               id="date-picker"
+              popperPlacement="top-end"
               onChange={this.handleCalendar}
               selected={ this.props.date ? Date.parse(this.props.date) : new Date() }
             />

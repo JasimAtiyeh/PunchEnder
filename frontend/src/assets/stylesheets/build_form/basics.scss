@@ -163,8 +163,8 @@
 
 .add-image {
   background-color: lightgray;
-  height: 288px;
-  width: 512px;
+  height: 144px;
+  width: 256px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,6 +173,10 @@
   -ms-user-select: none; 
   user-select: none;
   cursor: pointer;
+  @include md {
+    height: 288px;
+    width: 512px;
+  }
 }
 
 .change-image {

@@ -41,6 +41,7 @@ const NavDropdown = props => {
     <>
       <div className="nav-modal" onClick={() => setShow(false)} />
       <div className="nav-dropdown-content">
+        <i id="nav-dropdown-exit" className="fas fa-times" onClick={() => setShow(false)} />
         <div className="nav-dropdown-account">
           <span>ACCOUNT</span>
           <Link

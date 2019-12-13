@@ -207,6 +207,7 @@ export default {
         }
         projectCreator {
           _id
+          name
         }  
         category {
           _id

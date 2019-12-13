@@ -1,9 +1,11 @@
 .nav-dropdown-content {
   position: absolute;
   display: flex;
+  flex-direction: column;
+  width: 80vw;
   // box-shadow: 0px 0px 6px 0px darkgrey;
-  right: 15px;
-  top: 65px;
+  right: 0;
+  top: 4.5em;
   padding: 10px 40px;
   padding-bottom: 15px;
   border: 1px solid #9B9E9E;
@@ -11,17 +13,51 @@
   line-height: 24px;
   color: #282828;
   z-index: 101;
+  @include md {
+    width: auto;
+    right: 15px;
+    flex-direction: row;
+  }
+}
+
+#nav-dropdown-exit {
+  position: absolute;
+  cursor: pointer;
+  font-size: 1.5em;
+  right: 1.1em;
+  top: 0.8em;
+  @include md {
+    display: none;
+  }
 }
 
 .nav-dropdown-account {
   display: flex;
-  flex-direction: column;
   padding-top: 0.65em;
+  flex-direction: column;
+  margin-bottom: 0.8em;
+  @include md {
+    margin-bottom: 0;
+  }
   * {
+    display: table;
+    font-size: 1.1em;
+    margin-right: auto;
     margin-bottom: 3px;
+    include md {
+      margin: 0;
+      display: block;
+      width: 100%;
+    }
   }
   span {
     margin-bottom: 13px;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    @include md {
+      border-bottom: none;
+      padding-bottom: none;
+    }
   }
 }
 
@@ -40,9 +76,11 @@
 }
 
 .nav-dropdown-table {
-  border-spacing: 1em 0.6em;
-  margin-left: 3em;
   text-transform: none;
+  @include md {
+    margin-left: 3em;
+    border-spacing: 1em 0.6em;
+  }
   th {
     padding-bottom: 5px;
   }
@@ -60,7 +98,7 @@
       object-fit: cover;
     }
     p {
-      width: 200px;
+      width: 19vh;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;

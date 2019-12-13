@@ -6,13 +6,32 @@
   @return mix(black, $color, $percentage);
 }
 
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
 @import './reset';
+@import './break';
 @import './session';
 @import './draftjs.scss';
 @import './create_form/form';
 @import './build_form/form';
 @import './user/user_profile.scss';
 @import './project/project_index.scss';
+@import './project/index_layout.scss';
 @import './user/user_profile';
 @import './nav/nav';
 @import './nav/search';
@@ -32,4 +51,13 @@
 
 .main-page-content {
   padding-bottom: 9.5rem
+}
+
+body {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.app {
+  margin: 0 auto;
 }

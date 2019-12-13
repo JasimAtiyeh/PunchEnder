@@ -8,7 +8,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 15px 70px;
+      padding: 12px 33px;
+      @include md {
+        padding: 15px 70px;
+      }
     }
     .active {
       border-bottom: 3px solid green;

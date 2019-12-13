@@ -19,7 +19,9 @@ const IndexSegment = props => {
           only={only} />
       </li>
       <div className="projects-index-segment-side">
-        {tileLis}
+        <ul>
+          {tileLis}
+        </ul>
       </div>
     </div>
   )

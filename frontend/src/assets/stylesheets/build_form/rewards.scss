@@ -90,11 +90,14 @@
       width: 100%;
       background-color: white;
       border: 1px solid lightgray;
-      font-size: 16px;
-      line-height: 1.6;
+      font-size: 1em;
+      line-height: 1.4;
       padding: 3px 8px;
       margin-bottom: 35px;
       box-sizing: border-box;
+    }
+    >textarea {
+      resize: none;
     }
   }
 }
@@ -103,7 +106,7 @@
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  height: 30px;
+  height: 1.8em;
   margin-bottom: 35px;
   .reward-input-group-sign {
     background-color: lightgray;

@@ -8,6 +8,13 @@
   padding-top: 64px;
 }
 
+.build-form-container {
+  width: 98.5%;
+  @include md {
+    width: 100%;
+  }
+}
+
 .build-form-nav-container {
   position: fixed;
   width: 100%;

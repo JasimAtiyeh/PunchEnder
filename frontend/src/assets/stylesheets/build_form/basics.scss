@@ -29,8 +29,12 @@
   padding: 0 10px;
   border-bottom: 1px solid black;
   .basics-info {
-    width: 30%;
-    padding: 40px;
+    width: 20%;
+    padding: 15px;
+    @include md {
+      width: 30%;
+      padding: 40px;
+    }
     h4 {
       font-size: 1.19em;
       margin-bottom: 10px;
@@ -54,7 +58,10 @@
   .basics-form {
     padding: 80px 40px;
     padding-left: 100px;
-    width: 70%;
+    width: 80%;
+    @include md {
+      width: 70%;
+    }
     label {
       display: block;
       margin-bottom: 10px;

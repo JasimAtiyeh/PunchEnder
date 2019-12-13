@@ -18,7 +18,7 @@ const Nav = props => {
 	return (
 		<div className='nav'>
 			<div className='nav-links'>
-				<Link to='/'>Explore</Link>
+				{/* <Link to='/'>Explore</Link> */}
 				<Link to='/start'>Start a project</Link>
 			</div>
 			<Link to="/">

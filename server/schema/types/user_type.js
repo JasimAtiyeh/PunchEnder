@@ -6,7 +6,8 @@ const {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLFloat
 } = graphql;
 const User = mongoose.model("user");
 const keys = require("../../../config/keys");

@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
       projectsShow: 'active',
       pledgesShow: '',
       followedProjectsShow: '',
-	    currentUser: props.client.cache.data.data.ROOT_QUERY.currentUser
+      currentUser: props.client.cache.data.data.ROOT_QUERY.currentUser
     };
 
     this.showProjects = this.showProjects.bind(this);
@@ -64,6 +64,9 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    let funBucks;
+    if (this.state.currentUser) funBucks = this.props.client.cache.data.data[this.state.currentUser].funBucks;
+    console.log(funBucks);
     return (
       < Query
         query={ Queries.default.FETCH_USER }
@@ -124,6 +127,9 @@ class UserProfile extends React.Component {
                         year: 'numeric'
                       })}
                     </div>
+                  </div>
+                  <div className='user-profile-info-funbucks'>
+                    FunBucks: ${funBucks}
                   </div>
                 </div>
                 <div className='user-profile-projects'>

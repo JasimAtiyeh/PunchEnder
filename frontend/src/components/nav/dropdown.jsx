@@ -8,15 +8,16 @@ const { FETCH_USER } = Queries;
 
 const NavDropdown = props => {
   const { client, setShow } = props;
+  const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
 
   useEffect(() => {
     props.client.query({
       query: FETCH_USER,
-      variables: { _id: localStorage.userId }
+      variables: { _id: currentUser }
     });
   }, []);
 
-  const { loading, error, data } = useQuery(FETCH_USER, { variables: { _id: localStorage.userId } });
+  const { loading, error, data } = useQuery(FETCH_USER, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) return <div>Error!</div>;
   const { user } = data;

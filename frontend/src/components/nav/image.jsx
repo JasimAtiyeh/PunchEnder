@@ -2,11 +2,12 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../graphql/queries";
 import { withApollo } from 'react-apollo';
-const { FETCH_USER_IMAGE } = Queries;
+const { FETCH_USER_IMAGE, FETCH_USER } = Queries;
 
 const NavImage = props => {
   const { setShow } = props;
-	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  const { _loading, _error, _data } = useQuery(FETCH_USER, { variables: { _id: currentUser } });
   const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };

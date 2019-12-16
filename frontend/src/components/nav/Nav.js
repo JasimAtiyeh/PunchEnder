@@ -8,7 +8,7 @@ import Search from './search';
 import NavImage from './image';
 import NavDropDown from './dropdown';
 import { withApollo } from 'react-apollo';
-const { IS_LOGGED_IN } = Queries;
+const { CURRENT_USER } = Queries;
 
 const Nav = props => {
 	const [show, setShow] = useState(false);
@@ -28,11 +28,11 @@ const Nav = props => {
 			</Link>
 			<ApolloConsumer>
 				{client => (
-					<Query query={IS_LOGGED_IN}>
+					<Query query={CURRENT_USER}>
 						{({ data, loading, error }) => {
 							if (loading) return null;
 							if (error) return `Error! ${error.message}`;
-							if (data.isLoggedIn) {
+							if (data.currentUser) {
 								return (
 									<div className="nav-right">
 										<button

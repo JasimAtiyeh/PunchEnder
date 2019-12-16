@@ -371,8 +371,10 @@ const mutation = new GraphQLObjectType({
         pledgeAmount: { type: new GraphQLNonNull(GraphQLInt) }
       },
       async resolve(_, variables, context) {
-        const validUser = await AuthService.verifyUser({ token: context.token });
+        console.log(_)
         console.log(variables)
+        console.log(context)
+        const validUser = await AuthService.verifyUser({ token: context.token });
 
         if (validUser.loggedIn) {
           new Pledge({

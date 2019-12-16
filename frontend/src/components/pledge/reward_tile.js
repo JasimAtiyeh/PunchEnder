@@ -61,7 +61,7 @@ class RewardTile extends React.Component {
                           user_id: currentUser,
                           project_id: this.props.projectId,
                           reward_id: this.props.reward._id,
-                          pledgeAmount: parseInt(this.state.pledge)
+                          pledgeAmount: Number(this.state.pledge)
                         }
                       })
                       this.props.ownProps.history.push(`/projects/${this.props.projectId}`)

@@ -55,12 +55,12 @@ class PledgeTile extends React.Component {
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
-                      console.log(currentUser)
+                      console.log(typeof Number(this.state.pledge))
                       PLEDGE_PROJECT({
                         variables: {
                           user_id: currentUser,
                           project_id: this.props.projectId,
-                          pledgeAmount: parseInt(this.state.pledge)
+                          pledgeAmount: Number(this.state.pledge)
                         }
                       })
                       this.props.ownProps.history.push(`/projects/${this.props.projectId}`)

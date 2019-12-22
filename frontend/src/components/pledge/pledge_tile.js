@@ -40,7 +40,7 @@ class PledgeTile extends React.Component {
           </div>
           <div>
             <Mutation mutation={Mutations.PLEDGE_PROJECT}>
-              {PLEDGE_PROJECT => (
+              {pledgeProject => (
                 <div className='pledge-tiles-rewards-tile-option-pledge-inputs'>
                   <div className='pledge-tiles-rewards-tile-option-pledge-inputs-number'>
                     <i className="fas fa-dollar-sign"></i>
@@ -55,14 +55,15 @@ class PledgeTile extends React.Component {
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
-                      console.log(typeof Number(this.state.pledge))
-                      PLEDGE_PROJECT({
+                      pledgeProject({
                         variables: {
                           user_id: currentUser,
                           project_id: this.props.projectId,
+                          reward_id: null,
                           pledgeAmount: Number(this.state.pledge)
                         }
                       })
+                      console.log(this.props.ownProps)
                       this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
                     }}></input>
                 </div>

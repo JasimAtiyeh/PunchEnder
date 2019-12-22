@@ -66,7 +66,6 @@ class UserProfile extends React.Component {
   render() {
     let funBucks;
     if (this.state.currentUser) funBucks = this.props.client.cache.data.data[this.state.currentUser].funBucks;
-    console.log(funBucks);
     return (
       < Query
         query={ Queries.default.FETCH_USER }

@@ -41,7 +41,7 @@ class RewardTile extends React.Component {
           </div>
           <div>
             <Mutation mutation={Mutations.PLEDGE_PROJECT}>
-              {PLEDGE_PROJECT => (
+              {pledgeProject => (
                 <div className='pledge-tiles-rewards-tile-option-pledge-inputs'>
                   <div  className='pledge-tiles-rewards-tile-option-pledge-inputs-number'>
                     <i className="fas fa-dollar-sign"></i>
@@ -56,7 +56,7 @@ class RewardTile extends React.Component {
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
-                      PLEDGE_PROJECT({
+                      pledgeProject({
                         variables: {
                           user_id: currentUser,
                           project_id: this.props.projectId,

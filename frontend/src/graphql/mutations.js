@@ -7,6 +7,7 @@ export default {
         token
         loggedIn
         _id
+        funBucks
       }
     }
   `,
@@ -16,6 +17,7 @@ export default {
         token
         loggedIn
         _id
+        funBucks
       }
     }
   `,
@@ -177,6 +179,7 @@ export default {
         project {
           _id
           name
+          amountRaised
         }
         reward {
           _id

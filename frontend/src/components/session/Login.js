@@ -38,7 +38,8 @@ class Login extends Component {
     client.writeData({
       data: { 
         isLoggedIn: data.login.loggedIn,
-        currentUser: data.login._id
+        currentUser: data.login._id,
+        funBucks: data.login.funBucks
       }
     });
   }

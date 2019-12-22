@@ -30,7 +30,8 @@ class Register extends Component {
     client.writeData({
       data: { 
         isLoggedIn: data.register.loggedIn,
-        currentUser: data.register._id
+        currentUser: data.register._id,
+        funBucks: data.login.funBucks
       }
     });
   }

@@ -62,8 +62,8 @@ class PledgeTile extends React.Component {
                           reward_id: null,
                           pledgeAmount: Number(this.state.pledge)
                         }
-                      })
-                      console.log(this.props.ownProps)
+                      }).then(data => console.log(data))
+                      // console.log(pledgeProject)
                       this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
                     }}></input>
                 </div>

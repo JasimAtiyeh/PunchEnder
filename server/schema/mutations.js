@@ -374,12 +374,12 @@ const mutation = new GraphQLObjectType({
         const validUser = await AuthService.verifyUser({ token: context.token });
 
         if (validUser.loggedIn) {
-          new Pledge({
+          let pledge = new Pledge({
             pledger: variables.user_id,
             project: variables.project_id,
             reward: variables.reward_id,
             amount: variables.pledgeAmount 
-          }).save()
+          })
           await User.findByIdAndUpdate(variables.user_id, {
             $inc: {
               funBucks: -(variables.pledgeAmount)
@@ -395,6 +395,7 @@ const mutation = new GraphQLObjectType({
             }},
             { new: true }
           )
+          return pledge.save()
         } else {
           throw new Error("sorry, you need to log in first");
         }

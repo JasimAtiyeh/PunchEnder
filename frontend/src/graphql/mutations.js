@@ -177,6 +177,7 @@ export default {
         project {
           _id
           name
+          amountRaised
         }
         reward {
           _id

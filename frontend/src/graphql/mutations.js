@@ -7,6 +7,7 @@ export default {
         token
         loggedIn
         _id
+        funBucks
       }
     }
   `,
@@ -16,6 +17,7 @@ export default {
         token
         loggedIn
         _id
+        funBucks
       }
     }
   `,

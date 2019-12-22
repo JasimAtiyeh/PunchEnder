@@ -2,6 +2,7 @@ import React from 'react';
 import { Mutation } from "react-apollo";
 import Mutations from "../../graphql/mutations";
 import { withApollo } from 'react-apollo';
+import swal from 'sweetalert';
 
 class PledgeTile extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class PledgeTile extends React.Component {
 
   render() {
   	const currentUser = this.props.client.cache.data.data.ROOT_QUERY.currentUser;
+  	const funBucks = this.props.client.cache.data.data.ROOT_QUERY.funBucks;
     return (
       <div 
         className='pledge-tiles-rewards-tile'
@@ -53,18 +55,21 @@ class PledgeTile extends React.Component {
                     type='submit'
                     value='Pledge'
                     onClick={e => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      pledgeProject({
-                        variables: {
-                          user_id: currentUser,
-                          project_id: this.props.projectId,
-                          reward_id: null,
-                          pledgeAmount: Number(this.state.pledge)
-                        }
-                      }).then(data => console.log(data))
-                      // console.log(pledgeProject)
-                      this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
+                      if (funBucks > 0) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        pledgeProject({
+                          variables: {
+                            user_id: currentUser,
+                            project_id: this.props.projectId,
+                            reward_id: this.props.reward._id,
+                            pledgeAmount: Number(this.state.pledge)
+                          }
+                        })
+                        this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
+                      } else {
+                        swal("Insufficient funds", "Please add funds to your account", "warning");
+                      }
                     }}></input>
                 </div>
               )}

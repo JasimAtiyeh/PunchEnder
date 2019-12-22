@@ -52,6 +52,7 @@
     "slate-html-serializer": "^0.8.11",
     "slate-plain-serializer": "^0.7.11",
     "slate-schema-violations": "^0.1.39",
+    "sweetalert": "^2.1.2",
     "validator": "^12.0.0"
   },
   "devDependencies": {}

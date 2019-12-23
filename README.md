@@ -31,10 +31,122 @@
 * Updates - Project -->
 
 # PunchEnder
-PunchEnder is a clone of the popular crowd sourcing website KickStarter.
+PunchEnder is a clone of the popular crowd sourcing website KickStarter. PunchEnder allows users who have a product or campaign idea to put that idea online in hopes of getting funding from the public. All users, including users who do not create a project, can fund projects to help make them a reality. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
 
-### Overview
-PunchEnder gives users the ability to create a charitable project that they would like to be funded by our base of users. PunchEnder also gives users the ability to discover projects that they would like to fund. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
+### Link https://punchender.herokuapp.com/#/
+
+## Technologies & Technical Challenges
+Backend: MongoDB and Node.js
+Frontend: React, GraphQL, Apollo
+Style: HTML and CSS
+
+## Key Features & Implementation
+### Backing Projects
+#### Feature
+Backing projects allows users to contribute to a users idea that needs funding. Users can track the projects that they have backed and the project will track how much has been raised.
+
+![backed_projects](./frontend/src/assets/images/backed_projects.png)
+
+#### Implementation
+Backing a project affects the records of three different tables. This creates a new Pledge records, modifies the Users funds, and the projects amount raised. This is all done through a single GraphQL mutation. The information sent back from the mutation is what updates the project show page.
+
+```JavaScript
+  PLEDGE_PROJECT: gql`
+    mutation PledgeProject($user_id: ID!, $project_id: ID!, $reward_id:ID, $pledgeAmount: Int!) {
+      pledgeProject(user_id: $user_id, project_id: $project_id, reward_id: $reward_id, pledgeAmount: $pledgeAmount) {
+        _id
+        project {
+          _id
+          name
+          amountRaised
+        }
+        reward {
+          _id
+          name
+        }
+        amount
+      }
+    }
+  `
+
+  pledgeProject: {
+    type: PledgeType,
+    args: {
+      user_id: { type: new GraphQLNonNull(GraphQLID) },
+      project_id: { type: new GraphQLNonNull(GraphQLID) },
+      reward_id: { type: GraphQLID },
+      pledgeAmount: { type: new GraphQLNonNull(GraphQLInt) }
+    },
+    async resolve(_, variables, context) {
+      const validUser = await AuthService.verifyUser({ token: context.token });
+
+      if (validUser.loggedIn) {
+        let pledge = new Pledge({
+          pledger: variables.user_id,
+          project: variables.project_id,
+          reward: variables.reward_id,
+          amount: variables.pledgeAmount 
+        })
+        await User.findByIdAndUpdate(variables.user_id, {
+          $inc: {
+            funBucks: -(variables.pledgeAmount)
+          },
+          $push: {
+            backedProjects: variables.project_id
+          }},
+          { new: true }
+        )
+        await Project.findByIdAndUpdate(variables.project_id, {
+          $inc: {
+            amountRaised: variables.pledgeAmount
+          }},
+          { new: true }
+        )
+        return pledge.save()
+      } else {
+        throw new Error("sorry, you need to log in first");
+      }
+    }
+  }
+```
+
+### Rewards
+#### Feature
+When users are backing a project they have the choice of donating money for the greater good, or they can give money to the project for a reward. Rewards are usually products or services given the the user that donates to the projects. A project can have multiple tiers of rewards given for various increments that are pledged to a project.
+
+![rewards](./frontend/src/assets/images/rewards.png)
+
+#### Implementation
+Rewards are created by the project owner using a GraphQL mutation. When a user pledges to a project 
+
+```JavaScript
+  const [createReward] = useMutation(
+    CREATE_REWARD,
+    {
+      update(cache, { data: { newReward } }) {
+        try {
+          const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
+          qdata.project.rewards.push(newReward);
+          cache.writeQuery({
+            query: FETCH_UNFINISHED_PROJECT,
+            variables: { _id: project._id },
+            data: { project: qdata.project },
+          });
+        } catch {
+
+        }
+      }
+  });
+
+  const { loading, error, data } = useQuery(
+    Queries.FETCH_FINISHED_PROJECT,
+    { variables: { _id: projectId } }
+  );
+  if (loading) { return null };
+  if (error) { return <div>Error!</div> };
+  const { project } = data;
+  const rewards = Array.from(data.project.rewards);
+```
 
 ### Functionality & MVP
 * Projects - Users can create charitable projects that can be completely funded by our community of users. Creating a project entails adding details, a goal for funding, and rewards that users can get for backing a project.
@@ -47,13 +159,9 @@ PunchEnder gives users the ability to create a charitable project that they woul
 
 * Likes - Users are able to show support for a particular project by liking a project. They can then see the list of projects that they have supported under their user profile.
 
-### Technologies & Technical Challenges
-Backend: MongoDB and Node.js
-Frontend: React, GraphQL
-Style: HTML and CSS
 
-### Future Concepts
-* Credit card payments
+## Future Concepts
+#### Credit card payments
 
 ### Collaborators
 Jasim Atiyeh, Han Kyul Kim

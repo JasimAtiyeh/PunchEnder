@@ -6,14 +6,15 @@ const { FETCH_USER_IMAGE, FETCH_USER, CURRENT_USER } = Queries;
 
 const NavImage = props => {
   const { setShow, client } = props;
+  const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
+  // this prefetches the current user so the dropdown feels slightly snappier
   useEffect(() => {
     client.query({
       query: FETCH_USER,
       variables: { _id: currentUser }
     })
   });
-  
-  const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
+
   const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };

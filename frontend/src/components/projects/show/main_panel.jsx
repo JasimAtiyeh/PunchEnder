@@ -10,7 +10,7 @@ const { FETCH_FINISHED_PROJECT, FETCH_FINISHED_PROJECTS, FETCH_CATEGORY, CURRENT
 
 const MainPanel = props => {
   const { name, description, image, endDate, amountRaised, backers, goal, category, followedBy, _id } = props.project;
-	const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
+  const currentUser = props.client.readQuery({ query: CURRENT_USER }).currentUser;
   const followed = followedBy.some(u => u._id === currentUser);
 
   // This "currentUser" uses the client rather than the localStorage.

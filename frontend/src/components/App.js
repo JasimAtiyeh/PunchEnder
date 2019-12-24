@@ -15,7 +15,6 @@ import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
 import { Pledge } from "./pledge/pledge";
 import Footer from './footer/footer';
-import Random from './user/random';
 
 const App = () => {
   return (
@@ -27,7 +26,6 @@ const App = () => {
         </Switch>
         <Switch>
           <AuthRoute exact path="/start" component={CreateForm} />
-          <AuthRoute exact path="/random" component={Random} />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />
           <AuthRoute exact path="/signup" component={Register} routeType="auth" />
           <Route exact path='/' component={ProjectIndex} />

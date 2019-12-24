@@ -48,7 +48,7 @@ Backing projects allows users to contribute to a users idea that needs funding. 
 ![backed_projects](./frontend/src/assets/images/backed_projects.png)
 
 #### Implementation
-Backing a project affects the records of three different tables. This creates a new Pledge records, modifies the Users funds, and the projects amount raised. This is all done through a single GraphQL mutation. The information sent back from the mutation is what updates the project show page.
+Backing a project affects the records of three different tables. This creates a new Pledge records, modifies the Users funds, and the Projects amount raised. This is all done through a single GraphQL mutation. The information sent back from the mutation is what updates the project show page.
 
 ```JavaScript
   PLEDGE_PROJECT: gql`
@@ -112,56 +112,90 @@ Backing a project affects the records of three different tables. This creates a 
 
 ### Rewards
 #### Feature
-When users are backing a project they have the choice of donating money for the greater good, or they can give money to the project for a reward. Rewards are usually products or services given the the user that donates to the projects. A project can have multiple tiers of rewards given for various increments that are pledged to a project.
+When users are backing a project they have the choice of donating money for the greater good, or they can give money to the project for a reward. Rewards are usually products or services given by the user as donates to the projects. A project can have multiple tiers of rewards given for various increments that are pledged to a project.
 
-![rewards](./frontend/src/assets/images/rewards.png)
+![rewards](https://media.giphy.com/media/d7kY0pQ5hPyz4y7893/giphy.gif)
 
 #### Implementation
-Rewards are created by the project owner using a GraphQL mutation. When a user pledges to a project 
+Rewards are created by the project for each project. Rewards are recorded and prsented in an ordered list to display them in an increasing order. The ordering is tracked through an array saved to the project that is mapped over to display them on the page.
 
 ```JavaScript
-  const [createReward] = useMutation(
-    CREATE_REWARD,
-    {
-      update(cache, { data: { newReward } }) {
-        try {
-          const qdata = cache.readQuery({ query: FETCH_UNFINISHED_PROJECT, variables: { _id: project._id } });
-          qdata.project.rewards.push(newReward);
-          cache.writeQuery({
-            query: FETCH_UNFINISHED_PROJECT,
-            variables: { _id: project._id },
-            data: { project: qdata.project },
-          });
-        } catch {
+  const tier = rewards ? rewards.length + 1 : 1;
 
-        }
-      }
-  });
+  <div className="reward-form-container" ref={this.container}>
+    <h2>Add a tier {this.props.tier} reward</h2>
+    <span>{message}</span>
+    <form className="reward-form" onSubmit={e => e.preventDefault()}>
+      <div>
+        <label>Title</label>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+        <label>Pledge Amount</label>
+        <div className="reward-input-group">
+          <div className="reward-input-group-sign">$</div>
+          <input type="number" value={pledgeAmount} onChange={e => setPledgeAmount(e.target.value)} />
+        </div>
+        <label>Description</label>
+        <textarea id="reward-textarea" maxLength={135} value={description} onChange={e => setDescription(e.target.value)} />
+      </div>
+    </form>
+  </div>
 
-  const { loading, error, data } = useQuery(
-    Queries.FETCH_FINISHED_PROJECT,
-    { variables: { _id: projectId } }
-  );
-  if (loading) { return null };
-  if (error) { return <div>Error!</div> };
-  const { project } = data;
-  const rewards = Array.from(data.project.rewards);
+  {rewards.map((reward, idx) => (
+    <RewardTile
+      num={idx + 1}
+      show={show}
+      setShow={setShow}
+      key={idx}
+      projectId={project._id}
+      ownProps={props}
+      reward={reward} />
+  ))}
 ```
 
-### Functionality & MVP
-* Projects - Users can create charitable projects that can be completely funded by our community of users. Creating a project entails adding details, a goal for funding, and rewards that users can get for backing a project.
+### Text Editor
+#### Feature
+Users are given a long description, called a story, when creating a project. This is useful in letting the user explain all of the details of their project, and their backstory. We wanted to give the user more than just a text box. Giving them the option to put in images of their project, hyperlink to their website, and text formating for a nicer looking message.
 
-* Backing projects & rewards - Users that explore PunchEnder can find projects that they are interested in and can back those projects through funding them. When a project is backed, the user backing the project can choose to fund a specific amount to get a reward from the user that is creating the project. This is usually a gesture or special gift for being backed.
+![editor](./frontend/src/assets/images/editor.png)
 
-* Search - Find projects based off of the title or other key information in the project with our search feature.
+#### Implementation
+<!--Josh: We need to discuss how the text editor was added to the app. You can focus on how the editor was setup with the options. Feel free to change any code snippets you want.-->
 
-* Categories / Discover feature - The root page of PunchEnder will show a complete list of the projects that are hosted on our site. To make the browsing of the projects a bit easier, users can filter the list of projects down by browsing by category.
+##### Calling Editor in the project form
+```JavaScript
+  <Editor needSave={needSave} setNeedSave={setNeedSave} story={story} setStory={setStory}/>
+```
+##### Importing editor from Draft JS
+```JavaScript
+  import { Editor } from 'react-draft-wysiwyg';
+  import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-* Likes - Users are able to show support for a particular project by liking a project. They can then see the list of projects that they have supported under their user profile.
+  render() {
+    return (
+      <Editor
+        placeholder="Story here."
+        editorState={this.state.editorState}
+        toolbarClassName="story-toolbar"
+        wrapperClassName="story-wrapper story-write-wrapper"
+        editorClassName="story-editor"
+        onEditorStateChange={this.onChange}
+        toolbar={tboptions}
+      />
+    )
+  }
+```
 
+##### Options given to Draft JS to display in the editor
+```JavaScript
+  options: ['inline', 'blockType', 'list', 'link', 'image', 'history']
+```
 
 ## Future Concepts
 #### Credit card payments
+Implementing a credit card payment system would be the next logical step for our project. This will allow the users to fund their accounts and back projects.
+
+#### Category Creation
+It would be important to have a way for more categories to be added. It would be useful to have user create a category when a new one is needed. If they have a project that will not fit into one of our current categories.
 
 ### Collaborators
 Jasim Atiyeh, Han Kyul Kim

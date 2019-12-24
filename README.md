@@ -160,6 +160,7 @@ Users are given a long description, called a story, when creating a project. Thi
 
 #### Implementation
 <!--Josh: We need to discuss how the text editor was added to the app. You can focus on how the editor was setup with the options. Feel free to change any code snippets you want.-->
+Currently, the text editor used in the project is borrowed from a library called [react-draft-wysiwyg](https://github.com/jpuri/react-draft-wysiwyg). While the editor originally was a custom one created with SlateJS, the previous editor had a bug that was not resolved by the library at the time. While using older versions of SlateJS was also an option, a call was made to use a pre-built editor made with Draft.js. In the future, a custom-built editor may replace the current one. 
 
 ##### Calling Editor in the project form
 ```JavaScript

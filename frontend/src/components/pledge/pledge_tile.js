@@ -90,6 +90,10 @@ class PledgeTile extends React.Component {
                           variables: {
                             user_id: currentUser,
                             project_id: this.props.projectId,
+<<<<<<< HEAD
+=======
+                            reward_id: null,
+>>>>>>> 4403eed... update production readme
                             pledgeAmount: Number(this.state.pledge)
                           }
                         })

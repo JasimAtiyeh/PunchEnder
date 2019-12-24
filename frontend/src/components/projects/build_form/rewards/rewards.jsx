@@ -33,7 +33,7 @@ const BuildFormRewards = props => {
           cache.writeQuery({
             query: FETCH_UNFINISHED_PROJECT,
             variables: { _id: project._id },
-            data: { project: qdata.project },
+            data: { project: qdata.project }
           });
         } catch {
 

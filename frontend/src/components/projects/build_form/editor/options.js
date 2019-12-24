@@ -1,7 +1,7 @@
 export default {
   options: ['inline', 'blockType', 'list', 'link', 'image', 'history'],
-    inline: {
-      options: ['bold', 'italic', 'underline'],
+  inline: {
+    options: ['bold', 'italic', 'underline'],
   },
   blockType: {
     inDropdown: false,

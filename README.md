@@ -31,29 +31,171 @@
 * Updates - Project -->
 
 # PunchEnder
-PunchEnder is a clone of the popular crowd sourcing website KickStarter.
+PunchEnder is a clone of the popular crowd sourcing website KickStarter. PunchEnder allows users who have a product or campaign idea to put that idea online in hopes of getting funding from the public. All users, including users who do not create a project, can fund projects to help make them a reality. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
 
-### Overview
-PunchEnder gives users the ability to create a charitable project that they would like to be funded by our base of users. PunchEnder also gives users the ability to discover projects that they would like to fund. They can give any amount that they like, or give a particular amount and be rewarded by the project creator.
+### Link https://punchender.herokuapp.com/#/
 
-### Functionality & MVP
-* Projects - Users can create charitable projects that can be completely funded by our community of users. Creating a project entails adding details, a goal for funding, and rewards that users can get for backing a project.
-
-* Backing projects & rewards - Users that explore PunchEnder can find projects that they are interested in and can back those projects through funding them. When a project is backed, the user backing the project can choose to fund a specific amount to get a reward from the user that is creating the project. This is usually a gesture or special gift for being backed.
-
-* Search - Find projects based off of the title or other key information in the project with our search feature.
-
-* Categories / Discover feature - The root page of PunchEnder will show a complete list of the projects that are hosted on our site. To make the browsing of the projects a bit easier, users can filter the list of projects down by browsing by category.
-
-* Likes - Users are able to show support for a particular project by liking a project. They can then see the list of projects that they have supported under their user profile.
-
-### Technologies & Technical Challenges
+## Technologies & Technical Challenges
 Backend: MongoDB and Node.js
-Frontend: React, GraphQL
+Frontend: React, GraphQL, Apollo
 Style: HTML and CSS
 
-### Future Concepts
-* Credit card payments
+## Key Features & Implementation
+### Backing Projects
+#### Feature
+Backing projects allows users to contribute to a users idea that needs funding. Users can track the projects that they have backed and the project will track how much has been raised.
+
+![backed_projects](./frontend/src/assets/images/backed_projects.png)
+
+#### Implementation
+Backing a project affects the records of three different tables. This creates a new Pledge records, modifies the Users funds, and the Projects amount raised. This is all done through a single GraphQL mutation. The information sent back from the mutation is what updates the project show page.
+
+```JavaScript
+  PLEDGE_PROJECT: gql`
+    mutation PledgeProject($user_id: ID!, $project_id: ID!, $reward_id:ID, $pledgeAmount: Int!) {
+      pledgeProject(user_id: $user_id, project_id: $project_id, reward_id: $reward_id, pledgeAmount: $pledgeAmount) {
+        _id
+        project {
+          _id
+          name
+          amountRaised
+        }
+        reward {
+          _id
+          name
+        }
+        amount
+      }
+    }
+  `
+
+  pledgeProject: {
+    type: PledgeType,
+    args: {
+      user_id: { type: new GraphQLNonNull(GraphQLID) },
+      project_id: { type: new GraphQLNonNull(GraphQLID) },
+      reward_id: { type: GraphQLID },
+      pledgeAmount: { type: new GraphQLNonNull(GraphQLInt) }
+    },
+    async resolve(_, variables, context) {
+      const validUser = await AuthService.verifyUser({ token: context.token });
+
+      if (validUser.loggedIn) {
+        let pledge = new Pledge({
+          pledger: variables.user_id,
+          project: variables.project_id,
+          reward: variables.reward_id,
+          amount: variables.pledgeAmount 
+        })
+        await User.findByIdAndUpdate(variables.user_id, {
+          $inc: {
+            funBucks: -(variables.pledgeAmount)
+          },
+          $push: {
+            backedProjects: variables.project_id
+          }},
+          { new: true }
+        )
+        await Project.findByIdAndUpdate(variables.project_id, {
+          $inc: {
+            amountRaised: variables.pledgeAmount
+          }},
+          { new: true }
+        )
+        return pledge.save()
+      } else {
+        throw new Error("sorry, you need to log in first");
+      }
+    }
+  }
+```
+
+### Rewards
+#### Feature
+When users are backing a project they have the choice of donating money for the greater good, or they can give money to the project for a reward. Rewards are usually products or services given by the user as donates to the projects. A project can have multiple tiers of rewards given for various increments that are pledged to a project.
+
+![rewards](https://media.giphy.com/media/d7kY0pQ5hPyz4y7893/giphy.gif)
+
+#### Implementation
+Rewards are created by the project for each project. Rewards are recorded and prsented in an ordered list to display them in an increasing order. The ordering is tracked through an array saved to the project that is mapped over to display them on the page.
+
+```JavaScript
+  const tier = rewards ? rewards.length + 1 : 1;
+
+  <div className="reward-form-container" ref={this.container}>
+    <h2>Add a tier {this.props.tier} reward</h2>
+    <span>{message}</span>
+    <form className="reward-form" onSubmit={e => e.preventDefault()}>
+      <div>
+        <label>Title</label>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+        <label>Pledge Amount</label>
+        <div className="reward-input-group">
+          <div className="reward-input-group-sign">$</div>
+          <input type="number" value={pledgeAmount} onChange={e => setPledgeAmount(e.target.value)} />
+        </div>
+        <label>Description</label>
+        <textarea id="reward-textarea" maxLength={135} value={description} onChange={e => setDescription(e.target.value)} />
+      </div>
+    </form>
+  </div>
+
+  {rewards.map((reward, idx) => (
+    <RewardTile
+      num={idx + 1}
+      show={show}
+      setShow={setShow}
+      key={idx}
+      projectId={project._id}
+      ownProps={props}
+      reward={reward} />
+  ))}
+```
+
+### Text Editor
+#### Feature
+Users are given a long description, called a story, when creating a project. This is useful in letting the user explain all of the details of their project, and their backstory. We wanted to give the user more than just a text box. Giving them the option to put in images of their project, hyperlink to their website, and text formating for a nicer looking message.
+
+![editor](./frontend/src/assets/images/editor.png)
+
+#### Implementation
+<!--Josh: We need to discuss how the text editor was added to the app. You can focus on how the editor was setup with the options. Feel free to change any code snippets you want.-->
+
+##### Calling Editor in the project form
+```JavaScript
+  <Editor needSave={needSave} setNeedSave={setNeedSave} story={story} setStory={setStory}/>
+```
+##### Importing editor from Draft JS
+```JavaScript
+  import { Editor } from 'react-draft-wysiwyg';
+  import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+
+  render() {
+    return (
+      <Editor
+        placeholder="Story here."
+        editorState={this.state.editorState}
+        toolbarClassName="story-toolbar"
+        wrapperClassName="story-wrapper story-write-wrapper"
+        editorClassName="story-editor"
+        onEditorStateChange={this.onChange}
+        toolbar={tboptions}
+      />
+    )
+  }
+```
+
+##### Options given to Draft JS to display in the editor
+```JavaScript
+  options: ['inline', 'blockType', 'list', 'link', 'image', 'history']
+```
+
+## Future Concepts
+#### Credit card payments
+Implementing a credit card payment system would be the next logical step for our project. This will allow the users to fund their accounts and back projects.
+
+#### Category Creation
+It would be important to have a way for more categories to be added. It would be useful to have user create a category when a new one is needed. If they have a project that will not fit into one of our current categories.
 
 ### Collaborators
 Jasim Atiyeh, Han Kyul Kim

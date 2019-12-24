@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Query } from "react-apollo";
 import Queries from "../../graphql/queries";
 import { ApolloConsumer } from "react-apollo";
-import { withRouter } from "react-router-dom";
 import Search from './search';
 import NavImage from './image';
 import NavDropDown from './dropdown';

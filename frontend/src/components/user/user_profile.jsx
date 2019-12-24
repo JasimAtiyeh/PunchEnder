@@ -11,8 +11,12 @@ class UserProfile extends React.Component {
     super(props);
     this.state = {
       show: 1,
-      loaded: false,
+      loaded: false
     };
+  }
+
+  componentDidMount() {
+    this.setState({ loaded: true });
   }
 
   show(num) {
@@ -41,9 +45,9 @@ class UserProfile extends React.Component {
   }
 
   render() {
+    if (!this.state.loaded) return null;
     const { client } = this.props;
     const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
-    if (!currentUser) return null;
     return (
       <Query
         query={ FETCH_USER }

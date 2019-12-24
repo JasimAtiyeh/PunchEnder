@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from "../../graphql/queries";
 import { withApollo } from 'react-apollo';
-const { FETCH_USER_IMAGE, FETCH_USER_DROPDOWN, CURRENT_USER } = Queries;
+const { FETCH_USER_IMAGE, FETCH_USER_DROPDOWN, CURRENT_USER, FETCH_USER_BALANCE } = Queries;
 
 const NavImage = props => {
   const { setShow, client } = props;
@@ -12,8 +12,13 @@ const NavImage = props => {
     client.query({
       query: FETCH_USER_DROPDOWN,
       variables: { _id: currentUser }
-    })
-  })
+    });
+    client.query({
+      query: FETCH_USER_BALANCE,
+      variables: { _id: currentUser }
+    });
+  }, []);
+
   const { loading, error, data } = useQuery(FETCH_USER_IMAGE, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) { return <div>Error!</div> };

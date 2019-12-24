@@ -3,6 +3,8 @@ import { Mutation } from "react-apollo";
 import Mutations from "../../graphql/mutations";
 import { withApollo } from 'react-apollo';
 import swal from 'sweetalert';
+import Queries from "../../graphql/queries";
+const { FETCH_USER_BALANCE } = Queries;
 
 class RewardTile extends React.Component {
   constructor(props) {
@@ -19,7 +21,15 @@ class RewardTile extends React.Component {
 
   render() {
     const currentUser = this.props.client.cache.data.data.ROOT_QUERY.currentUser;
-  	const funBucks = this.props.client.cache.data.data.ROOT_QUERY.funBucks;
+    let funBucks;
+    try {
+      const { user } = this.props.client.readQuery({
+        query: FETCH_USER_BALANCE,
+        variables: { _id: currentUser }
+      });
+      funBucks = user.funBucks;
+    } catch {};
+
     const inactiveOnCampaign = this.props.onCampaign && this.props.num !== this.props.show;
     return (
       <div 

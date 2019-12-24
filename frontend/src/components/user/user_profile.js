@@ -1,25 +1,42 @@
 import React from 'react';
 import { Query, withApollo } from "react-apollo";
 import Queries from '../../graphql/queries';
-import ProjectIndexTile from '../projects/index/tile';
 import UserImage from './user_image';
+import ProfileProjectsSection from './profile_projects';
 import { Link } from 'react-router-dom';
-const { CURRENT_USER, FETCH_USER } = Queries;
+const { CURRENT_USER, FETCH_USER, FETCH_USER_BACKED_PROJECTS, FETCH_USER_FOLLOWED_PROJECTS } = Queries;
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: 1,
-      loaded: false
+      loaded: false,
     };
   }
 
   show(num) {
     return () => {
-      this.setState({
-        show: num
-      })
+      const currentUser = this.props.client.readQuery({ query: CURRENT_USER }).currentUser;
+      switch (num) {
+        case 1:
+          this.setState({ show: num });
+          break;
+        case 2:
+          this.props.client.query({
+            query: FETCH_USER_BACKED_PROJECTS,
+            variables: { _id: currentUser }
+          }).then(res => this.setState({ show: num, backedProjects: res.data.user.backedProjects }));
+          break;
+        case 3:
+          this.props.client.query({
+            query: FETCH_USER_FOLLOWED_PROJECTS,
+            variables: { _id: currentUser }
+          }).then(res => this.setState({ show: num, followedProjects: res.data.user.followedProjects }));
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -37,17 +54,6 @@ class UserProfile extends React.Component {
           const { funBucks } = data.user;
           const date = new Date();
           date.setTime(data.user.date);
-
-          // Getting pledges to not repeat projects on this page.
-          const pledges = data.user.pledges;
-          const pledgeMap = new Map();
-          const uniqPledges = [];
-          for (const pledge of pledges) {
-            if (!pledgeMap.has(pledge.project._id)) {
-              pledgeMap.set(pledge.project._id, true);    // set any value to Map
-              uniqPledges.push(pledge);
-            }
-          };
 
             return (
               <div className='user-profile'>
@@ -71,12 +77,12 @@ class UserProfile extends React.Component {
                     }
                     {this.state.show === 2 ?
                       <div>
-                        Backed {data.user.pledges.length} projects
+                        Backed {this.state.backedProjects.length} projects
                       </div> : null
                     }
                     {this.state.show === 3 ?
                       <div>
-                        Followed {data.user.followedProjects.length} projects
+                        Followed {this.state.followedProjects.length} projects
                       </div> : null
                     }
                     <div>
@@ -113,15 +119,11 @@ class UserProfile extends React.Component {
                   </div>
                   <div className='user-profile-projects-display'>
                     {
-                      data.user.projects.length > 0 && this.state.show === 1 ?
-                      data.user.projects.map((project, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={project} />
-                        </li>
-                      )) : null
+                      this.state.show === 1 && data.user.projects.length > 0 ?
+                        <ProfileProjectsSection projects={data.user.projects}/> : null
                     }
                     {
-                      data.user.projects.length <= 0 && this.state.show === 1 ?
+                      this.state.show === 1 && data.user.projects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't started any projects. </strong>
@@ -133,15 +135,11 @@ class UserProfile extends React.Component {
                       </div> : null
                     }
                     {
-                      uniqPledges.length > 0 && this.state.show === 2 ?
-                      uniqPledges.map((pledge, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={pledge.project} />
-                        </li>
-                      )) : null
+                      this.state.show === 2 && this.state.backedProjects.length > 0 ?
+                        <ProfileProjectsSection projects={this.state.backedProjects} /> : null
                     } 
                     {
-                      data.user.pledges.length <= 0 && this.state.show === 2 ?
+                      this.state.show === 2 && this.state.backedProjects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't backed any projects. </strong>
@@ -153,15 +151,11 @@ class UserProfile extends React.Component {
                       </div> : null
                     }
                     {
-                      data.user.followedProjects.length > 0 && this.state.show === 3 ?
-                      data.user.followedProjects.map((followedProject, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={followedProject} />
-                        </li>
-                      )) : null
+                      this.state.show === 3 && this.state.followedProjects.length > 0 ?
+                        <ProfileProjectsSection projects={this.state.followedProjects} /> : null
                     } 
                     {
-                      data.user.followedProjects.length <= 0 && this.state.show === 3 ?
+                      this.state.show === 3 && this.state.followedProjects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't followed any projects. </strong>

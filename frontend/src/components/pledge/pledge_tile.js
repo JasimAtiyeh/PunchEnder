@@ -1,8 +1,11 @@
 import React from 'react';
 import { Mutation } from "react-apollo";
 import Mutations from "../../graphql/mutations";
+import Queries from "../../graphql/queries";
 import { withApollo } from 'react-apollo';
 import swal from 'sweetalert';
+import gql from "graphql-tag";
+const { CURRENT_USER, FETCH_USER_BALANCE } = Queries;
 
 class PledgeTile extends React.Component {
   constructor(props) {
@@ -19,8 +22,16 @@ class PledgeTile extends React.Component {
   }
 
   render() {
-  	const currentUser = this.props.client.cache.data.data.ROOT_QUERY.currentUser;
-  	const funBucks = this.props.client.cache.data.data.ROOT_QUERY.funBucks;
+    const currentUser = this.props.client.readQuery({ query: CURRENT_USER }).currentUser;
+    let funBucks;
+    try {
+      const { user } = this.props.client.readQuery({
+        query: FETCH_USER_BALANCE,
+        variables: { _id: currentUser }
+      });
+      funBucks = user.funBucks;
+    } catch {};
+
     return (
       <div 
         className='pledge-tiles-rewards-tile'

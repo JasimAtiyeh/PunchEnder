@@ -19,6 +19,16 @@ export default {
       }
     }
   `,
+  
+  FETCH_USER_BALANCE: gql`
+    query user($_id: ID!) {
+      user(_id: $_id) {
+        _id
+        funBucks
+      }
+    }
+  `,
+
   FETCH_PROJECTS: gql`
     {
       projects {
@@ -79,12 +89,15 @@ export default {
       }
     }
   `,
+
   FETCH_USER: gql`
     query FetchUser($_id: ID!) {
       user(_id: $_id) {
         _id
         name
         image
+        date
+        funBucks
         projects {
           _id
           followedBy {
@@ -105,29 +118,42 @@ export default {
           }
           launched
         }
-        pledges {
+      }
+    }
+  `,
+
+  FETCH_USER_BACKED_PROJECTS: gql`
+    query FetchUser($_id: ID!) {
+      user(_id: $_id) {
+        _id
+        backedProjects {
           _id
-          project {
+          followedBy {
             _id
-            followedBy {
-              _id
-            }
-            projectCreator {
-              _id
-              name
-            }
+          }
+          projectCreator {
+            _id
             name
-            image
-            description
-            launched
-            goal
-            amountRaised
-            category {
-              _id
-              name
-            }
+          }
+          name
+          image
+          description
+          launched
+          goal
+          amountRaised
+          category {
+            _id
+            name
           }
         }
+      }
+    }
+  `,
+
+  FETCH_USER_FOLLOWED_PROJECTS: gql`
+    query FetchUser($_id: ID!) {
+      user(_id: $_id) {
+        _id
         followedProjects {
           _id
           followedBy {
@@ -148,8 +174,6 @@ export default {
             name
           }
         }
-        date
-        funBucks
       }
     }
   `,

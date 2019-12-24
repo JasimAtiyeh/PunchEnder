@@ -384,7 +384,7 @@ const mutation = new GraphQLObjectType({
             $inc: {
               funBucks: -(variables.pledgeAmount)
             },
-            $push: {
+            $addToSet: {
               backedProjects: variables.project_id
             }},
             { new: true }

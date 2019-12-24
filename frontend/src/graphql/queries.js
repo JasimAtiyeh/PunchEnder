@@ -153,6 +153,23 @@ export default {
       }
     }
   `,
+
+  FETCH_USER_DROPDOWN: gql`
+    query FetchUser($_id: ID!) {
+      user(_id: $_id) {
+        _id
+        name
+        image
+        projects {
+          _id
+          name
+          image
+          launched
+        }
+      }
+    }
+  `,
+
   FETCH_UNFINISHED_PROJECT: gql`
     query FetchUnfinishedProject($_id: ID!) {
       project(_id: $_id) {

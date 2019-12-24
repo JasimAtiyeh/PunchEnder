@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
       <Query
         query={ FETCH_USER }
         variables={{ _id: currentUser }} >
-          {({ loading, error, data, refetch }) => {
+          {({ loading, error, data }) => {
           if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;
           const { funBucks } = data.user;

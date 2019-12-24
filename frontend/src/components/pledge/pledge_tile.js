@@ -52,7 +52,25 @@ class PledgeTile extends React.Component {
             Pledge amount
           </div>
           <div>
-            <Mutation mutation={Mutations.PLEDGE_PROJECT}>
+            <Mutation
+              update={(client, { data }) => {
+                const amount = data.pledgeProject.amount;
+                const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
+
+                const { user } = client.readQuery({
+                  query: FETCH_USER_BALANCE,
+                  variables: { _id: currentUser },
+                });
+
+                user.funBucks -= amount;
+
+                client.writeQuery({
+                  query: FETCH_USER_BALANCE,
+                  variables: { _id: currentUser },
+                  data: { user },
+                });
+              }}  
+              mutation={Mutations.PLEDGE_PROJECT}>
               {pledgeProject => (
                 <div className='pledge-tiles-rewards-tile-option-pledge-inputs'>
                   <div className='pledge-tiles-rewards-tile-option-pledge-inputs-number'>
@@ -73,7 +91,6 @@ class PledgeTile extends React.Component {
                           variables: {
                             user_id: currentUser,
                             project_id: this.props.projectId,
-                            reward_id: this.props.reward._id,
                             pledgeAmount: Number(this.state.pledge)
                           }
                         })

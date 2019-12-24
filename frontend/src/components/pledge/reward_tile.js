@@ -4,7 +4,7 @@ import Mutations from "../../graphql/mutations";
 import { withApollo } from 'react-apollo';
 import swal from 'sweetalert';
 import Queries from "../../graphql/queries";
-const { FETCH_USER_BALANCE } = Queries;
+const { FETCH_USER_BALANCE, CURRENT_USER } = Queries;
 
 class RewardTile extends React.Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class RewardTile extends React.Component {
   }
 
   render() {
-    const currentUser = this.props.client.cache.data.data.ROOT_QUERY.currentUser;
+    const currentUser = this.props.client.readQuery({ query: CURRENT_USER }).currentUser;
     let funBucks;
     try {
       const { user } = this.props.client.readQuery({
@@ -52,7 +52,25 @@ class RewardTile extends React.Component {
             Pledge amount
           </div>
           <div>
-            <Mutation mutation={Mutations.PLEDGE_PROJECT}>
+            <Mutation
+              update={(client, { data }) => {
+                const amount = data.pledgeProject.amount;
+                const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
+
+                const { user } = client.readQuery({
+                  query: FETCH_USER_BALANCE,
+                  variables: { _id: currentUser },
+                });
+
+                user.funBucks -= amount;
+
+                client.writeQuery({
+                  query: FETCH_USER_BALANCE,
+                  variables: { _id: currentUser },
+                  data: { user },
+                });
+              }}  
+              mutation={Mutations.PLEDGE_PROJECT}>
               {pledgeProject => (
                 <div className='pledge-tiles-rewards-tile-option-pledge-inputs'>
                   <div  className='pledge-tiles-rewards-tile-option-pledge-inputs-number'>

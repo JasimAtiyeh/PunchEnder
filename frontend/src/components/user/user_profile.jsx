@@ -1,91 +1,63 @@
 import React from 'react';
 import { Query, withApollo } from "react-apollo";
-import * as Queries from '../../graphql/queries';
-import ProjectIndexTile from '../projects/index/tile';
+import Queries from '../../graphql/queries';
 import UserImage from './user_image';
+import ProfileProjectsSection from './profile_projects';
 import { Link } from 'react-router-dom';
+const { CURRENT_USER, FETCH_USER, FETCH_USER_BACKED_PROJECTS, FETCH_USER_FOLLOWED_PROJECTS } = Queries;
 
 class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: true,
-      pledges: false,
-      followedProjects: false,
-      projectsShow: 'active',
-      pledgesShow: '',
-      followedProjectsShow: '',
-      currentUser: props.client.cache.data.data.ROOT_QUERY.currentUser
+      show: 1,
+      loaded: false
     };
-
-    this.showProjects = this.showProjects.bind(this);
-    this.showPledges = this.showPledges.bind(this);
-    this.showFollowedProjects = this.showFollowedProjects.bind(this);
   }
 
   componentDidMount() {
-    this.props.client.query({
-      query: Queries.default.FETCH_USER,
-      variables: { _id: this.state.currentUser }
-    });
+    this.setState({ loaded: true });
   }
 
-  showProjects() {
-    this.setState({
-      projects: true,
-      pledges: false,
-      followedProjects: false,
-      projectsShow: 'active',
-      pledgesShow: '',
-      followedProjectsShow: ''
-    });
-  }
-
-  showPledges() {
-    this.setState({
-      projects: false,
-      pledges: true,
-      followedProjects: false,
-      projectsShow: '',
-      pledgesShow: 'active',
-      followedProjectsShow: ''
-    });
-  }
-
-  showFollowedProjects() {
-    this.setState({
-      projects: false,
-      pledges: false,
-      followedProjects: true,
-      projectsShow: '',
-      pledgesShow: '',
-      followedProjectsShow: 'active'
-    });
+  show(num) {
+    return () => {
+      const currentUser = this.props.client.readQuery({ query: CURRENT_USER }).currentUser;
+      switch (num) {
+        case 1:
+          this.setState({ show: num });
+          break;
+        case 2:
+          this.props.client.query({
+            query: FETCH_USER_BACKED_PROJECTS,
+            variables: { _id: currentUser }
+          }).then(res => this.setState({ show: num, backedProjects: res.data.user.backedProjects }));
+          break;
+        case 3:
+          this.props.client.query({
+            query: FETCH_USER_FOLLOWED_PROJECTS,
+            variables: { _id: currentUser }
+          }).then(res => this.setState({ show: num, followedProjects: res.data.user.followedProjects }));
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   render() {
-    let funBucks;
-    if (this.state.currentUser) funBucks = this.props.client.cache.data.data[this.state.currentUser].funBucks;
+    if (!this.state.loaded) return null;
+    const { client } = this.props;
+    const currentUser = client.readQuery({ query: CURRENT_USER }).currentUser;
     return (
-      < Query
-        query={ Queries.default.FETCH_USER }
-        variables={{ _id: this.state.currentUser }} >
-          {({ loading, error, data, refetch }) => {
+      <Query
+        query={ FETCH_USER }
+        variables={{ _id: currentUser }} >
+          {({ loading, error, data }) => {
           if (loading) return null;
           if (error) return <h2 className="not-found">User not found!</h2>;
+          const { funBucks } = data.user;
           const date = new Date();
           date.setTime(data.user.date);
-
-          // Getting pledges to not repeat projects on this page.
-          const pledges = data.user.pledges;
-          const pledgeMap = new Map();
-          const uniqPledges = [];
-          for (const pledge of pledges) {
-            if (!pledgeMap.has(pledge.project._id)) {
-              pledgeMap.set(pledge.project._id, true);    // set any value to Map
-              uniqPledges.push(pledge);
-            }
-          };
 
             return (
               <div className='user-profile'>
@@ -102,19 +74,19 @@ class UserProfile extends React.Component {
                     {data.user.name}
                   </h2>
                   <div className='user-profile-info-sub'>
-                    {this.state.projects ?
+                    {this.state.show === 1 ?
                       <div>
                         Started {data.user.projects.length} projects
                       </div> : null
                     }
-                    {this.state.pledges ?
+                    {this.state.show === 2 ?
                       <div>
-                        Backed {data.user.pledges.length} projects
+                        Backed {this.state.backedProjects.length} projects
                       </div> : null
                     }
-                    {this.state.followedProjects ?
+                    {this.state.show === 3 ?
                       <div>
-                        Follow {data.user.followedProjects.length} projects
+                        Followed {this.state.followedProjects.length} projects
                       </div> : null
                     }
                     <div>
@@ -134,32 +106,28 @@ class UserProfile extends React.Component {
                 <div className='user-profile-projects'>
                   <div className='user-profile-projects-button'>
                     <button
-                      onClick={this.showProjects}
-                      className={this.state.projectsShow}>
+                      onClick={this.show(1)}
+                      className={this.state.show === 1 ? 'active' : ''}>
                         Projects
                     </button>
                     <button
-                      onClick={this.showPledges}
-                      className={this.state.pledgesShow}>
+                      onClick={this.show(2)}
+                      className={this.state.show === 2 ? 'active' : ''}>
                         Backed
                     </button>
                     <button
-                      onClick={this.showFollowedProjects}
-                      className={this.state.followedProjectsShow}>
+                      onClick={this.show(3)}
+                      className={this.state.show === 3 ? 'active' : ''}>
                         Followed
                     </button>
                   </div>
                   <div className='user-profile-projects-display'>
                     {
-                      data.user.projects.length > 0 && this.state.projects ?
-                      data.user.projects.map((project, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={project} />
-                        </li>
-                      )) : null
+                      this.state.show === 1 && data.user.projects.length > 0 ?
+                        <ProfileProjectsSection projects={data.user.projects}/> : null
                     }
                     {
-                      data.user.projects.length <= 0 && this.state.projects ?
+                      this.state.show === 1 && data.user.projects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't started any projects. </strong>
@@ -171,15 +139,11 @@ class UserProfile extends React.Component {
                       </div> : null
                     }
                     {
-                      uniqPledges.length > 0 && this.state.pledges ?
-                      uniqPledges.map((pledge, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={pledge.project} />
-                        </li>
-                      )) : null
+                      this.state.show === 2 && this.state.backedProjects.length > 0 ?
+                        <ProfileProjectsSection projects={this.state.backedProjects} /> : null
                     } 
                     {
-                      data.user.pledges.length <= 0 && this.state.pledges ?
+                      this.state.show === 2 && this.state.backedProjects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't backed any projects. </strong>
@@ -191,15 +155,11 @@ class UserProfile extends React.Component {
                       </div> : null
                     }
                     {
-                      data.user.followedProjects.length > 0 && this.state.followedProjects ?
-                      data.user.followedProjects.map((followedProject, idx) => (
-                        <li key={idx}>
-                          <ProjectIndexTile project={followedProject} />
-                        </li>
-                      )) : null
+                      this.state.show === 3 && this.state.followedProjects.length > 0 ?
+                        <ProfileProjectsSection projects={this.state.followedProjects} /> : null
                     } 
                     {
-                      data.user.followedProjects.length <= 0 && this.state.followedProjects ?
+                      this.state.show === 3 && this.state.followedProjects.length <= 0 ?
                       <div className='user-profile-projects-display-none'>
                         <div>
                           <strong>You haven't followed any projects. </strong>

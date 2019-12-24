@@ -31,7 +31,8 @@ const UpdateShow = props => {
       </div>
       <h3>{update.title}</h3>
       <div className="update-info">
-        <img 
+        <img
+          alt="" 
           className="update-creator-image" 
           src={image}/>
         <div className="update-info-text">

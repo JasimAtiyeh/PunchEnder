@@ -16,7 +16,11 @@ const chunkArray = (array, size) => {
 
 const ProjectIndex = props => {
   const { loading, error, data } = useQuery(FETCH_FINISHED_PROJECTS);
-  if (loading) return null;
+  if (loading) return (
+    <div className="project-index-page">
+      <Tabs />
+    </div>
+  );
   if (error) return <div>Error!</div>;
 
   const { finishedProjects } = data;

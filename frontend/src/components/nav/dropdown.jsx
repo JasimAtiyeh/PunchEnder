@@ -1,23 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { withApollo } from 'react-apollo';
 import { useQuery } from '@apollo/react-hooks';
 import Queries from '../../graphql/queries';
 import Panel from './dropdown_panel';
-const { FETCH_USER } = Queries;
+const { FETCH_USER_DROPDOWN } = Queries;
 
 const NavDropdown = props => {
   const { client, setShow } = props;
   const currentUser = props.client.cache.data.data.ROOT_QUERY.currentUser;
 
-  useEffect(() => {
-    props.client.query({
-      query: FETCH_USER,
-      variables: { _id: currentUser }
-    });
-  }, []);
-
-  const { loading, error, data } = useQuery(FETCH_USER, { variables: { _id: currentUser } });
+  const { loading, error, data } = useQuery(FETCH_USER_DROPDOWN, { variables: { _id: currentUser } });
   if (loading) return null;
   if (error) return <div>Error!</div>;
   const { user } = data;

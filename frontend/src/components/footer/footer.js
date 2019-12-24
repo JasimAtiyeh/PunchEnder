@@ -15,10 +15,10 @@ function Footer() {
           </h1>
           <div className="footer-tile-links">
             <a className="footer-tile-link" href="https://github.com/joshhk72">
-              <img className="footer-tile-logo" src={GithubLogo}></img>
+              <img className="footer-tile-logo" alt="" src={GithubLogo}></img>
             </a>
             <a className="footer-tile-link" href="https://www.linkedin.com/in/joshhk72">
-              <img id="linkedin" className="footer-tile-logo" src={LinkedInLogo}></img>
+              <img id="linkedin" className="footer-tile-logo" alt="" src={LinkedInLogo}></img>
             </a>
           </div>
         </div>
@@ -28,10 +28,10 @@ function Footer() {
           </h1>
           <div className="footer-tile-links">
             <a className="footer-tile-link" href="https://github.com/JasimAtiyeh">
-              <img className="footer-tile-logo" src={GithubLogo}></img>
+              <img className="footer-tile-logo" alt="" src={GithubLogo}></img>
             </a>
             <a className="footer-tile-link" href="https://www.linkedin.com/in/jasim-atiyeh-a0281a5a">
-              <img id="linkedin" className="footer-tile-logo" src={LinkedInLogo}></img>
+              <img id="linkedin" className="footer-tile-logo" alt="" src={LinkedInLogo}></img>
             </a>
           </div>
         </div>

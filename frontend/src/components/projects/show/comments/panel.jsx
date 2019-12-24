@@ -11,7 +11,8 @@ const CommentPanel = props => {
     <li className="comment-panel">
       <div className="comment-panel-header">
         <div className="comment-panel-img-container">
-          <img 
+          <img
+            alt="" 
             className="comment-panel-img"
             src={image}
           />

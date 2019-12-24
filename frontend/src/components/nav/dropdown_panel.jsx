@@ -10,7 +10,7 @@ const DropdownPanel = props => {
     <td className="dropdown-project-cell">
       <Link to={`/projects/${project._id}`}
         onClick={() => setShow(false)}>
-        <img src={project.image || defaultImage}/>
+        <img src={project.image || defaultImage} alt=""/>
         <p>{project.name}</p>
       </Link>
     </td>

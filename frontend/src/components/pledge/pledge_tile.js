@@ -4,7 +4,6 @@ import Mutations from "../../graphql/mutations";
 import Queries from "../../graphql/queries";
 import { withApollo } from 'react-apollo';
 import swal from 'sweetalert';
-import gql from "graphql-tag";
 const { CURRENT_USER, FETCH_USER_BALANCE } = Queries;
 
 class PledgeTile extends React.Component {

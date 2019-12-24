@@ -22,7 +22,8 @@ const ProjectResult = props => {
         onClick={() => props.setSearching(false)}
         >
         <div className="project-result-panel-img-container">
-          <img 
+          <img
+            alt="" 
             className="project-result-panel-img"
             src={ image || defaultImage }
           />

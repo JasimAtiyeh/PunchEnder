@@ -41,6 +41,7 @@ const CommentForm = props => {
     <div className="comment-form-container">
       <div>
         <img
+          alt=""
           src={image}
           className="comment-form-image-container" />
       </div>

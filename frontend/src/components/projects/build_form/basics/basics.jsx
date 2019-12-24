@@ -110,7 +110,7 @@ const BuildFormBasics = props => {
               </div>
             }
             { image &&
-              <img className="change-image" src={image} onClick={ ()=> fileInput.click() } />
+              <img alt="" className="change-image" src={image} onClick={ ()=> fileInput.click() } />
             }
           </div>
         </div>

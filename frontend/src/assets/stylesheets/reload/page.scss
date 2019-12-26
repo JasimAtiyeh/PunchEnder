@@ -1,0 +1,55 @@
+.reload-page {
+  background-color: red;
+  padding-top: 4em;
+  > p {
+    margin: 0 auto;
+    font-size: 1.6em;
+    max-width: 750px;
+    background-color: blue;
+    text-align: center;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 750px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 2em 0.4em;
+    background-color: green;
+    label {
+      margin-bottom: 10px;
+    }
+    input {
+      &[type=number] {
+        display: block;
+        background-color: white;
+        padding: 6px 8px;
+        margin-bottom: 15px;
+      }
+      &[type=checkbox] {
+      }
+    }
+    button {
+      display: block;
+      padding: 8px 12px;
+      background-color: gray;
+      &:disabled {
+        background-color: tint(gray, 30%);
+        color: tint(black, 30%);
+        cursor: not-allowed;
+      }
+    }
+    .reload-checkbox-container {
+      display: flex;
+      justify-content: center;
+      width: 60%;
+      margin-left: 3%;
+      margin-bottom: 10px;
+      p {
+        color: rgb(92, 92, 92);
+        margin-left: 10px;
+      }
+    }
+  }
+}

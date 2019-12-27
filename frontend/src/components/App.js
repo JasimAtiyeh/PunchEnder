@@ -16,6 +16,7 @@ import '../assets/stylesheets/main.scss';
 import { Pledge } from "./pledge/pledge";
 import Footer from './footer/footer';
 import ReloadPage from './reload/page';
+import ReloadConfirmation from './reload/confirmation';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Nav />
         </Switch>
         <Switch>
+          <AuthRoute exact path="/confirmed" component={ReloadConfirmation} />
           <AuthRoute exact path="/balance" component={ReloadPage} />
           <AuthRoute exact path="/start" component={CreateForm} />
           <AuthRoute exact path="/login" component={Login} routeType="auth" />

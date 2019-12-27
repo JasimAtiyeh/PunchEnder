@@ -1,11 +1,9 @@
 .reload-page {
-  background-color: red;
   padding-top: 4em;
   > p {
     margin: 0 auto;
     font-size: 1.6em;
     max-width: 750px;
-    background-color: blue;
     text-align: center;
   }
   form {
@@ -16,7 +14,6 @@
     margin: 0 auto;
     box-sizing: border-box;
     padding: 2em 0.4em;
-    background-color: green;
     label {
       margin-bottom: 10px;
     }
@@ -24,10 +21,16 @@
       &[type=number] {
         display: block;
         background-color: white;
+        border: 1px solid gray;
         padding: 6px 8px;
         margin-bottom: 15px;
+        -moz-appearance:textfield;
       }
       &[type=checkbox] {
+      }
+      &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
     }
     button {
@@ -50,6 +53,26 @@
         color: rgb(92, 92, 92);
         margin-left: 10px;
       }
+    }
+  }
+}
+
+.reload-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200px;
+  p {
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  a {
+    display: block;
+    padding: 8px 12px;
+    background-color: black;
+    color: white;
+    &:hover {
+      background-color: tint(black, 10%);
     }
   }
 }

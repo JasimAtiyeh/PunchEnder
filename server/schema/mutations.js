@@ -470,6 +470,28 @@ const mutation = new GraphQLObjectType({
         }
       }
     },
+    addUserBalance: {
+      type: UserType,
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLID) },
+        amount: { type: new GraphQLNonNull(GraphQLFloat) }
+      },
+      async resolve(_, { _id, amount }, context) {
+        const validUser = await AuthService.verifyUser({ token: context.token });
+
+        if (validUser.loggedIn) {
+          return await User.findByIdAndUpdate(_id, {
+            $inc: {
+              funBucks: amount
+            }
+          },
+            { new: true }
+          )
+        } else {
+          throw new Error("Sorry, you need to log in first");
+        }
+      }
+    },
   }
 });
 

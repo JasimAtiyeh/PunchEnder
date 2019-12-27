@@ -43,6 +43,11 @@ const NavDropdown = props => {
             onClick={() => setShow(false)}>
             User Profile
           </Link>
+          <Link
+            to='/balance'
+            onClick={() => setShow(false)}>
+            Reload balance
+          </Link>
           <button
             onClick={e => {
               setShow(false)

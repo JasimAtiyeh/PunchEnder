@@ -246,4 +246,12 @@ export default {
       }
     }
   `,
+  ADD_USER_BALANCE: gql`
+    mutation addUserBalance($_id: ID!, $amount: Float!) {
+      addUserBalance(_id: $_id, amount: $amount) {
+        _id
+        funBucks
+      }
+    }
+  `
 };

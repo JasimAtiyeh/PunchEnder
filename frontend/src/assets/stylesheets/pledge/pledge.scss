@@ -202,13 +202,72 @@
   font-weight: 100;
 }
 
-.pledge-thanks {
-  max-width: 400px;
-  margin: 0 auto;
-  h1 {
-    font-size: 28px;
-    font-weight: 700;
-    color: #05ce78;
-    margin-bottom: 30px;
+.pledge-thanks-page {
+  padding: 50px 0;
+  .pledge-thanks {
+    min-width: 400px;
+    max-width: 600px;
+    box-sizing: border-box;
+    width: 100%;
+    padding-bottom: 30px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid gray;
+    > a {
+      margin: 25px;
+      background-color: black;
+      color: white;
+      margin-right: 15px;
+      border: 1px solid black;
+      padding: 8px 12px;
+      &:hover {
+        background-color: tint(black, 20%);
+      }
+    }
+    h1 {
+      font-size: 1.75em;
+      font-weight: 700;
+      color: #05ce78;
+      margin-bottom: 30px;
+      margin-top: 25px;
+      margin-left: 25px;
+    }
+    .pledge-thanks-top {
+      display: flex;
+      line-height: 1.2;
+      padding: 25px;
+      border-bottom: 1px dashed lightgray;
+      img {
+        height: 90px;
+        width: 120px;
+        object-fit: cover;
+        object-position: center;
+        margin-right: 25px;
+      }
+      a {
+        display: block;
+        color: blue;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    .pledge-thanks-summary {
+      padding: 25px;
+      h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+      }
+      em, p {
+        margin-bottom: 10px;
+      }
+      em {
+        font-weight: 500;
+      }
+      .pledge-thanks-note {
+        margin-top: 12px;
+        line-height: 1.4;
+      }
+    }
   }
 }

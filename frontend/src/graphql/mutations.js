@@ -180,10 +180,12 @@ export default {
           _id
           name
           amountRaised
+          image
         }
         reward {
           _id
           name
+          description
         }
         amount
       }

@@ -14,6 +14,7 @@ import ProjectShow from './projects/show/showpage';
 import UserProfile from './user/user_profile';
 import '../assets/stylesheets/main.scss';
 import { Pledge } from "./pledge/pledge";
+import PledgeConfirmation from "./pledge/confirm";
 import Footer from './footer/footer';
 import ReloadPage from './reload/page';
 import ReloadConfirmation from './reload/confirmation';
@@ -34,6 +35,7 @@ const App = () => {
           <AuthRoute exact path="/signup" component={Register} routeType="auth" />
           <Route exact path='/' component={ProjectIndex} />
           <Route exact path="/categories/:categoryId" component={CategoryIndex} />
+          <AuthRoute path="/projects/:projectId/thanks" component={PledgeConfirmation} />
           <AuthRoute path="/projects/:projectId/build" component={BuildForm} />
           <Route exact path="/projects/:projectId/pledge" component={Pledge} />
           <Route path="/projects/:projectId" component={ProjectShow} />

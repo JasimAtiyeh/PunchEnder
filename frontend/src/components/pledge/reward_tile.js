@@ -94,8 +94,12 @@ class RewardTile extends React.Component {
                             reward_id: this.props.reward._id,
                             pledgeAmount: Number(this.state.pledge)
                           }
-                        })
-                        this.props.ownProps.history.push(`/projects/${this.props.projectId}`)
+                        }).then(({ data: { pledgeProject } }) => {
+                          this.props.ownProps.history.push({
+                            pathname: `/projects/${this.props.projectId}/thanks`,
+                            state: { pledgeProject }
+                          });
+                        });
                       } else {
                           swal("Insufficient funds", "Please add funds to your account", "warning");
                       }
